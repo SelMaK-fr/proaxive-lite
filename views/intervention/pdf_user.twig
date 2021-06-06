@@ -1,0 +1,206 @@
+{% extends '_layout/layout_pdf.twig' %}
+
+{% block title %}Interventions{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="bloc-header mb1 bgcolor1">
+            <h2>{{ company.cname }}</h2> - <span>Bon d'intervention</span>
+        </div>
+        <!-- -->
+        <div class="bloc" style="background-color:#e4f5f3;">
+            <div class="bloc-columns bloc-columns-4">
+                <div class="bloc-column">
+                    {% if company.phone is not empty %}
+                    <span class="d-block">TEL : <strong>{{ company.phone }}</strong></span>
+                    {% endif %}
+                    {% if company.mobile is not empty %}
+                    <span class="d-block">Mobile : <strong>{{ company.mobile }}</strong></span>
+                    {% endif %}
+                </div>
+
+                <div class="bloc-column">
+                    <span class="d-block">{{ company.mail }}</span>
+                    <span class="d-block">{{ company.website }}</span>
+                </div>
+
+                <div class="bloc-column">
+                    <span class="d-block">Siret : {{ company.siret }}</span>
+                    <span class="d-block">APRM : {{ company.ape }}</span>
+                </div>
+
+                <div class="bloc-column">
+                    {% if company.tva is defined %}<span class="d-block">N°TVA : {{ company.tva }}</span>{% endif %}
+                    {% if company.rm is defined and company.rm is not empty %}<span class="d-block">RM : {{ company.rm }}</span>{% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- -->
+        <div class="bloc">
+            <div class="bloc-columns bloc-columns-2">
+                <div class="bloc-column">
+                    <div class="text-center text-uppercase"><h3>Intervention</h3></div>
+                    <div class="bloc-content">
+                        <span class="d-block">N°: {{ intervention.number }}</span>
+                        {% if(intervention.pmad == 0 ) %}
+                        <span class="d-block">Date de dépôt : {{ intervention.back_home | date('d-M-Y') }} / Retrait : {{ intervention.received | date('d-M-Y') }}</span>
+                        {% elseif(intervention.pmad == 1) %}
+                        <span class="d-block">Type : prise de main à distance</span>
+                        {% endif %}
+                        <span class="d-block">Technicien : <span class="text-uppercase">{{ company.director }}</span></span>
+                    </div>
+                </div>
+                <div class="bloc-column">
+                    <div class="text-center text-uppercase"><h3>Client</h3></div>
+                    <div class="bloc-content">
+                        <span class="d-block">Nom : <span class="text-uppercase">privé</span></span>
+                        <span class="d-block">Adresse : <span class="text-uppercase">privé</span></span>
+                        <span class="d-block">Ville : <span class="text-uppercase">privé</span></span>
+                        <span class="d-block">Courriel : <span class="text-uppercase">privé</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---->
+        <div class="bloc">
+            <div class="text-center text-uppercase"><h3>description du matériel</h3></div>
+            <div class="bloc-columns bloc-columns-2">
+                <div class="bloc-column">
+                    <div class="bloc-content">
+                        <span class="d-block">Fabricant/Assembleur : <span class="text-uppercase">{{ brand.b_title }}</span></span>
+                        <span class="d-block">N°série : <span class="text-uppercase">{{ equipment.serialnumber }}</span></span>
+                        <span class="d-block">Type : <span class="text-uppercase">{{ categoryEquipment.title }}</span></span>
+                        <span class="d-block">Système d'exploitation : <span class="text-uppercase">{{ operatingSystem.os_name }} ({{ operatingSystem.os_release }})</span></span>
+                    </div>
+                </div>
+                <div class="bloc-column">
+                    <div class="bloc-content">
+                        <span class="d-block">Année d'assemblage : <span class="text-uppercase">{{ equipment.year }}</span></span>
+                        <span class="d-block">N°de produit : <span class="text-uppercase">{{ equipment.numberproduct }}</span></span>
+                        <span class="d-block">Licence OS : <span class="text-uppercase">privé</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- -->
+        <div class="bloc">
+            <div class="text-center text-uppercase"><h3>Détails de l'intervention</h3></div>
+            <div class="bloc-columns bloc-columns-2">
+                <div class="bloc-column">
+                    <div class="bloc-content">
+                        <div class="bloc-input">
+                            <div class="form-input">
+                                <label for=""><input type="checkbox"> Réparation</label>
+                            </div>
+                            <div class="form-input">
+                                <label for=""><input type="checkbox"> Assemblage</label>
+                            </div>
+                            <div class="form-input">
+                                <label for=""><input type="checkbox"> Expertise</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bloc-content">
+                        <h3 class="children-title">&nbsp;</h3>
+                        <div class="list-content text-uppercase" style="min-height:300px">
+                            {% markdown %}
+                                {{ intervention.details }}
+                            {% endmarkdown %}
+                        </div>
+                    </div>
+                </div>
+                <div class="bloc-column">
+                    <div class="bloc-content">
+                        <div class="spacer" style="height:33px;"></div>
+                        <h3 class="children-title text-center text-uppercase">Description de la panne</h3>
+                        <div class="list-content" style="height:100px">
+                            <div class="var-content">
+                                {% markdown %}
+                                    {{ intervention.description }}
+                                {% endmarkdown %}
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="bloc-content">
+                        <h3 class="children-title text-center text-uppercase">Compte rendu</h3>
+                        <div class="bloc--inline border-bottom mtmb05">
+                            <div class="bloc-input">
+                                <div class="form-input">
+                                    <label for=""><input type="checkbox"> Logiciels</label>
+                                </div>
+                                <div class="form-input">
+                                    <label for=""><input type="checkbox"> Composant(s)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-content" style="height:200px">
+                            <div class="var-content text-uppercase">
+                                {% markdown %}
+                                    {{ intervention.report }}
+                                {% endmarkdown %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---->
+        <div class="bloc">
+            <div class="bloc-columns bloc-columns-2">
+                <div class="bloc-column" style="width:69%;border-right:1px solid #dbdbdb;">
+                    <div class="bloc-content form-container">
+                        <h3 class="children-title text-center text-uppercase" style="margin:0 0 1em 0">autres tâches effectuées</h3>
+                        <div class="bloc-input">
+                            <div class="form-input">
+                                <div class="form-group">
+                                    <label for="">Memtest+</label> <span><input type="checkbox"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Formatage rapide</label> <span><input type="checkbox"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Formatage b.n</label> <span><input type="checkbox"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">CHKDSK</label> <span><input type="checkbox"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Restauration</label> <span><input type="checkbox"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Réinitialisation</label> <span><input type="checkbox"></span>
+                                </div>
+                            </div>
+                            <div class="form-input">
+                                <div class="form-group">
+                                    <label for="">Check OS</label> <span><input type="checkbox"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Réinstallation OS</label> <span><input type="checkbox"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Mise(s) à jour</label> <span><input type="checkbox"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nettoyage boitier</label> <span><input type="checkbox"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nettoyage système</label> <span><input type="checkbox"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Installation box internet</label> <span><input type="checkbox"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bloc-column" style="width:30%">
+                    <div class="bloc-content">
+                        <h3 class="children-title text-center text-uppercase" style="margin:0 0 1em 0;background-color:#008c7b;color:white;">signature technicien</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

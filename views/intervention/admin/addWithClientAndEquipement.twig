@@ -1,0 +1,17 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Nouvelle intervention{% endblock %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+                <form method="post" class="form-border">
+                    {{ include('intervention/admin/_form.twig', {'withClientAndEquipment': 1}) }}
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %} Gestion des statuts {% endblock %}
+
+{% block breadCrumb %}
+    {{ breadcrumb('','', false) | raw }}
+{% endblock %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="columns">
+                <div class="column col-6 col-sm-12">
+                    <div class="admin-content">
+                        {{ include('_notifications.twig') }}
+                        {{ viewAlert('info',"Ici, vous pouvez créer autant de statut que vous le souhaitez. Ces derniers sont liés aux interventions") | raw }}
+
+                        <div class="card-custom">
+                            <div class="card-header"><h2>Nouveau statut</h2></div>
+                            <div class="card-body">
+                                <div class="admin-form">
+                                    <form method="post" action="">
+                                    {{ include('dashboard/status/_form.twig') }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- -->
+                <div class="column col-6 col-sm-12">
+                    <div class="admin-content">
+                        <div class="card-custom">
+                            <div class="card-header"><h2>Statuts enregistrés</h2></div>
+                            <div class="card-body">
+                                <table class="table-custom">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:5%;" scope="col">#</th>
+                                        <th style="width:20%;" scope="col" class="w350p">Titre</th>
+                                        <th style="width:20%;" scope="col">Fond</th>
+                                        <th style="width:15%;" scope="col">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in status %}
+                                        <tr>
+                                            <th scope="row">{{ item.id }}</th>
+                                            <td>{{ item.title }}</td>
+                                            <td><div style="background-color:#{{ item.bgcolor }};color:#ffffff;padding:0 1em;">{{ item.bgcolor }}</div></td>
+                                            <td><a class="btn-table btn-info" href="{{ item.UrlAdmin }}"><i class="icofont-edit"></i></a>
+                                                {% if item.not_delete != true or item.not_delete == null %}
+                                                <a href="#status-{{ item.id }}" class="btn-table btn-danger"><i class="icofont-trash"></i></a>
+                                                <!-- /modal -->
+                                                <form method="post" action="/admin/status/deleted" style="display:inline-block;">
+                                                    <input type="hidden" name="id" value="{{ item.id }}">
+                                                    {{ include('dashboard/_modal-delete.twig', {'id': 'status-' ~ item.id, 'title' : item.title }) }}
+                                                </form>
+                                                <!-- /.modal -->
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,806 @@
+//
+//  tail.datetime - The vanilla way to select dates and times!
+//  @file       ./less/tail.datetime-harx.less
+//  @author     SamBrishes <sam@pytes.net>
+//  @version    0.4.14 - Beta
+//
+//  @website    https://github.com/pytesNET/tail.DateTime
+//  @license    X11 / MIT License
+//  @copyright  Copyright © 2018 - 2019 SamBrishes, pytesNET <info@pytes.net>
+//
+@import "tail.mixins.less";
+
+//
+//  SETTINGS :: ALPHA COLOR
+//
+@alpha: transparent;
+
+//
+//  SETTINGS :: FONT FAMILY
+//
+@family: "Open Sans", Calibri, Arial, sans-serif;
+
+//
+//  SETTINGS :: BOX SHADOW
+//
+@shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 1px 2px 1px rgba(0, 0, 0, 0.1);
+
+//
+//  SETTINGS :: DEFAULT COLOR
+//
+@color: @light;
+
+//
+//  SETTINGS :: COLOR SCHEMES
+//
+@light: {
+    primary: #149BE6;
+    secondary: #32B93C;
+
+    foreground: #303438;
+    background: white;
+    separators: darken(white, 10%);
+
+    outside: #808488;
+    disabled: #A0A4A8;
+
+    @input: {
+        foreground: #606468;
+        background: white;
+        separators: #E0E0E0;
+
+        @hover: {
+            foreground: #404448;
+            background: white;
+            separators: #D0D0D0;
+        }
+        @focus: {
+            foreground: #303438;
+            background: white;
+            separators: @light[primary];
+        }
+        @disabled: {
+            foreground: #A0A4A8;
+            background: #F0F0F0;
+            separators: #D0D0D0;
+        }
+    }
+
+    @icons: {
+        left: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd\
+        mciIHdpZHRoPSI2IiBoZWlnaHQ9IjE2IiB2aWV3Qm94PSIwIDAgNiAxNiI+PHBhdGggZD0iTTYgMkwwIDhsNiA2VjJ6\
+        Ii8+PC9zdmc+");
+        right: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9z\
+        dmciIHdpZHRoPSI2IiBoZWlnaHQ9IjE2IiB2aWV3Qm94PSIwIDAgNiAxNiI+PHBhdGggZD0iTTAgMTRsNi02LTYtNnY\
+        xMnoiLz48L3N2Zz4=");
+        check: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9z\
+        dmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij48cGF0aCBkPSJNMTIgNWwtOCA4LTQ\
+        tNCAxLjUtMS41TDQgMTBsNi41LTYuNUwxMiA1eiIvPjwvc3ZnPg==");
+        times: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9z\
+        dmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij48cGF0aCBmaWxsPSIjMzAzNDM4IiB\
+        kPSJNNy40OCA4bDMuNzUgMy43NS0xLjQ4IDEuNDhMNiA5LjQ4bC0zLjc1IDMuNzUtMS40OC0xLjQ4TDQuNTIgOCAuNz\
+        cgNC4yNWwxLjQ4LTEuNDhMNiA2LjUybDMuNzUtMy43NSAxLjQ4IDEuNDhMNy40OCA4eiIvPjwvc3ZnPg==");
+    }
+};
+@dark: {
+    primary: #149BE6;
+    secondary: #32B93C;
+
+    foreground: #C0C4C8;
+    background: #202428;
+    separators: lighten(#202428, 10%);
+
+    outside: #808488;
+    disabled: #A0A4A8;
+
+    @input: {
+        foreground: #A0A4A8;
+        background: darken(#202428, 5%);
+        separators: #404448;
+
+        @hover: {
+            foreground: #C0C4C8;
+            background: darken(#202428, 5%);
+            separators: #606468;
+        }
+        @focus: {
+            foreground: #C0C4C8;
+            background: #303438;
+            separators: @light[primary];
+        }
+        @disabled: {
+            foreground: #808488;
+            background: #101418;
+            separators: #101418;
+        }
+    }
+
+    @icons: {
+        times: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9z\
+        dmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij48cGF0aCBmaWxsPSIjRkZGIiBkPSJ\
+        NNy40OCA4bDMuNzUgMy43NS0xLjQ4IDEuNDhMNiA5LjQ4bC0zLjc1IDMuNzUtMS40OC0xLjQ4TDQuNTIgOCAuNzcgNC\
+        4yNWwxLjQ4LTEuNDhMNiA2LjUybDMuNzUtMy43NSAxLjQ4IDEuNDhMNy40OCA4eiIvPjwvc3ZnPg==");
+        left: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd\
+        mciIHdpZHRoPSI2IiBoZWlnaHQ9IjE2IiB2aWV3Qm94PSIwIDAgNiAxNiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYg\
+        MkwwIDhsNiA2VjJ6Ii8+PC9zdmc+");
+        right: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9z\
+        dmciIHdpZHRoPSI2IiBoZWlnaHQ9IjE2IiB2aWV3Qm94PSIwIDAgNiAxNiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTA\
+        gMTRsNi02LTYtNnYxMnoiLz48L3N2Zz4=");
+        check: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9z\
+        dmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDEyIDE2Ij48cGF0aCBmaWxsPSIjRkZGIiBkPSJ\
+        NMTIgNWwtOCA4LTQtNCAxLjUtMS41TDQgMTBsNi41LTYuNUwxMiA1eiIvPjwvc3ZnPg==");
+    }
+};
+
+//
+//  STYLES
+//
+
+/* @start MAIN CALENDAR */
+.tail-datetime-calendar{
+    &, *, *:before, *:after{
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+}
+.tail-datetime-calendar{
+    top: 0;
+    left: 0;
+    width: 360px;
+    height: auto;
+    margin: 15px;
+    padding: 0;
+    z-index: 3000;
+    display: block;
+    position: absolute;
+    visibility: hidden;
+    direction: ltr;
+    border-collapse: separate;
+    font-family: @family;
+    background-color: @color[background];
+    .border(0; solid; @alpha; 3px;);
+    .shadow(@shadow);
+
+    &:after{
+        clear: both;
+        content: "";
+        display: block;
+        font-size: 0;
+        visibility: hidden;
+    }
+
+    // Static
+    &.calendar-static{
+        top: auto;
+        left: auto;
+        margin-left: auto;
+        margin-right: auto;
+        position: static;
+        visibility: visible;
+    }
+
+    // Close Button
+    button.calendar-close{
+        top: 100%;
+        right: 15px;
+        color: @color[foreground];
+        width: 35px;
+        height: 25px;
+        margin: 1px 0 0 0;
+        padding: 5px 10px;
+        opacity: 0.5;
+        display: inline-block;
+        position: absolute;
+        font-size: 14px;
+        line-height: 1.125em;
+        text-shadow: none;
+        border: 0;
+        outline: none;
+        background-color: @color[background];
+        background-image: @color[@icons][times];
+        background-repeat: no-repeat;
+        background-position: center center;
+        .border(0; solid; @alpha; 0 0 3px 3px);
+        .shadow(@shadow);
+        .transition(opacity 142ms linear);
+    }
+    button.calendar-close:hover{
+        opacity: 1.0;
+    }
+}
+/* @end MAIN CALENDAR */
+
+/* @start CALENDAR TOOLTIP */
+.tail-datetime-calendar .calendar-tooltip{
+    color: @color[background];
+    width: auto;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: absolute;
+    background-color: @color[foreground];
+    border-radius: 3px;
+
+    &:before{
+        top: -7px;
+        left: 50%;
+        width: 0;
+        height: 0;
+        margin: 0 0 0 -6px;
+        content: "";
+        display: block;
+        position: absolute;
+        .border(0 7px 7px 7px; solid; @alpha @alpha @color[foreground] @alpha);
+    }
+    .tooltip-inner{
+        width: auto;
+        margin: 0;
+        padding: 4px 7px;
+        display: block;
+        font-size: 12px;
+        line-height: 14px;
+    }
+}
+/* @end CALENDAR TOOLTIP */
+
+/* @start CALENDAR ACTIONs */
+.tail-datetime-calendar .calendar-actions{
+    color: @color[foreground];
+    width: 100%;
+    height: 36px;
+    margin: 0;
+    padding: 0;
+    display: table;
+    overflow: hidden;
+    border-spacing: 0;
+    border-collapse: separate;
+    background-color: @color[background];
+    .border(0; solid; @alpha; 3px 3px 0 0;);
+
+    span{
+        margin: 0;
+        padding: 0;
+        opacity: 0.5;
+        display: table-cell;
+        position: relative;
+        text-align: center;
+        line-height: 40px;
+        text-shadow: none;
+        background-repeat: no-repeat;
+        background-position: center center;
+        .transition(opacity 142ms linear, background 142ms linear;);
+
+        &[data-action]{
+            cursor: pointer;
+        }
+        &.action{
+            width: 50px;
+            font-size: 22px;
+        }
+        &.label{
+            width: auto;
+            opacity: 1;
+            font-size: 16px;
+        }
+        &:first-child{
+            border-radius: 4px 0 0 0;
+        }
+        &:last-child{
+            border-radius: 0 4px 0 0;
+        }
+        &:first-child:before,
+        &:last-child:before{
+            top: 5px;
+            bottom: 5px;
+            width: 1px;
+            height: auto;
+            margin: 0;
+            padding: 0;
+            content: "";
+            display: inline-block;
+            position: absolute;
+            background-color: @color[separators];
+        }
+        &:first-child:before{
+            right: -1px;
+        }
+        &:last-child:before{
+            left: -1px;
+        }
+        &:first-child:hover:before,
+        &:last-child:hover:before{
+            display: none;
+        }
+        &[data-action]:hover{
+            opacity: 0.95;
+            background-color: @color[separators];
+        }
+    }
+    span.action-prev{
+        background-image: @color[@icons][left];
+    }
+    span.action-next{
+        background-image: @color[@icons][right];
+    }
+    span.action-submit{
+        background-image: @color[@icons][check];
+    }
+    span.action-cancel{
+        background-image: @color[@icons][times];
+    }
+}
+/* @end CALENDAR ACTIONs */
+
+/* @start CALENDAR DATEPICKER */
+.tail-datetime-calendar .calendar-datepicker{
+    width: 100%;
+    margin: 0 0 15px 0;
+    padding: 0;
+    display: block;
+    position: relative;
+
+    &:after{
+        top: -1px;
+        left: 10px;
+        right: 10px;
+        content: "";
+        position: absolute;
+        .border(1px 0 0 0; solid; @color[separators]);
+    }
+    table{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border-spacing: 1px;
+        border-collapse: separate;
+    }
+    table tr th, table tr td{
+        color: @color[foreground];
+        width: 50px;
+        height: 35px;
+        padding: 0;
+        position: relative;
+        font-size: 13px;
+        text-align: center;
+        font-weight: normal;
+        text-shadow: none;
+        line-height: 30px;
+        background-color: @alpha;
+        .border(1px; solid; @alpha; 3px;);
+    }
+    table tr td{
+        cursor: pointer;
+    }
+    table tr td span.inner{
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+    }
+
+    // Special Fields
+    table tr td.date-disabled{
+        cursor: not-allowed;
+        color: @color[disabled];
+
+        &:after{
+            color: @color[disabled];
+            top: 0;
+            left: 0;
+            width: 49px;
+            height: 35px;
+            margin: 0;
+            padding: 0;
+            content: "✕";
+            opacity: 0.25;
+            display: inline-block;
+            position: absolute;
+            font-size: 30px;
+            line-height: 35px;
+        }
+    }
+    table tr td.date-previous,
+    table tr td.date-next{
+        color: @color[outside];
+        background-color: @alpha;
+    }
+    table tr td.date-today:before,
+    table tr td .tooltip-tick{
+        top: 5px;
+        width: 5px;
+        height: 5px;
+        margin: 0;
+        padding: 0;
+        z-index: 20;
+        content: "";
+        display: inline-block;
+        position: absolute;
+        .border(0; solid; @alpha; 50%;);
+    }
+    table tr td.date-today:before{
+        left: 5px;
+        background-color: @color[secondary];
+    }
+    table tr td .tooltip-tick{
+        right: 5px;
+        background-color: @color[foreground];
+    }
+    table tr td.date-select.date-today:before,
+    table tr td.date-select .tooltip-tick{
+        background-color: @color[background];
+    }
+    table tr td .tooltip-tick:before,
+    table tr td .tooltip-tick:after{
+        display: none;
+    }
+
+    // Calendar View `Days`
+    table tr td.calendar-day,
+    table tr td.calendar-month,
+    table tr td.calendar-year,
+    table tr td.calendar-decade{
+        width: 14.28571428571429%;
+        height: 35px;
+
+        &:hover{
+            border-color: @color[separators];
+        }
+        &.date-disabled:hover{
+            border-color: @color[background];
+            background-color: @color[background];
+        }
+        &.date-today{
+            color: @color[secondary];
+            border-color: @color[secondary];
+        }
+        &.date-select{
+            border-color: @color[primary];
+            background-color: @color[primary];
+        }
+        &.date-select span{
+            color: @color[background];
+        }
+        span.inner{
+            border: 0;
+        }
+    }
+    table tr td.calendar-year,
+    table tr td.calendar-decade{
+        width: 25%;
+    }
+    table tr td.calendar-decade span.inner{
+        height: 54px;
+        padding: 7px 15px;
+        text-align: center;
+        line-height: 20px;
+    }
+}
+/* @end CALENDAR DATEPICKER */
+
+/* @start CALENDAR TIMEPICKER */
+.tail-datetime-calendar .calendar-timepicker{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    border-top: 0;
+    text-align: center;
+
+    &:after{
+        top: -1px;
+        left: 10px;
+        right: 10px;
+        content: "";
+        position: absolute;
+        .border(1px 0 0 0; solid; @color[separators]);
+    }
+    .timepicker-field{
+        width: auto;
+        margin: 0;
+        padding: 20px 10px 10px 10px;
+        display: inline-block;
+        position: relative;
+        text-align: center;
+
+        &:first-of-type{
+            text-align: right;
+        }
+        &:last-of-type{
+            text-align: left;
+        }
+        input[type="text"]{
+            color: @color[@input][foreground];
+            width: 75px;
+            height: 35px;
+            margin: 0;
+            z-index: 4;
+            padding: 3px 20px 3px 5px;
+            display: inline-block;
+            position: relative;
+            font-size: 12px;
+            text-align: center;
+            appearance: textfield;
+            -moz-appearance: textfield;
+            -webkit-appearance: textfield;
+            background-color: @color[@input][background];
+            .border(1px; solid; @color[@input][separators]; 3px;);
+            .shadow(none;);
+            .transition(color 142ms linear, border 142ms linear, background 142ms linear;);
+
+            &:hover{
+                color: @color[@input][@hover][foreground];
+                border-color: @color[@input][@hover][separators];
+                background-color: @color[@input][@hover][background];
+            }
+            &:focus{
+                color: @color[@input][@focus][foreground];
+                border-color: @color[@input][@focus][separators];
+                background-color: @color[@input][@focus][background];
+            }
+            &:disabled{
+                cursor: not-allowed;
+                color: @color[@input][@disabled][foreground];
+                border-color: @color[@input][@disabled][separators];
+                background-color: @color[@input][@disabled][background];
+            }
+        }
+        button.picker-step{
+            right: 11px;
+            width: 20px;
+            height: 17px;
+            margin: 0;
+            padding: 0;
+            z-index: 15;
+            display: inline-block;
+            position: absolute;
+            background-color: @color[@input][background];
+            .shadow(none;);
+            .transition(border 142ms linear, background 142ms linear;);
+
+            &:before{
+                top: 5px;
+                left: 50%;
+                width: 0;
+                height: 0;
+                margin: 0 0 0 -3px;
+                padding: 0;
+                content: "";
+                display: inline-block;
+                position: absolute;
+                .transition(border 142ms linear;);
+            }
+            &.step-up{
+                top: 21px;
+                .border(0 0 1px 1px; solid; @color[@input][separators]; 0 2px 0 0;);
+
+                &:hover{
+                    background-color: @color[@input][@hover][background];
+                }
+                &:before{
+                    .border(0 4px 5px 4px; solid; @alpha @alpha @color[@input][foreground] @alpha;);
+                }
+            }
+            &.step-down{
+                top: 37px;
+                .border(1px 0 0 1px; solid; @color[@input][separators]; 0 0 2px 0;);
+
+                &:hover{
+                    background-color: @color[@input][@hover][background];
+                }
+                &:before{
+                    .border(5px 4px 0 4px; solid; @color[@input][foreground] @alpha @alpha @alpha;);
+                }
+            }
+        }
+        input:focus{
+            & + button.step-up{
+                border-color: @color[@input][@focus][separators];
+                background-color: @color[@input][@focus][background];
+
+                &:before{
+                    border-bottom-color: @color[@input][@focus][separators];
+                }
+                &:hover{
+                    color: @color[@input][@focus][background];
+                    background-color: @color[@input][@focus][separators];
+
+                    &:before{
+                        border-bottom-color: @color[@input][@focus][background];
+                    }
+                }
+            }
+            & + button + button.step-down{
+                border-color: @color[@input][@focus][separators];
+                background-color: @color[@input][@focus][background];
+
+                &:before{
+                    border-top-color: @color[@input][@focus][separators];
+                }
+                &:hover{
+                    color: @color[@input][@focus][background];
+                    background-color: @color[@input][@focus][separators];
+
+                    &:before{
+                        border-top-color: @color[@input][@focus][background];
+                    }
+                }
+            }
+        }
+        input:disabled{
+            & + button.step-up{
+                cursor: not-allowed;
+                border-color: @color[@input][@disabled][separators];
+                background-color: @color[@input][@disabled][background];
+
+                &:hover{
+                    border-color: @color[@input][@disabled][separators];
+                    background-color: @color[@input][@disabled][background];
+                }
+                &:before{
+                    border-bottom-color: @color[@input][@disabled][foreground];
+                }
+            }
+            & + button + button.step-down{
+                cursor: not-allowed;
+                border-color: @color[@input][@disabled][separators];
+                background-color: @color[@input][@disabled][background];
+
+                &:hover{
+                    border-color: @color[@input][@disabled][separators];
+                    background-color: @color[@input][@disabled][background];
+                }
+                &:before{
+                    border-top-color: @color[@input][@disabled][foreground];
+                }
+            }
+        }
+        label{
+            color: @color[@input][foreground];
+            margin: 0;
+            padding: 0;
+            display: block;
+            font-size: 12px;
+        }
+    }
+    label.timepicker-switch{
+        cursor: pointer;
+        margin: 0 0 -8px 0;
+        padding: 15px 0 0 0;
+        display: block;
+        text-align: center;
+        vertical-align: top;
+
+        &:before, &:after{
+            width: auto;
+            margin: 0;
+            padding: 0 5px;
+            font-size: 12px;
+            line-height: 16px;
+            vertical-align: top;
+        }
+        &:before{
+            content: attr(data-am);
+        }
+        &:after{
+            content: attr(data-pm);
+        }
+        input[type="checkbox"]{
+            display: none;
+
+            & + span{
+                display: inline-block;
+                position: relative;
+                vertical-align: top;
+
+                &:before{
+                    width: 50px;
+                    height: 16px;
+                    content: "";
+                    display: inline-block;
+                    vertical-align: top;
+                    .border(1px; solid; @color[primary]; 14px;);
+                    .transition(border 284ms linear;);
+                }
+                &:after{
+                    top: 3px;
+                    left: 4px;
+                    right: 30px;
+                    width: auto;
+                    height: 10px;
+                    margin: 0;
+                    padding: 0;
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    background-color: @color[primary];
+                    border-radius: 15px;
+                    vertical-align: top;
+                    .transition(left 284ms linear, right 284ms linear 284ms, background 284ms linear;);
+                }
+            }
+            &:checked + span{
+                &:before{
+                    border-color: @color[secondary];
+                }
+                &:after{
+                    left: 30px;
+                    right: 4px;
+                    background-color: @color[secondary];
+                    .transition(right 284ms linear, left 284ms linear 284ms, background 284ms linear;);
+                }
+            }
+        }
+    }
+}
+/* @end CALENDAR TIMEPICKER */
+
+/* @start RTL */
+.tail-datetime-calendar.rtl{
+    direction: rtl;
+
+    .calendar-actions span.action-next,
+    .calendar-actions span.action-prev{
+        transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+    }
+    .calendar-datepicker table tr td.date-disabled:after{
+        right: 3px;
+        transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+    .calendar-datepicker table tr td.date-today:before{
+        right: 5px;
+    }
+    .calendar-datepicker table tr td .tooltip-tick{
+        left: 5px;
+    }
+    .calendar-datepicker table tr td.calendar-month.date-today:before,
+    .calendar-datepicker table tr td.calendar-year.date-today:before,
+    .calendar-datepicker table tr td.calendar-decade.date-today:before{
+        right: 50%;
+        margin-right: -2.5px;
+    }
+    .calendar-datepicker table tr td.calendar-month:hover span.inner:before,
+    .calendar-datepicker table tr td.calendar-year:hover span.inner:before,
+    .calendar-datepicker table tr td.calendar-decade:hover span.inner:before{
+        right: 6px;
+        border-right-color: #cccccc;
+    }
+    .calendar-datepicker table tr td.calendar-month span.inner:after,
+    .calendar-datepicker table tr td.calendar-year span.inner:after,
+    .calendar-datepicker table tr td.calendar-decade span.inner:after{
+        left: 0;
+    }
+    .calendar-datepicker table tr td.calendar-month:hover span.inner:after,
+    .calendar-datepicker table tr td.calendar-year:hover span.inner:after,
+    .calendar-datepicker table tr td.calendar-decade:hover span.inner:after{
+        left: 6px;
+        border-left-color: #cccccc;
+    }
+    .calendar-datepicker table tr td.calendar-decade span.inner{
+        text-align: right;
+    }
+    .calendar-timepicker .timepicker-field:first-child{
+        text-align: left;
+        padding-left: 0;
+        padding-right: 25px;
+    }
+    .calendar-timepicker .timepicker-field:last-child{
+        text-align: right;
+        padding-left: 25px;
+        padding-right: 0;
+    }
+    .calendar-timepicker .timepicker-field:first-child input[type="text"]{
+        margin-left: -1px;
+        margin-right: 0;
+        border-radius: 0 3px 3px 0;
+    }
+    .calendar-timepicker .timepicker-field:last-child input[type="text"]{
+        margin-left: 0;
+        margin-right: -1px;
+        border-radius: 3px 0 0 3px;
+    }
+}
+/* @end RTL */

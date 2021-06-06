@@ -1,0 +1,82 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Les clients{% endblock %}
+
+{% block body %}
+    <div class="container--admin">
+
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+
+                <div class="card-custom">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="columns">
+                                <div class="column col-9 col-sm-6"><h2>Gestion des clients</h2></div>
+                                <div class="column col-3 col-sm-6 text-right">
+                                    {% if clients is not empty %}
+                                    <form method="post" action="/admin/clients/export">
+                                        <input type="hidden" name="export_data">
+                                        <button type="submit" class="btn-sm btn-primary"> <i class="icofont-download-alt"></i> Exporter les clients</button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% if clients is empty %}
+                        {{ viewAlert('info',"Il n'y a aucun client d'enregistré pour le moment") | raw }}
+                        {% else %}
+                            <table id="data-table" class="table-custom">
+                                <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Tél Fixe</th>
+                                    <th>Mobile</th>
+                                    <th>Ville</th>
+                                    <th>Département</th>
+                                    <th>Courriel</th>
+                                    <th>MàJ</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for client in clients %}
+                                    <tr onclick="document.location = '/admin/client/{{ client.c_id }}';" style="cursor: pointer">
+                                        <td>
+                                            {% if client.sleeping == 1 %}
+                                                <span style="color:#a4a4a4"><i class="icofont-teddy-bear"></i> <strong>{{ client.fullname }}</strong></span>
+                                                {% elseif client.sleeping == 0 %}
+                                                <strong>{{ client.fullname }}</strong>
+                                            {% endif %}
+
+                                        </td>
+                                        <td>{% if client.phone is not empty %}{{ client.phone }}{% endif %}</td>
+                                        <td>{% if client.mobile is not empty %}{{ client.mobile }}{% endif %}</td>
+                                        <td>
+                                            {% if client.zipcode is not empty and client.city is not empty %}
+                                            <i>{{ client.zipcode }}</i> - {{ client.city }}
+                                            {% elseif client.zipcode is not empty %}
+                                            <i>{{ client.zipcode }}</i>
+                                            {% elseif client.city is not empty %}
+                                            {{ client.city }}
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ client.name }} - {{ client.code }}</td>
+                                        <td>{{ client.mail }}</td>
+                                        <td>{{ client.updated_at | date('d/m/Y') }}</td>
+                                        <td>
+                                            <a href="/admin/edit-client/{{ client.c_id }}" class="btn btn-sm btn-info" title="Modifier le compte client"><i class="icofont-edit"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

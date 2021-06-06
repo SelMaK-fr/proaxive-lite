@@ -1,0 +1,41 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Proaxive Panel - Connexion</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre-exp.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre-icons.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/icons/icofont/icofont.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/admin-default/stylesheets/layout.css" type="text/css" media="screen">
+    <link rel="stylesheet" type="text/css" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/admin-default/stylesheets/light-style.css?={{ now | date('hi') }}" title="default"/>
+    <link rel="alternate stylesheet" type="text/css" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/admin-default/stylesheets/dark-style.css?={{ now | date('hi') }}" title="dark" />
+    {% block stylesheet %}{% endblock %}
+</head>
+<body class="login">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="container">
+    <div class="admin-form card-login">
+        <div class="card-custom">
+            <div class="card-header text-center card-header-custom">
+                <span><strong>Proaxive</strong> {{ app_info.release }} ver.{{ app_info.number }}</span>
+            </div>
+            <form method="post" class="form-default">
+                {% block body %}{% endblock %}
+                <div class="text-center mt-2">2021. Solution développée par <a href="https://proaxive.fr" target="_blank">Synexo Labs</a></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% block javascript %}{% endblock %}
+</body>
+
+</html>

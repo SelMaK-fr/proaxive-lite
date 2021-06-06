@@ -1,0 +1,27 @@
+<div class="recent-default-single">
+    <a href="/admin/client/{{ client.id }}">
+        <div class="recent-default-flex">
+            <div class="recent-d-img"><i class="icofont-user"></i></div>
+            <div class="recent-d-ctn">
+                <h2>{{ client.fullname }}</h2>
+                <p>
+                    {% if client.zipcode is not empty and client.city is not empty %}
+                        <i>{{ client.zipcode }}</i>, {{ client.city }}<br>
+                    {% elseif client.zipcode is not empty %}
+                        <i>{{ client.zipcode }}</i>
+                    {% elseif client.city is not empty %}
+                        {{ client.city }}<br>
+                    {% endif %}
+                    <!-- Client -->
+                    {% if client.phone is not empty and client.mobile is not empty %}
+                        {{ client.phone }} / {{ client.mobile }}
+                    {% elseif client.phone is empty %}
+                        {{ client.mobile }}
+                    {% elseif client.mobile is empty %}
+                        {{ client.phone }}
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </a>
+</div>

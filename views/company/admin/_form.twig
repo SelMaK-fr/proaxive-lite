@@ -1,0 +1,58 @@
+        <div class="columns">
+            <div class="column col-6 col-sm-12 col-sm-12 col-xl-12">
+                {% if firstAdd == 1 %}
+                <div class="form-group">
+                    <label for="logo">Logo de votre entreprise</label>
+                    <input type="file" class="form-input" name="logo" id="logo" title="Parcourir les fichiers"/>
+                </div>
+                {% endif %}
+                {{ form.input('cname', "Dénomination", "Le nom que porte votre entreprise") | raw }}
+                {{ form.input('about', "Slogan de l'entreprise", "Ex : Agence informatique du Finistère") | raw }}
+                <div class="columns">
+                    <div class="column col-6 col-sm-12">
+                        {{ form.input('adress', "Adresse postale", "Adresse postale") | raw }}
+                        {{ form.input('zipcode', "Code postal", "Code postal") | raw }}
+                        {{ form.select('country', "Pays", {'France':'France', 'Suisse':'Suisse', 'Belgique':'Belgique'}) | raw }}
+                        {{ form.input('fax', "Fax", "Numéro de fax") | raw }}
+                        {{ form.input('website', "Site internet (avec http:// ou https://)", "Adresse de votre site internet") | raw }}
+                    </div>
+                    <div class="column col-6 col-sm-12">
+                        {{ form.select('department_id', 'Département', departments) | raw }}
+                        {{ form.input('city', "Ville", "Ville") | raw }}
+                        <div class="columns">
+                            <div class="column col-3">
+                                {{ form.input('phone_indicatif',  'Indicatif', '+33') | raw }}
+                            </div>
+                            <div class="column col-9">
+                                {{ form.input('phone', "Téléphone fixe", "Téléphone fixe") | raw }}
+                                {{ form.input('mobile', "Téléphone mobile", "Téléphone mobile") | raw }}
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="column col-6 col-sm-12">
+                <div class="columns">
+                    <div class="column col-6 col-sm-12">
+                        {{ form.select('type', 'Type', {'Micro-Entreprise': 'Micro-Entreprise'}) | raw }}
+                        {{ form.input('siret', "Numéro de siret", "Numéro de siret") | raw }}
+                        {{ form.input('mail', "Courriel", "Adresse mail") | raw }}
+                        {{ form.input('director', "Gérant/Entrepreneur", "Nom du gérant/entrepreneur") | raw }}
+                        {{ form.input('facebook', "Facebook", "Avec https://") | raw }}
+                        {{ form.input('instagram', "Instagram", "Avec https://") | raw }}
+                        {{ form.input('twitter', "Twitter", "Avec https://") | raw }}
+                        {{ form.input('linkedin', "Linkedin", "Avec https://") | raw }}
+                    </div>
+                    <div class="column col-6 col-sm-12">
+                        <!-- Type -->
+                        {{ form.input('ape', "Code NAF/APE/APRM", "Ex : 9511Z") | raw }}
+                        {{ form.input('rm', "Code RM", false, '<i class="icofont-info-circle"></i> Laissez vide si aucun') | raw }}
+                        {{ form.input('rcs', "Code RCS", false, '<i class="icofont-info-circle"></i> Laissez vide si aucun') | raw }}
+                        {{ form.input('rc_pro', "RC Pro", false, '<i class="icofont-info-circle"></i> Laissez vide si aucun') | raw }}
+                        {{ form.input('tva', "Numéro de TVA", "Numéro de TVA", '<i class="icofont-info-circle"></i> Laissez vide si aucun') | raw }}
+                    </div>
+                </div>
+            </div>
+        </div>

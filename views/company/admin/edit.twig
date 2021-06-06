@@ -1,0 +1,53 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Gestion des entreprises{% endblock %}
+
+{% block body %}
+    <!-- START .cards -->
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+                <div class="card-custom">
+                    <div class="card-body">
+                        <div class="columns">
+                            <div class="column"><h4 class="header-title">Informations générales</h4></div>
+                            <div class="column text-right"><a class="btn btn-sm btn-info" href="#logo-upload">Remplacer/charger le logo</a></div>
+                        </div>
+                        <div class="admin-form">
+                            <form method="post" enctype="multipart/form-data">
+                                {{ include('company/admin/_form.twig') }}
+                                {{ form.submitSingle('primary', 'saveData', 'Sauvegarder', false) | raw }}
+                                <!-- MODAL -->
+                                <div class="modal modal-sm" id="logo-upload">
+                                    <a href="#close" class="modal-overlay" aria-label="Close"></a>
+                                    <div class="modal-container">
+                                        <div class="modal-header">
+                                            <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+                                            <div class="modal-title h5">Remplacer le logo !</div>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="content">
+                                                {% if company.logo is not empty %}
+                                                    <div class="text-center">
+                                                    <img width="40%" src="{{ getenv('APP_ROOT_PUBLIC') }}/uploads/company/{{ company.logo }}" alt="">
+                                                    </div>
+                                                {% endif %}
+                                                <input type="file" class="form-input" name="logo" id="logo" title="Parcourir les fichiers"/>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            {{ form.submitSingle('primary', 'saveLogo', 'Importer', false) | raw }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /MODAL -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

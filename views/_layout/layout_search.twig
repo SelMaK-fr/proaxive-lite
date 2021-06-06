@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="robots" content="noindex">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/icons/site.webmanifest">
+    <title>{{ getenv('APP_NAME') }} - {% block title %}{% endblock %}</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,700&display=swap" rel="stylesheet">
+    <!-- START::CSS_SPECTRE -->
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre-exp.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre-icons.min.css">
+    <link href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/stylesheets/app.css?={{ now | date('hi') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/stylesheets/light-style.css?={{ now | date('hi') }}" type="text/css" rel="stylesheet" media="all"/>
+</head>
+<body class="dark lighten-4 search-layout">
+{% block body %}{% endblock %}
+<footer class="footer-search">
+    <div class="container">
+        <div style="width:80%;margin:0 auto;">
+            <div class="columns">
+                <div class="column col-md-12">
+                       Propulsé par Proaxive {{ app_info.release }} {% if app_setting.view_version == 1%} ver.{{ app_info.number }}{% endif %}
+                </div>
+                <div class="column col-md-12 text-right">2021. Solution développée et éditée par <a href="https://www.synexolabs.com" target="_blank">SynexoLabs</a></div>
+            </div>
+        </div>
+
+    </div>
+</footer>
+<script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/app.js"></script>
+</body>
+</html>

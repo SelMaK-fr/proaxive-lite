@@ -1,0 +1,45 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Les administrateurs{% endblock %}
+
+{% block body %}
+
+    <div class="section--admin">
+    <div class="container">
+    <div class="admin-content">
+        {{ include('_notifications.twig') }}
+        <div class="card-custom">
+            <div class="card-header"><h2>Gestion des utilisateurs</h2></div>
+            <div class="card-body">
+                <table class="table-custom">
+                    <thead>
+                    <tr>
+                        <th style="width:45px;" scope="col">#</th>
+                        <th scope="col" class="w350p">Nom</th>
+                        <th scope="col">Rang (lvl)</th>
+                        <th scope="col">Pseudo</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Dernière visite</th>
+                        <th scope="col">Date de màj</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for auser in ausers %}
+                        <tr class="clickable-row" data-href="/admin/edit-auser/{{ auser.u_id }}" data-target="_self">
+                            <th scope="row">{{ auser.u_id }}</th>
+                            <td>{{ auser.fullname }}</td>
+                            <td>{{ auser.r_title }} ({{ auser.r_level }})</td>
+                            <td>{{ auser.pseudo }}</td>
+                            <td>{{ auser.mail }}</td>
+                            <td>{{ auser.lastvisite | date('d-m-Y') }}</td>
+                            <td>{{ auser.update_at | date('d-m-Y') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

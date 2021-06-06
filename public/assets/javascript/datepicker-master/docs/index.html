@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="A simple jQuery datepicker plugin.">
+  <meta name="author" content="Chen Fengyuan">
+  <title>Datepicker</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/datepicker.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <!--[if lt IE 9]>
+  <div class="alert alert-warning alert-dismissible fade show m-0 rounded-0" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+  </div>
+  <![endif]-->
+
+  <!-- Header -->
+  <header class="navbar navbar-light navbar-expand-md">
+    <div class="container">
+      <a class="navbar-brand" href="./">Datepicker</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/fengyuanchen/datepicker/blob/master/README.md" data-toggle="tooltip" title="View the documentation">Docs</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Examples
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="examples/datepicker-in-modal.html">Datepicker in a Bootstrap modal</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="https://github.com/fengyuanchen/datepicker" data-toggle="tooltip" title="View the GitHub project">GitHub</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="https://fengyuanchen.github.io" data-toggle="tooltip" title="Explore more projects">Explore</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="https://chenfengyuan.com" data-toggle="tooltip" title="About the author">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Jumbotron -->
+  <div class="jumbotron bg-primary text-white rounded-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md">
+        <h1>Datepicker <small class="h6">v1.0.7</small></h1>
+        <p class="lead">A simple jQuery datepicker plugin.</p>
+        </div>
+        <div class="col-md">
+          <div class="carbonads">
+            <script id="_carbonads_js" src="https://cdn.carbonads.com/carbon.js?serve=CKYI55Q7&placement=fengyuanchengithubio" async></script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+    <h1 class="page-header">Overview</h1>
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <h3 class="page-header">Demo</h3>
+        <div class="docs-datepicker">
+          <div class="input-group">
+            <input type="text" class="form-control docs-date" name="date" placeholder="Pick a date">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-outline-secondary docs-datepicker-trigger" disabled>
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <div class="docs-datepicker-container"></div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <h3 class="page-header">Options</h3>
+        <div class="docs-options">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="option-date">date</span>
+            </div>
+            <input type="text" class="form-control" name="date" value aria-describedby="option-date" placeholder="null">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="option-format">format</span>
+            </div>
+            <input type="text" class="form-control" name="format" value="mm/dd/yyyy" aria-describedby="option-format" placeholder="mm/dd/yyyy">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="option-startDate">startDate</span>
+            </div>
+            <input type="text" class="form-control" name="startDate" aria-describedby="option-startDate" placeholder="null">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="option-endDate">endDate</span>
+            </div>
+            <input type="text" class="form-control" name="endDate" aria-describedby="option-endDate" placeholder="null">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="option-language">language</span>
+            </div>
+            <select class="form-control" id="option-language" name="language">
+              <option value="ca-ES">ca-ES</option>
+              <option value="cs-CZ">cs-CZ</option>
+              <option value="da-DK">da-DK</option>
+              <option value="de-DE">de-DE</option>
+              <option value="el-GR">el-GR</option>
+              <option value="en-GB">en-GB</option>
+              <option value="en-US" selected>en-US</option>
+              <option value="es-ES">es-ES</option>
+              <option value="fi-FI">fi-FI</option>
+              <option value="fr-FR">fr-FR</option>
+              <option value="hu-HU">hu-HU</option>
+              <option value="is-IS">is-IS</option>
+              <option value="it-IT">it-IT</option>
+              <option value="ja-JP">ja-JP</option>
+              <option value="km-KH">km-KH</option>
+              <option value="ko-KR">ko-KR</option>
+              <option value="lt-LT">lt-LT</option>
+              <option value="lv-LV">lv-LV</option>
+              <option value="nb-NO">nb-NO</option>
+              <option value="nl-NL">nl-NL</option>
+              <option value="oc-FR">oc-FR</option>
+              <option value="pl-PL">pl-PL</option>
+              <option value="pt-BR">pt-BR</option>
+              <option value="ru-RU">ru-RU</option>
+              <option value="sk-SK">sk-SK</option>
+              <option value="sv-SE">sv-SE</option>
+              <option value="th-TH">th-TH</option>
+              <option value="tr-TR">tr-TR</option>
+              <option value="ug-CN">ug-CN</option>
+              <option value="vi-VN">vi-VN</option>
+              <option value="zh-CN">zh-CN</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="option-startView">startView</span>
+            </div>
+            <select class="form-control" id="option-startView" name="startView">
+              <option value="0" selected>0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="option-weekStart">weekStart</span>
+            </div>
+            <select class="form-control" id="option-weekStart" name="weekStart">
+              <option value="0" selected>0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="option-offset">offset</span>
+            </div>
+            <input type="number" class="form-control" name="offset" value="10" aria-describedby="option-offset" placeholder="offset">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="option-zIndex">zIndex</span>
+            </div>
+            <input type="number" class="form-control" name="zIndex" value="1000" aria-describedby="option-zIndex" placeholder="zIndex">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <h3 class="page-header">Toggles</h3>
+        <div class="docs-toggles">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" id="container" type="checkbox" name="container">
+                <label class="form-check-label" for="container">container</label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" id="trigger" type="checkbox" name="trigger">
+                <label class="form-check-label" for="trigger">trigger</label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" id="inline" type="checkbox" name="inline">
+                <label class="form-check-label" for="inline">inline</label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" id="autoShow" type="checkbox" name="autoShow">
+                <label class="form-check-label" for="autoShow">autoShow</label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" id="autoHide" type="checkbox" name="autoHide">
+                <label class="form-check-label" for="autoHide">autoHide</label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" id="autoPick" type="checkbox" name="autoPick">
+                <label class="form-check-label" for="autoPick">autoPick</label>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="form-check">
+                <input class="form-check-input" id="yearFirst" type="checkbox" name="yearFirst">
+                <label class="form-check-label" for="yearFirst">yearFirst</label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <h3 class="page-header">Methods</h3>
+        <div class="docs-actions">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-primary" data-method="getDate" data-target="#putDate">Get Date</button>
+            </div>
+            <input type="text" class="form-control" id="putDate">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-primary" data-arguments="[true]" data-method="getDate" data-target="#putDateFormatted">Get Date (formatted)</button>
+            </div>
+            <input type="text" class="form-control" id="putDateFormatted">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-primary" data-method="getMonthName" data-target="#putMonthName">Get Month Name</button>
+            </div>
+            <input type="text" class="form-control" id="putMonthName">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-primary" data-arguments="[true]" data-method="getMonthName" data-target="#putMonthNameShort">Get Month Name (short)</button>
+            </div>
+            <input type="text" class="form-control" id="putMonthNameShort">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-primary" data-method="getDayName" data-target="#putDayName">Get Day Name</button>
+            </div>
+            <input type="text" class="form-control" id="putDayName">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-primary" data-arguments="[true]" data-method="getDayName" data-target="#putDayNameShort">Get Day Name (short)</button>
+            </div>
+            <input type="text" class="form-control" id="putDayNameShort">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-primary" data-arguments="[false, true]" data-method="getDayName" data-target="#putDayNameMin">Get Day Name (min)</button>
+            </div>
+            <input type="text" class="form-control" id="putDayNameMin">
+          </div>
+          <div class="btn-group d-flex" role="group">
+            <button type="button" class="btn btn-primary" data-method="show">Show</button>
+            <button type="button" class="btn btn-primary" data-method="hide">Hide</button>
+          </div>
+          <div class="btn-group d-flex" role="group">
+            <button type="button" class="btn btn-primary" data-method="pick">Pick</button>
+            <button type="button" class="btn btn-primary" data-method="update">Update</button>
+          </div>
+          <div class="btn-group d-flex" role="group">
+            <button type="button" class="btn btn-primary" data-method="reset">Reset</button>
+            <button type="button" class="btn btn-primary" data-method="destroy">Destroy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="heart"></p>
+      <nav class="nav flex-wrap justify-content-center mb-3">
+        <a class="nav-link" href="https://github.com/fengyuanchen/datepicker">GitHub</a>
+        <a class="nav-link" href="https://github.com/fengyuanchen/datepicker/releases">Releases</a>
+        <a class="nav-link" href="https://github.com/fengyuanchen/datepicker/blob/master/LICENSE">License</a>
+        <a class="nav-link" href="https://chenfengyuan.com">About</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://fengyuanchen.github.io/shared/google-analytics.js"></script>
+  <script src="js/datepicker.js"></script>
+  <script src="js/datepicker.ca-ES.js"></script>
+  <script src="js/datepicker.cs-CZ.js"></script>
+  <script src="js/datepicker.da-DK.js"></script>
+  <script src="js/datepicker.de-DE.js"></script>
+  <script src="js/datepicker.el-GR.js"></script>
+  <script src="js/datepicker.en-GB.js"></script>
+  <script src="js/datepicker.en-US.js"></script>
+  <script src="js/datepicker.es-ES.js"></script>
+  <script src="js/datepicker.fi-FI.js"></script>
+  <script src="js/datepicker.fr-FR.js"></script>
+  <script src="js/datepicker.hu-HU.js"></script>
+  <script src="js/datepicker.is-IS.js"></script>
+  <script src="js/datepicker.it-IT.js"></script>
+  <script src="js/datepicker.ja-JP.js"></script>
+  <script src="js/datepicker.km-KH.js"></script>
+  <script src="js/datepicker.ko-KR.js"></script>
+  <script src="js/datepicker.lt-LT.js"></script>
+  <script src="js/datepicker.lv-LV.js"></script>
+  <script src="js/datepicker.nb-NO.js"></script>
+  <script src="js/datepicker.nl-NL.js"></script>
+  <script src="js/datepicker.oc-FR.js"></script>
+  <script src="js/datepicker.pl-PL.js"></script>
+  <script src="js/datepicker.pt-BR.js"></script>
+  <script src="js/datepicker.ru-RU.js"></script>
+  <script src="js/datepicker.sk-SK.js"></script>
+  <script src="js/datepicker.sv-SE.js"></script>
+  <script src="js/datepicker.th-TH.js"></script>
+  <script src="js/datepicker.tr-TR.js"></script>
+  <script src="js/datepicker.ug-CN.js"></script>
+  <script src="js/datepicker.vi-VN.js"></script>
+  <script src="js/datepicker.zh-CN.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

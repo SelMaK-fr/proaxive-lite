@@ -1,0 +1,7 @@
+{{ form.inputWithIcon('fullname', false, 'user-suited', 'Nom complet') | raw }}
+{{ form.inputWithIcon('pseudo', false, 'user-alt-7', "Pseudonyme de l'administrateur") | raw }}
+{{ form.select('roles_id', 'Rang', roles) | raw }}
+{{ form.inputWithIcon('mail', false, 'email', 'Adresse email') | raw }}
+{% if inputpassword is defined %}
+{{ form.password('password', 'Mot de passe', false) | raw }}
+{% endif %}

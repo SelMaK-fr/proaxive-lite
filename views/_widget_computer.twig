@@ -1,0 +1,24 @@
+<div class="card-custom">
+    <div class="card-content">
+        <div class="center">
+            <i class="material-icons">desktop_windows</i>
+            <h2>Votre ordinateur</h2>
+        </div>
+            <div class="swipe" id="mySwipe">
+                <div class="swipe-wrap">
+                    {% for item in computers %}
+                        <div class="center">
+                            <span class="small-txt-h2 center dblock mb1">{{ item.name }} ({{ item.b_title }})</span>
+                            {% markdown %}
+                            {{ item.content }}
+                            {% endmarkdown %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+    </div>
+    <div class="card-action bordertop center">
+        <a class="btn-small primary noshadow" id="prev"><i class="material-icons">keyboard_arrow_left</i></a>
+        <a class="btn-small primary noshadow" id="next"><i class="material-icons">keyboard_arrow_right</i></a>
+    </div>
+</div>

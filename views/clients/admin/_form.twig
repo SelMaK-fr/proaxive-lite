@@ -1,0 +1,37 @@
+    <div class="columns">
+        <div class="column col-sm-12 col-xl-12">
+            <div class="columns">
+                <div class="column col-6 col-sm-12">
+                    {{ form.input('lastname', 'Nom', 'Nom du client') | raw }}
+                </div>
+                <div class="column col-6 col-sm-12">
+                    {{ form.input('firstname', 'Prénom', 'Prénom du client') | raw }}
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column col-6">
+                    {{ form.input('phone', 'Téléphone fixe', 'Numéro de téléphone') | raw }}
+                </div>
+                <div class="column col-6">
+                    {{ form.input('mobile', 'Téléphone mobile', 'Numéro de téléphone mobile') | raw }}
+                </div>
+            </div>
+            {{ form.input('mail', 'Courriel', 'Adresse courriel du client') | raw }}
+        </div>
+        <div class="column col-sm-12">
+            {{ form.textareaDefault('adress', 'Adresse Postale', 'Adresse postale du client') | raw }}
+            <div class="columns">
+                <div class="column col-3 col-sm-12">{{ form.input('zipcode', 'Code Postal', 'Code postal') | raw }}</div>
+                <div class="column col-3 col-sm-12">{{ form.input('city', 'Ville', 'Ville') | raw }}</div>
+                <div class="column col-3 col-sm-12">
+                    {% if formAdd == 1 %}
+                    {{ form.selectWithValue('department_id', 'Département', departments, company.did) | raw }}
+                    {% else %}
+                    {{ form.select('department_id', 'Département', departments) | raw }}
+                    {% endif %}
+                </div>
+            </div>
+            {{ form.inputswitch('sleeping', 'En sommeil ?') | raw }}
+        </div>
+    </div>
+{{ form.submitDefault('Enregistrer', 'primary') | raw }}

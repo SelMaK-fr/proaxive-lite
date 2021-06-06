@@ -1,0 +1,69 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Gérer les marques{% endblock %}
+
+{% block breadCrumb %}
+    <li><a href="#"></a></li>
+    <li><a href="/admin">Admin</a></li>
+    <li><a href="/admin/equipments">équipements</a></li>
+    <li>Marques</li>
+{% endblock %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                <div class="columns">
+                    <div class="column">
+                        <div class="card-custom">
+                            <div class="card-header"><h2>Ajouter une marque</h2></div>
+                            <div class="card-body">
+                                <div class="admin-form">
+                                    <form method="post" action="#">
+                                        {{ include('equipments/admin/brands/_form.twig') }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        {{ include('_notifications.twig') }}
+                        <div class="card-custom">
+                            <div class="card-header"><h2>Marques enregistrées</h2></div>
+                            <div class="card-body">
+                                {% if brands is empty %}
+                                    {{ viewAlert('info',"Il n'y a aucune marque d'enregistrée pour le moment") | raw }}
+                                {% else %}
+                                    <div class="columns">
+                                    {% for item in brands %}
+                                        <div class="column col-3 col-sm-12">
+                                            <div class="thumbnail">
+                                                <span class="delete-icon"><a class="trigger" href="#delete{{ item.id }}"><i class="icofont-trash"></i></a></span>
+                                                <div class="thumbnail__title">
+                                                    <span class="t__name">{{ item.b_title }}</span>
+                                                </div>
+                                                <div class="thumbnail__content">
+                                                    <a href="{{ item.UrlAdmin }}" title="Editer la marque {{ item.b_title }}">
+                                                    <img class="thumbnail-logo" src="{% if item.b_logo is empty or item.b_logo is null %}{{ getenv('APP_ADMIN_THEME') }}/img/no-image-available.png{% elseif item.b_logo %}{{ item.b_logo }}{% endif %}" alt="Logo de {{ item.b_title }}">
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                            <!-- /modal -->
+                                            <form method="post" action="/admin/equipments/brand/delete" style="display:inline-block;">
+                                                <input type="hidden" name="id" value="{{ item.id }}">
+                                                {{ include('dashboard/_modal-delete.twig', {'id' : 'delete' ~ item.id , 'title' : item.b_title}) }}
+                                            </form>
+                                            <!-- /.modal -->
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

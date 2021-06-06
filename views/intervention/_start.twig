@@ -1,0 +1,49 @@
+{% if status.id == 7 or status.id == 5 %}
+    <div class="alert alert-danger">Intervention <strong>{{ status.title }}</strong></div>
+    <div class="card-custom">
+        <h1 class="title-card primary whitetxt">Compte rendu</h1>
+        <div class="card-content">
+            {{ intervention.report | markdown }}
+        </div>
+    </div>
+{% else %}
+    {% if intervention.closed == 1 %}
+        <div class="alert alert-info">Intervention <strong>cloturée</strong> le {{ intervention.close_date | date('d-m-Y à H:i') }}</div>
+        {% if intervention.back_home is null %}
+            <div class="alert alert-info"><i class="material-icons">info_outline</i> Votre matériel vous attend, n'hésitez pas à me contacter si je ne l'ai pas déjà fait :)</div>
+        {% else %}
+            <div class="alert alert-success"><i class="material-icons">done_all</i> Votre matériel vous a été remis le <strong>{{ intervention.back_home | date('d-m-Y') }}</strong></div>
+        {% endif %}
+        <div class="card-custom">
+            <h1 class="title-card primary whitetxt">Compte rendu</h1>
+            <div class="card-content">
+                {{ intervention.report | markdown }}
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-warning">Intervention ouverte depuis le {{ intervention.created_at | date('d-m-Y à H:i') }}. Dernière mise à jour le {{ intervention.updated_at | date('d-m-Y à H:i') }}</div>
+    {% endif %}
+{% endif %}
+
+<div class="tabs-pe">
+    <ul id="tabs">
+        <li><a href="#details">Détails de l'intervention</a></li>
+        <li><a href="#about">Description de la panne</a></li>
+        <li><a href="#observation">Observation(s)</a></li>
+    </ul>
+
+    <div class="tabContent" id="details">
+        <div class="about_intervention">
+            <h4>Maintenance étape par étape</h4>
+            {{ intervention.details | markdown }}
+        </div>
+    </div>
+
+    <div class="tabContent" id="about">
+        {{ intervention.description | markdown }}
+    </div>
+
+    <div class="tabContent" id="observation">
+        {{ intervention.observation | markdown }}
+    </div>
+</div>

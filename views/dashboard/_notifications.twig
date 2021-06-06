@@ -1,0 +1,5 @@
+{% if sessionFlash.hasFlashes %}
+    {% for type, message in sessionFlash.getFlashes %}
+        <div id="notification" class="alert-admin alert-a-{{ type | raw }} alert-radius">{{ message | raw }}</div>
+    {% endfor %}
+{% endif %}

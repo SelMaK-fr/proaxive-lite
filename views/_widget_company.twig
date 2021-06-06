@@ -1,0 +1,37 @@
+<div class="card-custom">
+    <div class="card-content">
+        <div class="text-center">
+            {% if company.logo is empty %}
+            <img alt="" width="40%" src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/proaxive_logo_synexolabs_400.png">
+            {% else %}
+            <img width="40%" src="{{ getenv('APP_ROOT_PUBLIC') }}/uploads/company/{{ company.logo }}" alt="">
+            {% endif %}
+            <h2 class="m-0">{{ company.cname }}</h2>
+            <span class="small-txt-h2">{{ company.about }}</span>
+        </div>
+        <p class="spanlistAndicons">
+            <span><i class="material-icons">phone</i>
+                {% if company.phone is not empty and company.mobile is not empty %}
+                    <a href="tel:{{ company.phone_indicatif }}{{ company.phone | replace({'.': ''}) | slice(1,15) }}">{{ company.phone }}</a> /
+                    <a href="tel:{{ company.phone_indicatif }}{{ company.mobile | replace({'.': ''}) | slice(1,15) }}">{{ company.mobile }}</a>
+                {% elseif company.phone is empty %}
+                    <a href="tel:{{ company.phone_indicatif }}{{ company.mobile | replace({'.': ''}) | slice(1,15) }}">{{ company.mobile }}</a>
+                {% elseif company.mobile is empty %}
+                    <a href="tel:{{ company.phone_indicatif }}{{ company.phone | replace({'.': ''}) | slice(1,15) }}">{{ company.phone }}</a>
+                {% endif %}
+            </span>
+            <span><i class="material-icons">alternate_email</i> {{ company.mail }}</span>
+            <span><i class="material-icons">business</i>{{ company.siret }} </span>
+            <span>
+                {% if company.adress is not empty %}
+                    {{ company.adress }}<br>
+                {% endif %}
+                {{ getdata(company.zipcode, '') }}
+                {{ company.city }} - {{ company.name }}
+            </span>
+        </p>
+    </div>
+    <div class="card-action text-center bordertop">
+        <a href="{{ company.website }}" target="_blank" title="Notre site internet"><i class="material-icons">link</i> {{ company.cname }}</a>
+    </div>
+</div>

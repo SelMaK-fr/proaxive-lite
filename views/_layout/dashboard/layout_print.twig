@@ -1,0 +1,33 @@
+<!doctype html>
+<html class="no-js" lang="fr">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Proaxive Lite - {% block title %}{% endblock %}</title>
+    <!-- CSS  -->
+    <!-- START::CSS_SPECTRE Local -->
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre-exp.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre-icons.min.css">
+    <!-- START::ICONFONT -->
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/icons/icofont/icofont.min.css">
+    <!-- START::Layout -->
+    <link rel="stylesheet" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/layout.css?={{ now | date('hi') }}" type="text/css"/>
+    <!-- START::layout colors -->
+    <link rel="stylesheet" type="text/css" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/colors/light-style.css?={{ now | date('hi') }}" title="default"/>
+    <link rel="alternate stylesheet" type="text/css" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/colors/dark-style.css?={{ now | date('hi') }}" title="dark" />
+    <!-- START::Print -->
+    <link rel="stylesheet" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/print.css" type="text/css" media="print">
+</head>
+
+<body class="print">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- start:Main-body -->
+{% block body %}{% endblock %}
+<!-- end:Main-body -->
+<script src="{{ getenv('APP_ADMIN_THEME') }}/js/main.js"></script>
+</body>
+</html>

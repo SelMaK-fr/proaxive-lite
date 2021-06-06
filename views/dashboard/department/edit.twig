@@ -1,0 +1,23 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %} Modification d'un département {% endblock %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+            {{ include('_notifications.twig') }}
+                <form method="post" action="#">
+                    <div class="card-custom">
+                        <div class="card-header"><h2>Modifier le département - {{ department.name }}</h2></div>
+                        <div class="card-body">
+                            <div class="admin-form">
+                                {{ include('dashboard/department/_form.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

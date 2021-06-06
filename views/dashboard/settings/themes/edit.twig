@@ -1,0 +1,58 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Gestion des paramètres du site internet{% endblock %}
+
+{% block javascript %}
+<link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/codemirror-5.60.0/lib/codemirror.css">
+<script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/codemirror-5.60.0/lib/codemirror.js"></script>
+<script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/codemirror-5.60.0/mode/css/css.js"></script>
+<script>
+   var editor = CodeMirror.fromTextArea(document.getElementById("codecss"), {
+      lineNumbers: true,
+      mode: "text/css",
+      matchBrackets: true,
+    });
+</script>
+<script src="https://unpkg.com/vanilla-picker@2"></script>
+<script>
+    // Create a new Picker instance and set the parent element.
+    // By default, the color picker is a popup which appears when you click the parent.
+    var parent = document.querySelector('#parent');
+    var picker = new Picker(parent);
+    // You can do what you want with the chosen color using two callbacks: onChange and onDone.
+    picker.onChange = function(color) {
+        parent.style.background = color.rgbaString;
+    };
+    // onDone is similar to onChange, but only called when you click 'Ok'.
+</script>
+{% endblock %}
+
+{% block body %}
+    <!-- START .cards -->
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+                <div id="parent">
+                    <span class="label label-primary">
+                        Cliquez ici pour ouvrir le générateur de couleur
+                    </span>
+                </div>
+                <form method="post">
+                    <div class="card-custom">
+                        <div class="card-body">
+                            <div class="card-header m-0">
+                                <h2>Thème CSS <span class="txtprimary">({{ theme }}/{{ cssName }}.css)</span></h2>
+                            </div>
+                            <div class="admin-form">
+                                <textarea class="codemirror-int mg-b-3" id="codecss" name="stylesheets">{{ css }}</textarea>
+                                {{ form.submitDefault('Sauvegarder', 'primary mg-tb-2') | raw }}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

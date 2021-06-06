@@ -1,0 +1,69 @@
+<div class="main-menu mg-tb-3">
+    <div class="container">
+                <ul class="nav-tabs menu-wrapper menu-icon">
+                    <li {% if current_menu == 'home' and current_menu is defined %}class="active"{% endif %}>
+                        <a href="/admin"><i class="icofont-ui-home"></i> Accueil</a>
+                    </li>
+                    <li {% if current_menu == 'clients' and current_menu is defined %}class="active"{% endif %}>
+                        <a href="/admin/clients"><i class="icofont-id"></i> Clients</a>
+                    </li>
+                    <li {% if current_menu == 'interventions' and current_menu is defined %}class="active"{% endif %}>
+                        <a href="/admin/interventions"><i class="icofont-tools-bag"></i> Interventions</a>
+                    </li>
+                    <li {% if current_menu == 'equipments' and current_menu is defined %}class="active"{% endif %}>
+                        <a href="/admin/equipments"><i class="icofont-monitor"></i> Équipements</a>
+                    </li>
+                    <li class="adm_user {% if current_menu == 'ausers' and current_menu is defined %}active{% endif %}">
+                        <a href="/admin/ausers"><i class="icofont-users-alt-2"></i> Utilisateurs</a>
+                    </li>
+                    <li class="{% if current_menu == 'config' and current_menu is defined %}active{% endif %}">
+                        <a href="/admin/setting"><i class="icofont-gear-alt"></i> Paramètres</a>
+                    </li>
+                </ul>
+                <div class="tab-content menu-content">
+                    <!-- home -->
+                    <div id="home" class="tab-pane {% if current_menu == 'home' and current_menu is defined %}active{% endif %} tab-menu-bg">
+                        <ul class="main-menu-dropdown animate__animated animate__flipInX">
+                            <li><a href="/admin/edit-company/1">Mon entreprise</a></li>
+                            <li><a href="/admin/status">Gérer les statuts</a></li>
+                            <li><a href="/admin/departments">Gérer les départements</a></li>
+                        </ul>
+                    </div>
+                    <!-- clients -->
+                    <div id="clients" class="tab-pane {% if current_menu == 'clients' and current_menu is defined %}active{% endif %} tab-menu-bg">
+                        <ul class="main-menu-dropdown animate__animated animate__flipInX">
+                            <li><a href="/admin/add-client"><i class="icofont-ui-add"></i> Créer un client</a></li>
+                        </ul>
+                    </div>
+                    <!-- interventions -->
+                    <div id="interventions" class="tab-pane {% if current_menu == 'interventions' and current_menu is defined %}active{% endif %} tab-menu-bg">
+                        <ul class="main-menu-dropdown animate__animated animate__flipInX">
+                            <li><a href="/admin/add-intervention"><i class="icofont-ui-add"></i> Créer une intervention</a></li>
+                        </ul>
+                    </div>
+                    <!-- equipments -->
+                    <div id="equipments" class="tab-pane {% if current_menu == 'equipments' and current_menu is defined %}active{% endif %} tab-menu-bg">
+                        <ul class="main-menu-dropdown animate__animated animate__flipInX">
+                            <li><a href="/admin/add-equipment"><i class="icofont-ui-add"></i> Créer un équipement</a></li>
+                            <li><a href="/admin/equipments/categories">Gérer les catégories</a></li>
+                            <li><a href="/admin/equipments/brands">Gérer les marques</a></li>
+                            <li><a href="/admin/operating-systems">Gérer les systèmes d'exploitation</a></li>
+                        </ul>
+                    </div>
+                    <!-- ausers -->
+                    <div id="ausers" class="tab-pane {% if current_menu == 'ausers' and current_menu is defined %}active{% endif %} tab-menu-bg">
+                        <ul class="main-menu-dropdown animate__animated animate__flipInX">
+                            <li><a href="/admin/ausers/roles">Gérer les rôles</a></li>
+                        </ul>
+                    </div>
+                    <!-- ausers -->
+                    <div id="parameters" class="tab-pane {% if current_menu == 'config' and current_menu is defined %}active{% endif %} tab-menu-bg">
+                        <ul class="main-menu-dropdown animate__animated animate__flipInX">
+                            <li><a href="/admin/setting">Paramètres global</a></li>
+                            <li><a href="/admin/setting/css">Thèmes (CSS)</a></li>
+                        </ul>
+                    </div>
+                </div>
+    </div>
+
+</div>

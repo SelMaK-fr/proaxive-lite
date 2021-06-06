@@ -1,0 +1,141 @@
+<!doctype html>
+<html class="no-js" lang="fr">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!--[if lt IE 7]>
+    <meta http-equiv="refresh" content="1; URL={{ getenv('APP_ROOT_PUBLIC') }}/ie6-browser">
+    <![endif]-->
+    <title>Proaxive Lite - {% block title %}{% endblock %}</title>
+    <!-- CSS  -->
+    <!-- START::CSS_SPECTRE Local -->
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre-exp.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre-icons.min.css">
+    <!-- START::Animate CSS -->
+    <link rel="stylesheet" href="{{ getenv('APP_ADMIN_THEME') }}/node_modules/animate.css/animate.min.css"/>
+    <!-- START::SimpleMDE -->
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/simplemde/simplemde.min.css">
+    <!-- START::ICONFONT -->
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/icons/icofont/icofont.min.css">
+    <!-- START::Datetime -->
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/tail-datetime/css/tail.datetime-default-green.css">
+    <!-- START::DataTable -->
+    <link rel="stylesheet" href="{{ getenv('APP_ADMIN_THEME') }}/node_modules/vanilla-datatables/dist/vanilla-dataTables.min.css">
+    <!-- START::Layout -->
+    <link rel="stylesheet" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/layout.css?={{ now | date('hi') }}" type="text/css"/>
+    <!-- START::layout colors -->
+    <link rel="stylesheet" type="text/css" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/light-style.css?={{ now | date('hi') }}" title="default"/>
+    <link rel="alternate stylesheet" type="text/css" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/dark-style.css?={{ now | date('hi') }}" title="dark" />
+    <!-- START::Omega -->
+    <link rel="stylesheet" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/omega.css?={{ now | date('hi') }}" type="text/css"/>
+    <!-- START::Print -->
+    <link rel="stylesheet" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/print.css" type="text/css" media="print">
+</head>
+
+<body>
+<!-- start:Header Top -->
+<div class="header-top">
+    <div class="container">
+        <div class="columns">
+            <div class="column col-6">
+                <div class="header-top-logo text-uppercase">
+                    <div class="pe--logo">
+                        <img src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/logo-green.png" alt="">
+                    </div>
+                    <strong>Proaxive </strong>Lite Panel
+                </div>
+            </div>
+            <div class="column col-6">
+                <div class="header-top-menu s--switcher">
+                    {% if app_setting.style_selector == true %}
+                    <div class="style-switcher">
+                        Styles :
+                        <ul>
+                            <li><a class="style--default" href="/" onclick="setActiveStyleSheet('default'); return false;"><span></span></a></li>
+                            <li><a class="style--dark" href="/" onclick="setActiveStyleSheet('dark'); return false;"><span></span></a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <ul class="navbar-custom">
+                        <li><a href="/admin/edit-auser/1" title="Mon compte utilisateur"><i class="icofont-user-alt-7"></i> <span>Bonjour {{ sessionAuth.pseudo }}</span></a></li>
+                        <li><a href="/logout" title="Se deconnecter"><i class="icofont-logout"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end:Header Top -->
+<!-- start:BreadCrumb -->
+{{ include('_layout/dashboard/_breadcrumb.twig') }}
+<!-- end:BreadCrumb -->
+<!-- start:Main-menu-mobile -->
+{{ include('_layout/dashboard/_main_menu_mobile.twig') }}
+<!-- end:Main-menu-mobile -->
+<!-- start:Main-menu -->
+{{ include('_layout/dashboard/_main_menu.twig') }}
+<!-- end:Main-menu -->
+<!-- start:Main-body -->
+{% block body %}{% endblock %}
+<!-- end:Main-body -->
+<!-- start:Footer -->
+<footer>
+    <div class="container">
+        <div class="columns">
+            <div class="column col-6">
+                2021. <strong>Proaxive</strong> {{ app_info.release }} - <strong>{{ app_info.number }}</strong> ({{ app_info.verdate }})
+            </div>
+            <div class="column col-6 text-right">
+                {% if app_setting.style_selector == false %}
+                    <div class="style-switcher">
+                        Styles :
+                        <ul>
+                            <li><a class="style--default" href="/" onclick="setActiveStyleSheet('default'); return false;"><span></span></a></li>
+                            <li><a class="style--dark" href="/" onclick="setActiveStyleSheet('dark'); return false;"><span></span></a></li>
+                        </ul>
+                    </div>
+                {% endif %}
+                Développé par <a href="{{ app_info.urlauthor }}" target="_blank"><strong>{{ app_info.author }}</strong></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end:Footer -->
+{% block javascript %}{% endblock %}
+<!-- START::Tabs navbar -->
+<!-- START::Omega -->
+<script src="{{ getenv('APP_ADMIN_THEME') }}/js/omega.js"></script>
+<!-- START::Style switcher -->
+<script src="{{ getenv('APP_ADMIN_THEME') }}/js/style.switcher.js"></script>
+<!-- START::Linked select -->
+<script src="{{ getenv('APP_ADMIN_THEME') }}/js/linked-select.js"></script>
+<!-- START::Datetime -->
+<script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/tail-datetime/js/tail.datetime.min.js"></script>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+        tail.DateTime(".tail-datetime-field", { /* Your Options */ });
+    });
+</script>
+<!-- START::DataTable -->
+<script src="{{ getenv('APP_ADMIN_THEME') }}/node_modules/vanilla-datatables/dist/vanilla-dataTables.min.js"></script>
+<script type="text/javascript">
+    var dataTable = new DataTable("#data-table");
+</script>
+<!-- START::main js -->
+<script src="{{ getenv('APP_ADMIN_THEME') }}/js/main.js"></script>
+<!-- START::JSColor -->
+<script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/jscolor.js"></script>
+<!-- START::SimpleMDE -->
+<script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/simplemde/simplemde.min.js"></script>
+<script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/tabs.js"></script>
+<script>
+    [].forEach.call(document.getElementsByClassName('area-mdeditor'),element => {
+        const simplemde = new SimpleMDE({
+            element: element,
+        });
+    });
+</script>
+</body>
+</html>

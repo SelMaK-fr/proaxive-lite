@@ -1,0 +1,23 @@
+{% if intervention.rapport_bao is not empty %}
+    <div class="columns mg-b-3">
+        <div class="column col-12 col-sm-12">
+    <div class="card-0">
+        <div class="card-header">
+            <div class="columns">
+                <div class="column col-10 col-sm-6">
+                    <h2>Détails du rapport BAO</h2>
+                </div>
+                <div class="column col-2 col-sm-6 text-right">
+                    <button class="btn btn-sm btn-white" data-js-expand="id"><i class="icofont-plus"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body toggle-content p-0" data-js-expanded="id">
+            <div class="form-group">
+                <textarea class="form-input" style="width:100%;padding:1.5em;" rows="20">{{ rapport }}</textarea>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endif %}

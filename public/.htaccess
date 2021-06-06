@@ -1,0 +1,20 @@
+######################################################################################
+# HTACCESS FILE by SynexoLabs (SelMaK_)
+# File ver. 2.1	27/08/2020
+# https://www.synexolabs.com
+######################################################################################
+<Files *.json>
+  order allow,deny
+  deny from all
+</Files>
+
+RewriteEngine on
+
+# production configuration
+RewriteCond %{REQUEST_FILENAME} !-f
+# Commentez cette ligne pour une mise en mod développement
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Local/dev configuration
+# décommentez cette ligne pour une mise en mod développement
+#RewriteRule . index.php [L]

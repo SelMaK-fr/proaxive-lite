@@ -1,0 +1,71 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title 'Gestion des équipements' %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <a class="btn btn-primary" href="/admin/client/{{ client_id }}/equipment/{{ equipment.id }}/add-intervention" title="Créer une nouvelle intervention pour cet équipement"> <i class="icofont-ui-add"></i> Créer une intervention</a>
+            <div class="tabs-pe">
+                <ul id="tabs">
+                    <li><a href="#edit_form">Modifier l'équipement</a></li>
+                    <li><a href="#list_inter">Intervention(s) pour cet équipement</a></li>
+                </ul>
+                <div class="tabContent" id="edit_form">
+                    <div class="admin-content">
+                        <form class="form-border" method="post">
+                            {{ include('equipments/admin/_form.twig') }}
+                        </form>
+                    </div>
+                </div>
+                <div class="tabContent" id="list_inter">
+                    <div class="card-custom">
+                        <div class="card-body">
+                            <div class="card-header">
+                                <h2>Intervention(s) pour cet équipement</h2>
+                            </div>
+                            {% if interventions is empty %}
+                                {{ viewAlert('info', "Aucune intervention enregistrée pour cet équipement") | raw }}
+                            {% else %}
+                                <div class="columns">
+                                    {% for item in interventions %}
+                                        <div class="column col-4 col-sm-12 col-xl-12 recent-default-single" style="margin-top:0.5em;">
+                                            <a class="p-relative" href="/admin/edit-intervention/{{ item.id }}">
+                                                {% if item.close_date is null %}
+                                                    <div class="ribbon ribbon--right ribbon--primary"><span><i class="icofont-wrench"></i> wip</span></div>
+                                                {% endif %}
+                                                <div class="recent-default-flex">
+                                                    <div class="recent-d-img"><i class="icofont-{{ item.icon }}"></i></div>
+                                                    <div class="recent-d-ctn">
+                                                        <strong>{{ item.title }}</strong>
+                                                        <p>
+                                                            N°{{ item.number }}<br>
+                                                            <i class="icofont-calendar"></i> Créée le {{ item.created_at | date('d-m-Y') }}<br>
+                                                            {% if item.close_date is not null %}
+                                                                <i class="icofont-check"></i> Cloturée le <span class="txtprimary">{{ item.close_date | date('d-m-Y') }}</span>
+                                                            {% else %}
+                                                                <i class="icofont-clock-time"></i> Mise à jour le {{ item.updated_at | date('d-m-Y') }}
+                                                            {% endif %}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right mg-b-2">
+                <a class="d-inline btn btn-sm btn-danger" href="#{{ equipment.id }}" title="Supprimer"><i class="icofont-delete"></i> Supprimer cet équipement</a>
+            </div>
+        </div>
+        <form method="post" action="/admin/equipment/delete">
+            <input type="hidden" value="{{ equipment.id }}" name="id">
+            {{ include('dashboard/_modal-delete.twig', {id:equipment.id , title:equipment.name, 'note': 'Cela supprimera également ses interventions'}) }}
+        </form>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

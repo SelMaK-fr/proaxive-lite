@@ -1,0 +1,149 @@
+:root{
+    --primary-color: #008c7b;
+    --default-txt-color:#ffffff;
+    --main-txt-color: #222;
+    --body-txt-color: #333;
+    --secondary-color:#CDCDCD;
+}
+::selection {
+    background-color: var(--primary-color);
+    color: var(--default-txt-color);
+}
+/** home **/
+.home span{
+    color: var(--primary-color);
+}
+.dark{
+    background-color:var(--primary-color);
+}
+/** links **/
+a, a:link, a:visited {
+    color: var(--primary-color);
+}
+/** text and background **/
+.primary{
+    background-color: var(--primary-color);
+}
+.primarytxt, .progressbar li.active{
+    color: var(--primary-color);
+}
+/** progress bar (intervention) **/
+.progressbar li.active{
+    color: var(--primary-color);
+}
+.progressbar li.active span {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.progressbar li.active:before{
+    border-color: var(--primary-color);
+}
+.progressbar li.active + li:after {
+    background-color: var(--primary-color);
+}
+/** Dropdown **/
+.dropdown-content li span:hover{
+    background-color: var(--primary-color);
+}
+/** status **/
+.status{
+    background-color: var(--secondary-color);
+}
+/** blocs **/
+.bloc.inworkshop{
+    background-color: var(--primary-color);
+    border-color:var(--primary-color);
+}
+/** button **/
+.btn.btn-primary, .button.btn-primary{
+    background-color: var(--primary-color);
+}
+.button.primary:hover, .btn-small.primary:hover{
+    background-color: var(--primary-color);
+}
+/** intervention **/
+.about_intervention ul li:last-child{
+    color: var(--primary-color);
+}
+/** footer **/
+footer.page-footer{
+    background-color: var(--primary-color)!important;
+}
+/** search layout **/
+body.search-layout{}
+.search .title-border{
+    border-color: var(--primary-color);
+}
+/** Print Intervention **/
+.pdf .primary{
+    background-color: var(--primary-color);
+}
+.pdf, .pdf h4{
+    color:var(--main-txt-color);
+}
+.pdf ul li:nth-child(2n+1){
+    background-color: #dbdbdb;
+}
+.pdf #container{
+    background-color:var(--first-bg-color);
+    border:1px solid #000000;
+}
+.pdf .title-container{
+    background-color:var(--body-txt-color);
+    color:var(--default-txt-color);
+}
+.pdf .border-right{
+    border-right:1px solid #000000;
+}
+.pdf .border-left{
+    border-left:1px solid #000000;
+}
+.pdf .border-bottom{
+    border-bottom:1px solid #000000;
+}
+.pdf .border-top{
+    border-top:1px solid #000000;
+}
+.pdf .company-info{
+    border-top:1px solid var(--body-txt-color);
+    border-bottom:1px solid var(--body-txt-color);
+    border-right:1px solid var(--body-txt-color);
+}
+.pdf .companyname-adress span.secondary{
+    color:var(--default-txt-color);
+}
+.pdf .block h3{
+    color:var(--default-txt-color);
+}
+.pdf .block-title{
+    border-top:1px solid var(--body-txt-color);
+}
+.pdf .bi--children h3.children-title{
+    background-color:var(--body-txt-color);
+    color:var(--default-txt-color);
+}
+.pdf .etiquette{
+    color:var(--default-txt-color);
+}
+.pdf .checkbox{
+    -moz-box-shadow: 2px 2px 0px 0px var(--body-txt-color);
+    -webkit-box-shadow: 2px 2px 0px 0px var(--body-txt-color);
+    -o-box-shadow: 2px 2px 0px 0px var(--body-txt-color);
+    box-shadow: 2px 2px 0px 0px var(--body-txt-color);
+    border:1px solid var(--body-txt-color);
+}
+.pdf .checkbox:checked{
+    background-color:#77adc3;
+}
+.pdf .neutral{background-color: var(--table-thead-color)}
+.pdf .default{background-color: #f2f2f2;}
+.pdf .primary{background-color:var(--primary-color)}
+.pdf .primary-light{background-color:#e8f0ff}
+.pdf .secondary{background-color: #77adc3; color: #fff;}
+.pdf .secondary-light{background-color: #edf8fc}
+.pdf .grey{background-color:#bfbfbf;}
+.pdf footer{
+    background-color:var(--main-bg-color);
+    color: #d9d9d9;
+}
+

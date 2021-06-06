@@ -1,0 +1,63 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Equipements{% endblock %}
+
+{% block body %}
+    <div class="container--admin">
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+                <div class="card-custom">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="columns">
+                                <div class="column col-9 col-sm-6"><h2>Gestion des équipements</h2></div>
+                                <div class="column col-3 col-sm-6 text-right">
+                                    {% if equipments is not empty %}
+                                    <form method="post" action="/admin/equipments/export">
+                                        <input type="hidden" name="export_data">
+                                    <button type="submit" class="btn-sm btn-primary"> <i class="icofont-download-alt"></i> Exporter les équipements</button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+                        {% if equipments is empty %}
+                            {{ viewAlert('info',"Il n'y a aucun équipement d'enregistré pour le moment") | raw }}
+                        {% else %}
+                            <table id="data-table" class="table-custom">
+                                <thead>
+                                <tr>
+                                    <th>Dénomination</th>
+                                    <th>Catégorie</th>
+                                    <th>Marque</th>
+                                    <th>Système d'exploitation</th>
+                                    <th>Client</th>
+                                    <th>Date</th>
+                                    <th>Atelier</th>
+                                    <th>Etat</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for equipment in equipments %}
+                                    <tr onclick="document.location = '/admin/edit-equipment/{{ equipment.eid }}';" style="cursor: pointer">
+                                        <td><strong>{{ equipment.ename }}</strong></td>
+                                        <td>{{ equipment.title | raw }}</td>
+                                        <td>{{ equipment.b_title | raw }}</td>
+                                        <td>{{ equipment.os_name }} - {{ equipment.os_architecture }} bits ({{ equipment.os_release }})</td>
+                                        <td><span class="text-uppercase">{{ equipment.fullname }}</span></td>
+                                        <td>{{ equipment.created_at | date('d/m/Y') }}</td>
+                                        <td>{{ equipment.workshop | raw }}</td>
+                                        <td>{{ equipment.etat | raw }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

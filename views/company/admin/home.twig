@@ -1,0 +1,44 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Gestion des entreprises{% endblock %}
+
+{% block body %}
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+                <div class="card-custom">
+                    <div class="card-header"><h2>Mon entreprise</h2></div>
+                    <div class="card-body">
+                        {% if companies is empty %}
+                            <div class="alert alert-info"><strong>Aucune données</strong> Il n'y a aucune entreprise d'enregistrée pour le moment</div>
+                        {% else %}
+                            <table class="table-custom">
+                                <thead>
+                                <tr>
+                                    <th>C.ID</th>
+                                    <th>Dénomination</th>
+                                    <th>Gérant</th>
+                                    <th>Type</th>
+                                    <th>Département</th>
+                                    <th>Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for company in companies %}
+                                    <tr class="clickable-row" data-href="/admin/edit-company/{{ company.cid }}" data-target="_self">
+                                        <td class="text-center">{{ company.cid }}</td>
+                                        <td><strong>{{ company.cname }}</strong></td>
+                                        <td>{{ company.director }}</td>
+                                        <td>{{ company.type }}</td>
+                                        <td>{{ company.dname }}</td>
+                                        <td>{{ company.created_at | date('d-m-Y') }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

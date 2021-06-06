@@ -1,0 +1,44 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Modifier un administrateur{% endblock %}
+
+{% block body %}
+    <!-- START .cards -->
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+                <div class="admin-form">
+                    <form class="form-default" method="post" action="#">
+                        <div class="columns">
+                            <div class="column col-12 col-sm-12">
+                                <div class="card-custom mg-b-2">
+                                    <div class="card-header"><h2><span class="txtprimary">Activation</span> de l'authentification à double facteur</h2></div>
+                                    <div class="card-body">
+                                        <p>
+                                            Veuillez scanner le QRcode afin d'activer l'authentification à double facteur.<br>
+                                            Entrez ensuite le code unique fourni.
+                                        </p>
+                                        <div class="qrcode">
+                                            <img src="{{ qrcode }}" alt="">
+                                            <span class="d-block">
+                                                Texte :
+                                                <span class="label label-primary">
+                                                    {{ secret }}
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <br>
+                                        {{ form.inputEmpty('code', 'Code généré', false, false, true, {'type': 'text'}) | raw }}
+                                        {{ form.submitSingleWithIcon('primary') | raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Intervention du {{ intervention.icreated | localizeddate('none', 'none', 'fr', null, 'EEEE d MMM Y') }}{% endblock %}
+
+{% block body %}
+
+    <!-- START .cards -->
+    <div class="section--admin">
+            <div class="container">
+                <div class="admin-form">
+                    {{ include('_notifications.twig') }}
+                            <div class="columns">
+                                <div class="column col-9 col-lg-12 col-sm-12">
+                                    <div class="card-custom">
+                                        <form method="post" action="" enctype="multipart/form-data">
+                                        <div class="card-body">
+                                            <div class="card-header">
+                                                <h2>Rapport BAO pour l'intervention : <span class="txtprimary">{{ intervention.title }}</span></h2>
+                                            </div>
+
+                                            <textarea class="form-input area-mdeditor" name="rapport_bao" readonly>{{ rapport }}</textarea>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="columns">
+                                                <div class="column col-6 col-sm-12">
+                                                    <button class="btn btn-primary" type="submit" name="rapport"><i class="icofont-check-circled"></i> Sauvegarder</button>
+                                                </div>
+                                                <div class="column col-6 col-sm-12 text-right">
+                                                    <button class="btn btn-danger" type="submit" name="delete_file"><i class="icofont-trash"></i> Supprimer ce rapport</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                <div class="column col-3 col-lg-12 col-sm-12">
+                                    <div class="card-0 mg-b-2">
+                                        <div class="card-header"><h2>Client</h2></div>
+                                        <div class="card-body">
+                                            <div class="recent-default-single">
+                                                <a href="/admin/client/{{ client.id }}">
+                                                    <div class="recent-default-flex">
+                                                        <div class="recent-d-img"><i class="icofont-user"></i></div>
+                                                        <div class="recent-d-ctn">
+                                                            <h2>{{ client.fullname }}</h2>
+                                                            <p><i>{{ client.zipcode }}</i> - {{ client.city }} <br>{{ getdata(client.phone, 'N/A') }}</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+    <!-- END .cards -->
+
+{% endblock %}

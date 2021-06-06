@@ -1,0 +1,62 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %} Gestion des départements {% endblock %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="columns">
+                <div class="column col-6 col-sm-12">
+                    <div class="admin-content">
+                        {{ include('_notifications.twig') }}
+                        <div class="card-custom">
+                            <div class="card-header"><h2>Nouveau département</h2></div>
+                            <div class="card-body">
+                                <div class="admin-form">
+                                    <form method="post" action="">
+                                    {{ include('dashboard/department/_form.twig') }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- -->
+                <div class="column col-6 col-sm-12">
+                    <div class="admin-content">
+                        <div class="card-custom">
+                            <div class="card-header"><h2>Départements enregistrés</h2></div>
+                            <div class="card-body">
+                                <table id="data-table" class="table-custom">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:5%;" scope="col">#</th>
+                                        <th style="width:10%;" scope="col" class="w350p">Code</th>
+                                        <th style="width:20%;" scope="col">Nom</th>
+                                        <th style="width:20%;" scope="col">Slug</th>
+                                        <th style="width:20%;" scope="col">Soundex</th>
+                                        <th style="width:15%;" scope="col">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in departments %}
+                                        <tr>
+                                            <th scope="row">{{ item.id }}</th>
+                                            <td>{{ item.code }}</td>
+                                            <td>{{ item.name }}</td>
+                                            <td>{{ item.slug }}</td>
+                                            <td>{{ item.soundex }}</td>
+                                            <td><a class="btn-table btn-info" href="{{ item.UrlAdmin }}"><i class="icofont-edit"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

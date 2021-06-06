@@ -1,0 +1,31 @@
+{
+    "name": "synexolabs/proaxive",
+    "description": "Gestion d'intervention informatique en ligne pour Micro-Entrepreneur",
+    "authors": [
+        {
+            "name": "SelMaK-fr",
+            "email": "synexolabs@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4||^8.0",
+        "twig/twig": "^v2.12.0",
+        "aptoma/twig-markdown": "^3.4.0",
+        "michelf/php-markdown": "^1.9.0",
+        "robmorgan/phinx": "^0.12.6",
+        "swiftmailer/swiftmailer": "^v6.2.7",
+        "buzzingpixel/twig-getenv": "^1.0.1",
+        "verot/class.upload.php": "^2.1.0",
+        "mailjet/mailjet-apiv3-php": "^v1.5.1",
+        "twig/extra-bundle": "^v3.3.0",
+        "twig/extensions": "^v1.5.4",
+        "christian-riesen/otp": "^2.7",
+        "ext-json": "*",
+        "creitive/breadcrumbs": "^v3.3.2"
+    },
+    "require-dev": {
+        "symfony/dotenv": "^4.3",
+        "filp/whoops": "^2.12.0",
+        "symfony/yaml": "^v5.2.5"
+    }
+}

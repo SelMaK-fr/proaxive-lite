@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,700&display=swap" rel="stylesheet">
+    <!-- START::CSS_SPECTRE -->
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre-exp.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/frameworks/spectre/spectre-icons.min.css">
+    <!-- START::ICONFONT -->
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/icons/icofont/icofont.min.css">
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/stylesheets/app.css?={{ now | date('mi') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/default-css/print-intervention/voucher.css?={{ now | date('mi') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/default-css/print-intervention/print.css?={{ now | date('mi') }}" type="text/css" media="print"/>
+    <link rel="stylesheet" href="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/stylesheets/light-style.css?={{ now | date('hi') }}" type="text/css" media="all"/>
+</head>
+<body>
+<header class="navigation primary noshadow">
+    <div class="container">
+        <div class="navbar-default">
+            <div class="columns">
+                <div class="column col-6 col-sm-6">
+                    <div class="sitename">
+                        <a href="https://proaxive.fr" target="_blank" class="navbar-brand mr-2">
+                            <span><strong>Proaxive</strong> Lite</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="column col-6 col-sm-6 text-right">
+                    <div class="links">
+                        <ul>
+                            <li class="txtwhite"><strong>{{ company.cname }}</strong> : </li>
+                            {% if company.facebook is not empty %}
+                            <li><a href="{{ company.facebook }}" rel="noopener noreferrer" target="_blank"><i class="icofont-facebook"></i> <span>Facebook</span></a></li>
+                            {% endif %}
+                            {% if company.twitter is not empty %}
+                            <li><a href="{{ company.twitter }}" rel="noopener noreferrer" target="_blank"><i class="icofont-twitter"></i> <span>Twitter</span></a></li>
+                            {% endif %}
+                            {% if company.linkedin is not empty %}
+                            <li><a href="{{ company.linkedin }}" rel="noopener noreferrer" target="_blank"><i class="icofont-linkedin"></i> <span>Linkedin</span></a></li>
+                            {% endif %}
+                            {% if company.instagram is not empty %}
+                            <li><a href="{{ company.instagram }}" rel="noopener noreferrer" target="_blank"><i class="icofont-instagram"></i> <span>Instagram</span></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+{% block body %}{% endblock %}
+
+<footer class="page-footer white dark-1">
+    <div class="footer-copyright">
+        <div class="container">
+            <a class="brown-text text-lighten-3" target="_blank" href="https://proaxive.fr">Proaxive {{ app_info.release }}</a> {% if app_setting.view_version == 1%} ver.{{ app_info.number }}{% endif %}. Solution par <strong>SynexoLabs</strong>
+        </div>
+    </div>
+</footer>
+
+<!--  Scripts-->
+<script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/tabs.js"></script>
+<script language="javascript">
+    function printDiv(divName){
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
+</body>
+</html>

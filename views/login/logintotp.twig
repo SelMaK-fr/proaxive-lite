@@ -1,0 +1,16 @@
+{% extends '_layout/dashboard/layout_login.twig' %}
+
+{% block body %}
+    {{ include('_notifications.twig') }}
+    <div class="card-body">
+        <div class="text-center mg-tb-3">
+            <h3>Authentification en deux étapes</h3>
+            <img width="50%" src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/vectorv190413650.jpg" alt="">
+        </div>
+        <p>Veuillez entrer le code généré par votre application mobile</p>
+        {{ form.input('code', '<i class="icofont-key"></i> Code', '') | raw }}
+    </div>
+    <div class="card-footer text-center">
+        <button type="submit" name="" class="btn btn-primary"><i class="icofont-login"></i> Valider</button>
+    </div>
+{% endblock %}

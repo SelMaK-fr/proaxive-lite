@@ -1,0 +1,9 @@
+/* line 1, ../sass/pdf.scss */
+body.pdf {
+  background: red;
+}
+
+/* line 4, ../sass/pdf.scss */
+.printpdf {
+  background-color: red;
+}

@@ -1,0 +1,24 @@
+<!-- MODAL -->
+<div class="modal modal-sm" id="{{ id }}">
+    <a href="#close" class="modal-overlay" aria-label="Close"></a>
+    <div class="modal-container">
+        <div class="modal-header">
+            <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+            <div class="modal-title h5">Supprimer un élément</div>
+        </div>
+        <div class="modal-body">
+            <div class="content">
+                <p class="text-danger"><strong>Action irréverssible</strong></p>
+                {% if note is not empty %}
+                    {{ viewAlert('info', note) | raw }}
+                {% endif %}
+                <p>Etes-vous certain de vouloir supprimer cet enregistrement ?</p>
+                <p>-> <strong>{{ title }}</strong></p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            {{ form.submitDefault('Supprimer', 'danger') | raw }}
+        </div>
+    </div>
+</div>
+<!-- /MODAL -->

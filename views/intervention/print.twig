@@ -1,0 +1,25 @@
+{% extends '_layout/layout.twig' %}
+
+{% block title %} Intervention n°{{ intervention.number }} du {{ intervention.created_at | date('d-m-Y') }}  {% endblock %}
+
+{% block body %}
+    <div class="title-page txtcenter">
+        <h1><span class="primarytxt">Imprimez mon bon d'intervention</span></h1>
+        <span>Vous pouvez imprimer votre bon ici. Une version non privée vous sera remise en même temps que votre équipement.</span>
+    </div>
+    {% if intervention.start is null %}
+        <div class="container">
+            <div class="alert alert-info mt1">Le bon d'intervention sera disponible une fois l'intervention débutée.</div>
+            <p>
+                <a href="/i/{{ intervention.number_link }}" class="btn btn-secondary">Retour au suivi</a>
+            </p>
+        </div>
+    {% else %}
+        <div class="container text-center mt2 mb2">
+            <button onclick="printDiv('printpdf');" class="btn btn-primary"><i class="icofont-printer"></i> Imprimer cette fiche</button>
+            <a href="/i/{{ intervention.number_link }}" class="btn btn-secondary">Retour au suivi</a>
+        </div>
+        {{ include('templates/print_intervention.twig') }}
+    {% endif %}
+    <div class="mt2 mb2"></div>
+{% endblock %}

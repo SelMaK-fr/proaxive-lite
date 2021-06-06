@@ -1,0 +1,17 @@
+{% extends '_layout/dashboard/layout_login.twig' %}
+
+{% block body %}
+        {{ include('_notifications.twig') }}
+        <div class="card-body">
+            <div class="text-center mg-tb-3">
+                <img width="30%" src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/proaxive_logo_synexolabs_400.png" alt="">
+            </div>
+            {{ form.input('pseudo', '<i class="icofont-ui-user"></i> Pseudo', 'Bruce') | raw }}
+            {{ form.password('password', '<i class="icofont-ui-password"></i> Mot de passe', '') | raw }}
+        </div>
+        <div class="card-footer text-center">
+            {{ forum.submitSingleWithIcon('btn-primary', 'Se connecter', 'login') }}
+            <button type="submit" name="" class="btn btn-primary"><i class="icofont-login"></i> Se connecter</button>
+            <a class="d-block mt-2" href="/lostpassword">Mot de passe oublié ?</a>
+        </div>
+{% endblock %}

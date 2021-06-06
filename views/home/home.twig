@@ -1,0 +1,50 @@
+{% extends '_layout/layout_search.twig' %}
+
+{% block title "Suivi des intervention en ligne" %}
+
+{% block body %}
+    <div class="section no-pad-bot search" id="index-banner">
+        <div class="container">
+            <div class="card-custom bradius search-box" style="width:80%;margin:0 auto;top: 3vh;position:relative">
+                <div class="columns">
+                    <div class="column col-6 col-md-12 rborder">
+                        <div class="pl5">
+                            <h1 class="title-search">
+                                {% if company.logo is empty %}
+                                <img src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/proaxive_logo_synexolabs_400.png">
+                                {% else %}
+                                    <img src="{{ getenv('APP_ROOT_PUBLIC') }}/uploads/company/{{ company.logo }}" alt="Logo {{ company.cname }}">
+                                {% endif %}
+                                {% if company.cname is empty %}
+                                Proaxive
+                                {% else %}
+                                {{ company.cname }}
+                                {% endif %}
+                            </h1>
+                            <div class="search-text">
+                                Proaxive est une application web qui permet de suivre les interventions en ligne. Elle est totalement gratuite pour tous les clients.
+                            </div>
+                        </div>
+                        <div style="width:auto;">
+                            <figure>
+                                <img src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/undraw_bug_fixing_oc7a.svg" alt="">
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="column col-6 col-md-12">
+                        <div class="p5">
+                            {{ include('_notifications.twig') }}
+                            <form method="post">
+                                <h2 class="title-search-form">Entrez un numéro d'intervention</h2>
+                                <div class="title-border mb2"></div>
+                                {{ form.inputBlock('search_intervention', false, 'Votre numéro d\'intervention') | raw }}
+                                {{ form.submit('primary shadow') | raw }}
+                            </form>
+                            <div class="alert alert-info mt3">Le numéro d'intervention vous est communiqué par votre technicien.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

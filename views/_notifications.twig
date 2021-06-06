@@ -1,0 +1,13 @@
+{% if sessionFlash.hasFlashes %}
+    {% for type, message in sessionFlash.getFlashes %}
+        {% if type == 'success' %}
+            <div id="notification" class="{% if app_setting.notify_fixed == 1%}notification--fixed{% endif%} alert alert-{{ type | raw }}"><i class="icofont-check-circled"></i> {{ message | raw }}</div>
+        {% elseif type == 'info' %}
+            <div id="notification" class="{% if app_setting.notify_fixed == 1%}notification--fixed{% endif%} alert alert-{{ type | raw }}"><i class="icofont-info-circle"></i> {{ message | raw }}</div>
+        {% elseif type == 'danger' %}
+            <div id="notification" class="{% if app_setting.notify_fixed == 1%}notification--fixed{% endif%} alert alert-{{ type | raw }}"><i class="icofont-error"></i> {{ message | raw }}</div>
+        {% elseif type == 'warning' %}
+            <div id="notification" class="{% if app_setting.notify_fixed == 1%}notification--fixed{% endif%} alert alert-{{ type | raw }}"><i class="icofont-warning"></i> {{ message | raw }}</div>
+        {% endif %}
+    {% endfor %}
+{% endif %}

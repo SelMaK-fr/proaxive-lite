@@ -1,0 +1,23 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Gérer les rôles utilisateur{% endblock %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                {{ include('dashboard/_notifications.twig') }}
+                <div class="card-custom">
+                    <div class="card-header"><h2>Modifier le rôle {{ role.title }}</h2></div>
+                    <div class="card-body">
+                        <div class="admin-form">
+                            <form class="form-default" method="post" action="#">
+                                {{ include('ausers/admin/roles/_form.twig') }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

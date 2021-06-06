@@ -1,0 +1,194 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Intervention du {{ intervention.icreated | localizeddate('none', 'none', 'fr', null, 'EEEE d MMM Y') }}{% endblock %}
+
+{% block body %}
+
+    <!-- START .cards -->
+    <div class="section--admin">
+        <form method="post">
+        <div class="container">
+            <div class="admin-form">
+                {% if intervention.closed == 1 %}
+                <div class="alert alert-success" role="alert"><span><i class="icofont-check"></i></span>Cette intervention a été cloturée le <strong>{{ intervention.close_date | localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y à H:m') }}</strong></div>
+                {% endif %}
+                {% if intervention.cancel_inter is not null %}
+                    <div class="alert alert-danger" role="alert"><span><i class="icofont-stop"></i></span>Cette intervention a été annulée le <strong>{{ intervention.cancel_inter | localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y à H:m') }}</strong></div>
+                {% endif %}
+                <div class="card-custom mg-b-3">
+                    <div class="card-body">
+                        <div class="columns">
+                            <div class="column col-4 col-sm-12">
+                                <div class="column-bloc">
+                                    <h4 class="header-title"><i class="icofont-user"></i> Client</h4>
+                                    Nom : <a href="/admin/client/{{ client.id }}"><strong>{{ client.fullname }}</strong></a><br>
+                                    {{ getDataWithHtml(client.adress, 'Adresse', 'strong') | raw }}
+                                    Code postal/Ville :
+                                    <strong>
+                                    {% if client.zipcode is not empty and client.city is not empty %}
+                                    {{ client.zipcode }}, {{ client.city }}
+                                    {% elseif client.zipcode is not empty %}
+                                        {{ client.zipcode }}
+                                    {% elseif client.city is not empty %}
+                                        {{ client.city }}
+                                    {% endif %}
+                                    </strong>
+                                    <br>
+                                    {{ getDataWithHtml(client.mail, 'Courriel', 'strong') | raw }}
+                                    Téléphones :
+                                    <strong>
+                                    {% if client.phone is not empty and client.mobile is not empty %}
+                                        {{ client.phone }} / {{ client.mobile }}
+                                    {% elseif client.phone is empty %}
+                                        {{ client.mobile }}
+                                    {% elseif client.mobile is empty %}
+                                        {{ client.phone }}
+                                    {% endif %}
+                                    </strong><br>
+                                </div>
+                            </div>
+                            <div class="column col-4 col-sm-12">
+                                <div class="column-bloc">
+                                    <h4 class="header-title"><i class="icofont-gears"></i> Intervention</h4>
+                                    Numéro : <strong>{{ intervention.number }}</strong><br>
+                                    {% if intervention.pmad == 0 %}
+                                    Date de dépôt : <strong>{{ intervention.received | localizeddate('none', 'none', 'fr', null, 'EEEE d MMM Y') }}</strong><br>
+                                    {% elseif intervention.pmad == 1 %}
+                                    Type : <strong>Prise de main à distance</strong><br>
+                                    {% endif %}
+                                    {% if intervention.start is not null %}
+                                    Début de l'intervention : <strong>{{ intervention.start | localizeddate('none', 'none', 'fr', null, 'EEEE d MMM Y à H:m') }}</strong><br>
+                                    {% endif %}
+                                    Lien vers l'intervention : <br> <a href="{{ app_setting.app_url }}/i/{{ intervention.number_link }}" target="_blank">{{ app_setting.app_url }}/i/{{ intervention.number_link }}</a>
+                                </div>
+                            </div>
+                            <div class="column col-4 col-sm-12">
+                                <div class="column-bloc">
+                                    <h4 class="header-title"><i class="icofont-computer"></i> Équipement</h4>
+                                    Dénomination : <strong>{{ equipment.name }}</strong> (<a href="#config-{{ equipment.id }}" title="Voir la configuration matériel">Composants</a>) <br>
+                                    {{ getDataWithHtml(equipment.serialnumber, 'Numéro de série', 'strong') | raw }}
+                                    {{ getDataWithHtml(equipment.numberproduct, 'Numéro de produit', 'strong') | raw }}
+                                    Type d'équipement : <strong>{{ categoryEquipment.title }}</strong><br>
+                                    Marque : <strong>{{ brand.b_title }}</strong><br>
+                                    {{ getDataWithHtml(equipment.licence_os, 'Licence OS', 'strong') | raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- BAO -->
+                {{ include('intervention/admin/include/_rapport_bao.twig') }}
+                <!-- Submit Form -->
+                <div class="columns button-inline">
+                    <div class="column col-12 col-sm-12">
+                        <div class="card-custom">
+                            <div class="card-header"><h2>Actions pour cette intervention</h2></div>
+                            <div class="card-body">
+                                {{ include('intervention/admin/_button.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-custom">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <h2>{{ intervention.title }}</h2>
+                        </div>
+                        <div class="columns">
+                            <div class="column col-6 col-lg-12 col-sm-12">
+                                {{ form.select('status_id', 'Statut', status) | raw }}
+                                {{ form.textareaMde('description', "Décrivez le problème rencontré", "Décrire le problème rencontré") | raw }}
+                                {{ form.textareaMde('observation', "Note d'observation à l'attention du client", "Note supplémentaire suite à l'intervention") | raw }}
+                            </div>
+                            <div class="column col-6 col-lg-12 col-sm-12">
+                                {{ form.select('steps', 'Etape', {1: 'Matériel récupéré', 2: 'En atelier', 3: 'Tests finaux', 4: 'Terminé'}) | raw }}
+                                {{ form.textareaMde('details', "Décrivez les actions en temps réel", "Détails de l'intervention", 'Un - plus retour à la ligne pour chaque action') | raw }}
+                                {{ form.textareaMde('note_tech', "Note d'observation (technicien)", "Note supplémentaire suite à l'intervention (technicien)") | raw }}
+                                <!-- Status -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#delete-inter-{{ intervention.id }}" class="btn btn-danger" title="Voir la configuration"><i class="icofont-trash"></i> Supprimer cette intervention</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="modal" id="closed-1">
+                <a href="#close" class="modal-overlay" aria-label="Close"></a>
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+                        <div class="modal-title h5">Compte rendu</div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content">
+                            <p>
+                                {{ form.textareaDefault('report', '', "Compte rendu de l'intervention terminée") | raw }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" name="cloture" class="btn btn-primary btn-flat">Cloturer</button>
+                    </div>
+                </div>
+            </div>
+            <!-- button float form -->
+            <aside id="aside" class="form-aside">
+                {{ include('intervention/admin/_button.twig') }}
+            </aside>
+        </form>
+    </div>
+    <!-- END .cards -->
+    <!-- Modal Equipment -->
+    <div class="modal modal-sm" id="config-{{ equipment.id }}">
+        <a href="#close" class="modal-overlay" aria-label="Close"></a>
+        <div class="modal-container">
+            <div class="modal-header">
+                <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+                <div class="modal-title h5">{{ equipment.name }}</div>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <span class="d-block mg-b-1"><strong>Configuration matériel</strong></span>
+                    <p>
+                        {% markdown %}
+                        {{ equipment.content }}
+                        {% endmarkdown %}
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal Delete -->
+    <form method="post" action="/admin/intervention/delete">
+    <input type="hidden" name="id" value="{{ intervention.id }}">
+    {{ include('dashboard/_modal-delete.twig', {'id': 'delete-inter-' ~ intervention.id, 'title': intervention.title}) }}
+    </form>
+    <!-- Modal BAO -->
+    <form method="post" action="" enctype="multipart/form-data">
+        <div class="modal" id="upload-file">
+            <a href="#close" class="modal-overlay" aria-label="Close"></a>
+            <div class="modal-container">
+                <div class="modal-header">
+                    <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+                    <div class="modal-title h5">Ajouter rapport BAO</div>
+                </div>
+                <div class="modal-body">
+                    {{ include('_notifications.twig') }}
+                    {{ viewAlert('info', 'Seuls les fichiers <strong>.txt</strong> sont autorisés ici.') | raw }}
+                    <p>Pour en savoir plus sur l'outil BAO -> <a href="https://www.isergues.fr/bao.php" target="_blank">BAO par Bastien | ²</a></p>
+                    <div class="content">
+                        <input type="file" class="form-input" name="baofiles" id="file_bao" title="Parcourir les fichiers"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    {{ form.submitDefault('Envoyer', 'primary', 'send_file') | raw }}
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

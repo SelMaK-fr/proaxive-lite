@@ -1,0 +1,408 @@
+
+<div id="printpdf" class="printpdfInter">
+    <div class="pdf">
+        <div id="container">
+            <div class="title-container">
+                <span>Services informatiques {{ company.cname }}</span>
+            </div>
+            <div class="block block-company-logo border-bottom">
+                <div class="columns">
+                    <div class="column border-right">
+                        <div class="companyname-adress">
+                            <div class="company-info pr05 pl05">
+                                <span class="txtuppercase"><strong>{{ company.cname }}</strong></span> - {{ company.director }}<br>
+                                <span class="d-block txtuppercase">{{ company.adress }} {{ company.zipcode }}, {{ company.city }}</span>
+                            </div>
+                            <div class="columns">
+                                <div class="column border-right border-bottom">
+                                    <span class="d-block txtcenter border-bottom default"><strong>{{ app_setting.society_days }}</strong></span>
+                                    <span class="d-block txtcenter pr05 pl05">{{ app_setting.society_hours }}</span>
+                                </div>
+                                <div class="column border-right border-bottom">
+                                    <span class="d-block txtcenter border-bottom default"><strong>&nbsp</strong></span>
+                                    <span class="d-block secondary txtcenter">Laissez un message</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column logo-company">
+                        {% if company.logo is empty %}
+                            <div class="logo">
+                                <div><img src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/proaxive_logo_synexolabs_400.png)" alt=""></div>
+                            </div>
+                        {% else %}
+                            <div class="logo">
+                                <div><img src="{{ getenv('APP_ROOT_PUBLIC') }}/uploads/company/{{ company.logo }}" alt=""></div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!---->
+            <div class="block block-contact neutral">
+                <div class="columns">
+                    <div class="column border-right">
+                        <div class="columns">
+                            <div class="column border-right pr05 pl05">
+                                {% if(company.phone is not empty) %}
+                                    Tel: <strong>{{ company.phone }}</strong><br>
+                                {% endif %}
+                                {% if(company.mobile is not empty) %}
+                                    Mobile : <strong>{{ company.mobile }}</strong>
+                                {% endif %}
+                            </div>
+                            <div class="column pr05 pl05">{{ company.mail }}<br>{{ company.website }}</div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="columns">
+                            <div class="column border-right pr05 pl05">Siret : {{ company.siret }}<br>APRM : {{ company.ape }}</div>
+                            <div class="column pr05 pl05">{% if company.tva is defined %}N°TVA : {{ company.tva }}<br>{% endif %}RM : {{ company.rm }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---->
+            <div class="block-title txtcenter border-bottom">
+                <h3>Bon d'intervention/réparation/assemblage PC</h3>
+            </div>
+            <!---->
+            <div class="block block-infos">
+                <div class="columns">
+                    <div class="column border-right ">
+                        <h3 class="txtcenter txtuppercase primary">Intervention</h3>
+                        <ul>
+                            {% if intervention.pmad == 1%}
+                                <li>Inter N° : {{ intervention.number }} | Démarrée le : {{ intervention.created_at | localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}</li>
+                                <li>Type : <strong>prise de main à distance</strong></li>
+                            {% else %}
+                                <li>Inter N° : {{ intervention.number }} | Démarrée le : {{ intervention.created_at | localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}</li>
+                                <li>Date de dépôt : {{ intervention.received | localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }} <span style="display: inline-block;margin-left:2em;">Retrait le : {% if intervention.back_home is not null %}{{ intervention.back_home | localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}{% endif %}</span></li>
+                            {% endif %}
+                            <li>Suivi : <a href="{{ app_setting.app_url }}/i/{{ intervention.number_link }}" target="_blank">{{ app_setting.app_url }}/i/{{ intervention.number_link }}</a></li>
+                            <li>Technicien : <span class="txtuppercase">{{ company.director }}</span> </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3 class="txtcenter txtuppercase primary">Client</h3>
+                        <ul>
+                            {% if viewClient is defined %}
+                            <li>Nom : <span class="txtuppercase">{{ client.fullname }}</span></li>
+                            <li>
+                                Adresse :
+                                <span class="txtuppercase">
+                                        {% if client.adress is not empty %}
+                                            {{ client.adress }},
+                                        {% endif %}
+                                    {% if client.zipcode is not empty and client.city is not empty %}
+                                        {{ client.zipcode }} ({{ client.city }})
+                                    {% elseif client.zipcode is not empty %}
+                                        {{ client.zipcode }}
+                                    {% elseif client.city is not empty %}
+                                        {{ client.city }}
+                                    {% endif %}
+                                    </span>
+                            </li>
+                            <li>Courriel : <span class="txtuppercase">{{ client.mail }}</span></li>
+                            <li>
+                                {% if client.phone is not empty and client.mobile is not empty %}
+                                    Téléphone : {{ client.phone }} / {{ client.mobile }}
+                                {% elseif client.phone is empty %}
+                                    Mobile : {{ client.mobile }}
+                                {% elseif client.mobile is empty %}
+                                    Tél : {{ client.phone }}
+                                {% endif %}
+                            </li>
+                                {% else %}
+                                <li class="txtuppercase"><i class="icofont-minus-circle"></i> Données privées</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!---->
+            <div class="block block-equipment">
+                <h3 class="txtcenter txtuppercase primary">Description du materiel</h3>
+                <div class="columns">
+                    <div class="column">
+                        <ul>
+                            <li>Fabricant/Assembleur : <span class="txtuppercase">{{ brand.b_title }}</span></li>
+                            <li>N°de série : <span class="txtuppercase">{{ equipment.serialnumber }}</span></li>
+                            {% if intervention is empty %}
+                                <li>Type :
+                                    <div class="form-group d-inline" style="margin-right:1em;">
+                                        <label>
+                                            <input type="checkbox">
+                                            <i class="form-icon"></i> Notebook/Netbook
+                                        </label>
+                                    </div>
+                                    <div class="form-group d-inline" style="margin-right:1em;">
+                                        <label>
+                                            <input type="checkbox">
+                                            <i class="form-icon"></i> Ordinateur fixe
+                                        </label>
+                                    </div>
+                                    <div class="form-group d-inline">
+                                        <label>
+                                            <input type="checkbox">
+                                            <i class="form-icon"></i> Ordinateur AIO
+                                        </label>
+                                    </div>
+                                </li>
+                            {% else %}
+                                <li>Type : <span class="txtuppercase">{{ categoryEquipment.title }}</span></li>
+                            {% endif %}
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <ul>
+                            <li>Année d'assemblage : <span class="txtuppercase">{{ equipment.year }}</span></li>
+                            <li>N°de produit : <span class="txtuppercase">{{ equipment.numberproduct }}</span></li>
+                            <li>OS : {{ operatingSystem.os_name }} {{ operatingSystem.os_architecture }} (ver.{{ operatingSystem.os_release }})</li>
+                            {% if equipment.licence_os is not empty %}
+                                <li>Licence OS : <span class="txtuppercase">{{ equipment.licence_os }}</span></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!---->
+            <div class="block block-intervention">
+                <h3 class="txtcenter txtuppercase primary">détails du diagnostic</h3>
+                <div class="block--inline pr05 pl05 bi--d-diag">
+                    <div class="columns">
+                        <div class="column col-3">
+                            Type d'intervention réalisée :
+                        </div>
+                        <div class="column col-5 txtright">
+                            <div class="form-group d-inline">
+                                <label class="form-checkbox">
+                                    <input type="checkbox">
+                                    <i class="form-icon"></i> Réparation
+                                </label>
+                            </div>
+                            <div class="form-group d-inline">
+                                <label class="form-checkbox">
+                                    <input type="checkbox">
+                                    <i class="form-icon"></i> Assemblage
+                                </label>
+                            </div>
+                            <div class="form-group d-inline">
+                                <label class="form-checkbox">
+                                    <input type="checkbox">
+                                    <i class="form-icon"></i> Expertise
+                                </label>
+                            </div>
+                        </div>
+                        <div class="column col-4 border-left">
+                            <div class="form-group d-inline">
+                                <label class="form-checkbox">
+                                    <input type="checkbox">
+                                    <i class="form-icon"></i> Avec sauvegarde
+                                </label>
+                            </div>
+                            <div class="form-group d-inline">
+                                <label class="form-checkbox">
+                                    <input type="checkbox">
+                                    <i class="form-icon"></i> Sans sauvegarde
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="bi--children">
+                    <div class="columns">
+                        <div class="column col-5">
+                            <h3 class="children-title">&nbsp;</h3>
+                            <div class="block-content border-right p0 txtuppercase bc--details" style="min-height: 378px;">
+                                {% markdown %}
+                                    {{ intervention.details }}
+                                {% endmarkdown %}
+                            </div>
+                        </div>
+                        <div class="column col-7">
+                            <h3 class="children-title txtuppercase txtcenter">Description de la panne</h3>
+                            <div class="block-content txtuppercase bc--description" style="min-height: 80px;">
+                                {% markdown %}
+                                    {{ intervention.description }}
+                                {% endmarkdown %}
+                            </div>
+                            <h3 class="children-title txtuppercase txtcenter">Compte rendu</h3>
+                            <div class="block--inline border-bottom pr05 pl05">
+                                <div class="form-group d-inline">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox">
+                                        <i class="form-icon"></i> Logiciel(s)
+                                    </label>
+                                </div>
+                                <div class="form-group d-inline">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox">
+                                        <i class="form-icon"></i> Composant(s)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="block-content txtuppercase bc--report" style="min-height: 185px;">
+                                {% markdown %}
+                                    {{ intervention.report }}
+                                {% endmarkdown %}
+                            </div>
+                            <div class="block-content tension">
+                                <div class="border-top border-bottom border-left border-right" style="padding:0.5em;">
+                                    <div style="display: grid;grid-template-columns: repeat(3, 1fr);" class="mb-2">
+                                        <span class="d-block"><strong>+12v :</strong></span>
+                                        <span class="d-block"><strong>+5v :</strong></span>
+                                        <span class="d-block"><strong>3,3v :</strong></span>
+                                    </div>
+                                    <div style="display: grid;grid-auto-columns: auto;">
+                                        <span class="d-block" style="grid-row: 1;">Consommation globale (min) : </span>
+                                        <span class="d-block" style="grid-row: 1 / 3;"><strong>Watts</strong></span>
+                                        <div class="form-group d-inline txtcenter" style="grid-row: 1;">
+                                            <label>
+                                                <input type="checkbox"> Non mesurée
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <!--evaluation and more details-->
+                        <div class="column col-5">
+                            <h3 class="children-title txtuppercase txtcenter">Évaluation initiale</h3>
+                            <div class="block-content border-right p0 bc--evaluation" style="min-height:125px;">
+                                <div class="columns">
+                                    <div class="column">
+                                        <ul>
+                                            <li>Démarrage du PC</li>
+                                            <li>Boot Bios</li>
+                                            <li>Démarrage OS</li>
+                                            <li>Message(s) d'erreur(s)</li>
+                                            <li>Affichage vidéo</li>
+                                        </ul>
+                                    </div>
+                                    <div class="column list-checkbox">
+                                        <ul>
+                                            {% for i in 0..4 %}
+                                                <li>
+                                                    <div class="form-group d-inline">
+                                                        <label class="form-checkbox">
+                                                            <input type="checkbox">
+                                                            <i class="form-icon"></i> OUI
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group d-inline">
+                                                        <label class="form-checkbox">
+                                                            <input type="checkbox">
+                                                            <i class="form-icon"></i> NON
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--descrtion, compte rendu, observation-->
+                        <div class="column col-7">
+                            <h3 class="children-title txtuppercase txtcenter">observation</h3>
+                            <div class="block-content txtuppercase">
+                                {% markdown %}
+                                    {{ intervention.observation }}
+                                {% endmarkdown %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---->
+            <div class="block block-end bi--children ">
+                <div class="columns">
+                    <div class="column col-7 border-right">
+                        <div>
+                            <h3 class="txtcenter children-title txtuppercase">autres tâches effectuées</h3>
+                            <div class="block-content p0">
+                                <div class="columns">
+                                    <div class="column col-6">
+                                        <div class="columns">
+                                            <div class="column col-10">
+                                                <ul>
+                                                    <li>Memtest +</li>
+                                                    <li>Formatage rapide</li>
+                                                    <li>Formatage b.n</li>
+                                                    <li>CHKDSK</li>
+                                                    <li>Restauration OS</li>
+                                                    <li>Réinitialisation OS</li>
+                                                </ul>
+                                            </div>
+                                            <div class="column col-2 list-checkbox">
+                                                <ul>
+                                                    {% for i in 0..5 %}
+                                                        <li>
+                                                            <div class="form-group d-inline">
+                                                                <label class="form-checkbox" style="position: relative;">
+                                                                    <input type="checkbox">
+                                                                    <span class="lc--checkbox" style="position: absolute;top:-15px;">
+                                                                            <i class="form-icon"></i>
+                                                                        </span>
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column col-6">
+                                        <div class="columns">
+                                            <div class="column col-10">
+                                                <ul>
+                                                    <li>Check OS</li>
+                                                    <li>Réinstallation OS</li>
+                                                    <li>Mise(s) à jour</li>
+                                                    <li>Nettoyage tour/boitier</li>
+                                                    <li>Nettoyage système</li>
+                                                    <li>Installation box internet</li>
+                                                </ul>
+                                            </div>
+                                            <div class="column col-2 list-checkbox">
+                                                <ul>
+                                                    {% for i in 0..5 %}
+                                                        <li>
+                                                            <div class="form-group d-inline">
+                                                                <label class="form-checkbox" style="position: relative;">
+                                                                    <input type="checkbox" checked="checked">
+                                                                    <span class="lc--checkbox" style="position: absolute;top:-15px;right:15px;">
+                                                                            <i class="form-icon"></i>
+                                                                        </span>
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column col-5">
+                        <h3 class="txtcenter txtuppercase primary">signature technicien</h3>
+                        <div class="block-content" style="height:60px">
+
+                        </div>
+                        <h3 class="txtcenter txtuppercase secondary">Signature client</h3>
+                        <div class="block-content" style="height:60px">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

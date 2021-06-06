@@ -1,0 +1,153 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Compte client - {{ client.fullname }}{% endblock %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                <div class="mg-b-3">
+                    {% if client.sleeping == 1 %}
+                        {{ viewAlert('warning', 'Ce client est en sommeil') | raw }}
+                    {% endif %}
+                    <div class="card-custom">
+                        <div class="card-body">
+                            <div class="card-header"><h2>Fiche client</h2></div>
+                            <div class="columns">
+                                <div class="column left-title">
+                                    Client : <strong>{{ client.fullname }}</strong>
+                                </div>
+                                <div class="column right-options text-right">
+                                    Dernière modification le <strong>{{ client.updated_at | localizeddate('none', 'none', 'fr', null, 'EEEE d MMM Y') }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="columns">
+                    <div class="column col-3 col-sm-12 col-xl-12">
+                        <div class="card-custom">
+                            <div class="card-body">
+                                <div class="user-details list-table mt-2">
+                                    <ul>
+                                        <li><strong>Nom :</strong> {{ client.lastname }}</li>
+                                        <li><strong>Prénom :</strong> {{ client.firstname }}</li>
+                                        {% if client.mail is not empty %}
+                                        <li><strong>Courriel :</strong> {{ client.mail }}</li>
+                                        {% endif %}
+                                        {% if client.mobile is not empty or client.phone is not empty %}
+                                        <li><strong>Tèl :</strong>
+                                            {% if client.phone is not empty and client.mobile is not empty %}
+                                                <a href="tel:{{ company.phone_indicatif }}{{ client.phone | replace({'.': ''}) | slice(1,15) }}">{{ client.phone }}</a>
+                                                /
+                                                <a href="tel:{{ company.phone_indicatif }}{{ client.mobile | replace({'.': ''}) | slice(1,15) }}">{{ client.mobile }}</a>
+                                            {% elseif client.phone is empty %}
+                                            <a href="tel:{{ company.phone_indicatif }}{{ client.mobile | replace({'.': ''}) | slice(1,15) }}">{{ client.mobile }}</a>
+                                            {% elseif client.mobile is empty %}
+                                            <a href="tel:{{ company.phone_indicatif }}{{ client.phone | replace({'.': ''}) | slice(1,15) }}">{{ client.phone }}</a>
+                                            {% endif %}
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                                <div class="user-adress mt-2">
+
+                                    <span><strong>Adresse postale :</strong></span>
+                                    <p>
+                                        {{ getdata(client.adress, false, 'span') | raw }}
+                                        {% if client.zipcode is not empty and client.city is not empty %}
+                                            <br><i>{{ client.zipcode }}</i>, {{ client.city }}<br>
+                                        {% elseif client.zipcode is not empty %}
+                                            <br><i>{{ client.zipcode }}</i>
+                                        {% elseif client.city is not empty %}
+                                            <br>{{ client.city }}<br>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="user-button text-center">
+                                <a href="/admin/edit-client/{{ client.id }}" class="btn-sm btn-primary"><i class="icofont-edit"></i> Modifier</a>
+                                <a class="btn-sm btn-danger" href="#delete{{ client.id }}" title="Supprimer"><i class="icofont-delete"></i> Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column col-9 col-sm-12 col-xl-12">
+                        <div class="columns">
+                            <div class="column col-4">
+                                <div class="card-custom cc-shadow">
+                                    <div class="card-body">
+                                        <div class="columns">
+                                            <div class="column col-6 col-sm-12">
+                                                <div class="card-header"><h2>Équipements</h2></div>
+                                            </div>
+                                            <div class="column col-6 col-sm-12 text-right">
+                                                <a href="/admin/client/{{ client.id }}/add-equipment" class="btn-sm btn-primary" title="Ajouter un équipement"><i class="icofont-plus"></i></a>
+                                            </div>
+                                        </div>
+                                        {% if equipments is empty %}
+                                            {{ viewAlert('info', "Aucun équipement enregistré") | raw }}
+                                        {% else %}
+                                            <div class="recent-default">
+                                                {% for item in equipments %}
+                                                    <div class="recent-default-single {% if item.status == 0 %}equipment-out{% endif %}">
+                                                        <a href="/admin/edit-equipment/{{ item.eid }}">
+                                                            <div class="recent-default-flex">
+                                                                <div class="recent-d-img"><i class="icofont-{{ item.icon }}"></i></div>
+                                                                <div class="recent-d-ctn">
+                                                                    <h2>{{ item.name }}</h2>
+                                                                    <p>
+                                                                        <i>{{ item.title }}</i> - {{ item.b_title }}<br>
+                                                                        <i class="icofont-clock-time"></i> {{ item.updated_at | date('d-m-Y') }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column col-8">
+                                <div class="card-custom cc-shadow">
+                                    <div class="card-body">
+                                        <div class="columns">
+                                            <div class="column col-6 col-sm-12">
+                                                <div class="card-header"><h2>Interventions</h2></div>
+                                            </div>
+                                            <div class="column col-6 col-sm-12 text-right">
+                                                {% if equipments is not empty %}
+                                                <a href="/admin/client/{{ client.id }}/add-intervention" class="btn-sm btn-primary" title="Créer une intervention"><i class="icofont-plus"></i></a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% if interventions is empty %}
+                                            {{ viewAlert('info', "Aucune intervention enregistrée pour ce client") | raw }}
+                                        {% else %}
+                                        <div class="recent-default">
+                                            <div class="columns">
+                                                {% for item in interventions %}
+                                                    {{ include('intervention/admin/_item.twig') }}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modal -->
+    <form method="post" action="/admin/client/delete">
+        <input type="hidden" name="id" value="{{ client.id }}">
+        {{ include('dashboard/_modal-delete.twig', {'id' : 'delete' ~ client.id , 'title' : client.fullname, 'note': "Supprimer un client, supprime toutes ses données (interventions et équipements)."}) }}
+    </form>
+    <!-- /.modal -->
+{% endblock %}

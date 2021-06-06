@@ -1,0 +1,252 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    {% if lastversionNum > version %}
+    <div class="container">
+        {{ viewAlert('success', '<strong>Nouvelle version disponible !</strong> Pensez à mettre à jour votre version de Poraxive > <a href="https://proaxive.fr/updates" target="_blank">Télécharger la mise à jour</a>') | raw }}
+    </div>
+    {% endif %}
+    <!-- start:Main-stats -->
+    <div class="main-stats">
+        <div class="container">
+            <div class="columns">
+                <!-- card 04 -->
+                <div class="column col-3 col-sm-12">
+                    <a class="stats-card" href="/admin/clients">
+                        <div class="stats-title">
+                            <h2>{{ countClient }}</h2>
+                            <p>Clients</p>
+                        </div>
+                        <div class="stats-icon"><i class="icofont-id-card"></i></div>
+                    </a>
+                </div>
+                <!-- card 03 -->
+                <div class="column col-3 col-sm-12">
+                    <a class="stats-card" href="/admin/equipments">
+                        <div class="stats-title">
+                            <h2>{{ countEquipment }}</h2>
+                            <p>Équipements</p>
+                        </div>
+                        <div class="stats-icon"><i class="icofont-monitor"></i></div>
+                    </a>
+                </div>
+                <!-- card 02 -->
+                <div class="column col-3 col-sm-12">
+                    <a class="stats-card" href="/admin/interventions">
+                        <div class="stats-title">
+                            <h2>{{ countIntervention }}</h2>
+                            <p>Interventions</p>
+                        </div>
+                        <div class="stats-icon"><i class="icofont-repair"></i></div>
+                    </a>
+                </div>
+                <!-- card 01 -->
+                <div class="column col-3 col-sm-12">
+
+                    <a class="stats-card" href="/admin/equipments/brands">
+                        <div class="stats-title">
+                            <h2>{{ countBrand }}</h2>
+                            <p>Marques</p>
+                        </div>
+                        <div class="stats-icon"><i class="icofont-building-alt"></i></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:Main-stats -->
+    <!-- start:Main-message / bloc -->
+    <div class="main-message mg-tb-3">
+        <div class="container">
+            <div class="columns">
+                <div class="column col-9 col-lg-12">
+                    <div class="card-custom">
+                        <div class="card-header"><h2>Derniers messages</h2></div>
+                        <div class="card-body">
+                            <p>
+                                Bienvenue sur la version <strong>stable</strong> de Proaxive Lite.<br>
+                                Un <a href="https://discord.gg/GpUHExKqWH" target="_blank">serveur Discord</a> (code : GpUHExKqWH)  a été mis en place afin de suivre l'avancement et de participer à ce projet. N'hésitez pas à y vous connecter.<br>
+                                Pour pour tout ce qui est support de l'application, ça se passe sur <a
+                                        href="https://forums.synexolabs.com" target="_blank">les forums officiels</a>.
+                            </p>
+                            {% if checkFolderInstall %}
+                                {{ viewAlert('danger', '<strong>Alert sécurité !</strong> Veuillez renommer le dossier <strong>install</strong>. <a href="/admin/setting">Sécuriser l\'application</a>') | raw }}
+                            {% endif %}
+                            {% if auser.token is not null %}
+                                {{ viewAlert('warning', '<strong>1er étape</strong> ! Il est important de changer vos identifiants administrateur - <a href="/admin/edit-auser/1">Editer mon compte admin</a>') | raw }}
+                            {% endif %}
+                            {% if countCompany == 0 %}
+                                {{ viewAlert('warning', '<strong>2ème étape</strong> ! Commencez par créer votre entreprise - <a href="/admin/add-company">Créer mon entreprise</a>') | raw }}
+                            {% endif %}
+                            {% if countClient == 0 %}
+                                {{ viewAlert('warning', '<strong>3ème étape</strong> ! Créez votre premier client et ses équipements - <a href="/admin/add-client">Créer un client</a>') | raw }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="column col-3 col-lg-12">
+                    <div class="card-custom">
+                        <div class="card-header"><h2>Proaxive <span class="txtprimary">{{ app_info.release }}</span> </h2></div>
+                        <div class="card-body">
+                            <span class="d-block">Version : <strong {% if version < lastversionNum %}style="color:red;"{% endif %}>{{ app_info.number }}</strong> ({{ app_info.verdate }})</span>
+                            <span class="d-block">Dernière version :
+                                <strong class="{% if lastversionNum > version %}txtprimary{% endif %}">{{ lastversion.num }}</strong> ({{ lastversion.date }})
+                            </span>
+                            <span class="d-block">Nom de code : <strong>{{ lastversion.namecode }}</strong></span>
+                            <span class="d-block">Statut : <strong>{{ app_info.status }}</strong></span>
+                            <span class="d-block">Développeur : <a href="{{ app_info.urlauthor }}" target="_blank"><i class="icofont-link-alt"></i></a> <strong>{{ app_info.author }}</strong></span>
+                            <span class="d-block">PHP : <strong>{{ phpversion }}</strong></span>
+                            {% if lastversionNum > version %}
+                            <p class="text-center mg-tb-1">
+                            <a href="https://proaxive.fr" target="_blank" class="btn-sm btn-primary"><i class="icofont-external-link"></i> Mettre à jour</a>
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:Main-message / bloc -->
+    <!-- start:Main-last -->
+    <div class="main-last">
+        <div class="container">
+            <div class="columns">
+                <div class="column col-6 col-lg-12">
+                    <div class="card-custom">
+                        <div class="card-header"><h2>Interventions en cours</h2></div>
+                        <div class="card-body">
+                            {% if interInProgress is empty %}
+                                {{ viewAlert('info', "Il n'y a aucune intervention en cours") | raw }}
+                            {% else %}
+                            <table class="table-custom">
+                                <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Date</th>
+                                    <th>Client</th>
+                                    <th>Statut</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for interprogress in interInProgress %}
+                                <tr class="clickable-row" data-href="/admin/edit-intervention/{{ interprogress.idi }}" data-target="_self">
+                                    <td>{{ interprogress.number }}</td>
+                                    <td>{{ interprogress.icreated | localizeddate('none', 'none', 'fr', null, 'd, MMM') }}</td>
+                                    <td>{{ interprogress.fullname }}</td>
+                                    <td><span class="label" style="background-color:#{{ interprogress.bgcolor }}">{{ interprogress.tstatus }}</span></td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="column col-6 col-lg-12">
+                    <div class="card-custom">
+                        <div class="card-header"><h2>Interventions cloturées</h2></div>
+                        <div class="card-body">
+                            {% if interInClose is empty %}
+                            {{ viewAlert('info', "Il n'y a aucune intervention cloturée") | raw }}
+                            {% else %}
+                            <table class="table-custom">
+                                <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Date</th>
+                                    <th>Client</th>
+                                    <th>Cloture</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for interclose in interInClose %}
+                                <tr class="clickable-row" data-href="/admin/edit-intervention/{{ interclose.idi }}" data-target="_self">
+                                    <td>{{ interclose.number }}</td>
+                                    <td>{{ interclose.icreated | localizeddate('none', 'none', 'fr', null, 'd, MMM') }}</td>
+                                    <td>{{ interclose.fullname }}</td>
+                                    <td>{{ interclose.close_date | localizeddate('none', 'none', 'fr', null, 'd, MMM') }} <i class="icofont-check-alt"></i></td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:Main-last -->
+    <!-- start:Main-last -->
+    <div class="main-last mg-tb-3">
+        <div class="container">
+            <div class="columns">
+                <div class="column col-4 col-lg-12">
+                    <div class="card-custom">
+                        <div class="card-header"><h2>Clients Récents</h2></div>
+                        <div class="card-body">
+                            {% if clients is empty %}
+                            {{ viewAlert('info',"Il n'y a aucun client enregistré") | raw }}
+                            {% else %}
+                            <div class="recent-default">
+                                {% for client in clients %}
+                                <div class="recent-default-single">
+                                    <a href="{{ client.urlAdmin }}">
+                                        <div class="recent-default-flex">
+                                            <div class="recent-d-img"><i class="icofont-user"></i></div>
+                                            <div class="recent-d-ctn">
+                                                <h2>{{ client.fullname }}</h2>
+                                                <p>
+                                                    {% if client.zipcode is not empty and client.city is not empty %}
+                                                        <i>{{ client.zipcode }}</i> - {{ client.city }} ({{ client.name }})<br>
+                                                    {% elseif client.zipcode is not empty %}
+                                                        <i>{{ client.zipcode }} ({{ client.name }})</i>
+                                                    {% elseif client.city is not empty %}
+                                                        {{ client.city }} ({{ client.name }})<br>
+                                                    {% endif %}
+                                                    {{ getDataWithHtml(client.phone, false, 'strong') | raw }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="column col-4 col-lg-12">
+                    <div class="card-custom">
+                        <div class="card-header"><h2>En atelier</h2></div>
+                        <div class="card-body">
+                            {% if equipmentInWork is empty %}
+                            {{ viewAlert('info',"Il n'y a aucun équipement en atelier") | raw }}
+                            {% else %}
+                            <div class="recent-default">
+                                {% for equipment in equipmentInWork %}
+                                <div class="recent-default-single">
+                                    <a href="{{ equipment.urlAdmin }}">
+                                        <div class="recent-default-flex">
+                                            <div class="recent-d-img"><i class="icofont-{{ equipment.icon }}"></i></div>
+                                            <div class="recent-d-ctn">
+                                                <h2>{{ equipment.ename }}</h2>
+                                                <p><i>{{ equipment.ce_title }}</i> - {{ equipment.fullname }}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:Main-last -->
+{% endblock %}

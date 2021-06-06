@@ -1,0 +1,27 @@
+License
+-------
+
+Proaxive Lite is released under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 3 of the License,
+or (at your option) any later version (GPL-3+).
+More information: https://www.gnu.org/licenses/gpl-3.0.txt
+
+Proaxive Lite uses some external libraries released under different licenses :
+
+Component               Version     Licence                 Usage
+--------------------------------------------------------------------
+Twig                    2.9         BSD                     Template
+Twig Markdown           3.1         MIT                     Editor
+PHP Markdown            1.8         N/C                     Editor
+Phinx                   0.12.5      MIT                     Database migration
+SwiftMailer             6.2         MIT                     Email
+Twig Getenv             1.0.1       Apache License          Variable environment
+Class Upload Verot      2.0         GPL-2.0                 Upload files
+KNP Snappy              1.2         MIT                     PDF Generate
+wkhtmltopdf-amd64       0.12.4      LGPL-3.0                PDF Generate
+wkhtmltoimage-amd64     0.12.4      LGPL-3.0                PDF Generate
+MailJet APIv3 PHP       1.5.1       MIT                     Send Email
+Twig Extra-Bundle       3.1.1       MIT                     Template
+Whoops                  2.5         MIT                     View Errors
+YAML                    5.2.1       MIT                     Package
+Dotenv                  4.4.18      MIT                     Variable environment

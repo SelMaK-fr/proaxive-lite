@@ -1,0 +1,45 @@
+//
+//  tail.datetime - The vanilla way to select dates and times!
+//  @file       ./less/tail.mixins.less
+//  @author     SamBrishes <sam@pytes.net>
+//  @version    0.4.14 - Beta
+//
+//  @website    https://github.com/pytesNET/tail.DateTime
+//  @license    X11 / MIT License
+//  @copyright  Copyright © 2018 - 2019 SamBrishes, pytesNET <info@pytes.net>
+//
+
+//
+//  MIXINS :: BORDER
+//
+.border(@width: 1px; @style: solid; @color: transparent;){
+    border-width: @width;
+    border-style: @style;
+    border-color: @color;
+}
+
+//
+//  MIXINS :: BORDER \W RADIUS
+//
+.border(@width; @style; @color; @radius;){
+    border-width: @width;
+    border-style: @style;
+    border-color: @color;
+    border-radius: @radius;
+}
+
+//
+//  MIXINS :: BOX SHADOW
+//
+.shadow(@shadow: none;){
+    box-shadow: @shadow;
+    -webkit-box-shadow: @shadow;
+}
+
+//
+//  MIXINS :: TRANSITION
+//
+.transition(@transition: none;){
+    transition: @transition;
+    -webkit-transition: @transition;
+}

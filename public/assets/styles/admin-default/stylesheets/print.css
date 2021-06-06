@@ -1,0 +1,30 @@
+@page { margin: 0.3cm;size: portrait; }
+
+body {
+    width: auto!important;
+    margin: auto!important;
+    font-family: serif;
+    font-size: 8pt;
+    background-color: #fff!important;
+    color: #000!important;
+}
+#container{
+    width: auto!important;
+    height: auto!important;
+}
+.bi--d-diag{
+    line-height:20px;
+}
+/*.bc--details{min-height:340px!important;}
+.bc--evaluation{min-height: 60px!important;}
+.bc--description{min-height: 70px!important;}
+.bc--report{min-height: 170px!important;}*/
+span.lc--checkbox{
+    top: -12px!important;
+    right: 20px!important;
+}
+
+header {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}

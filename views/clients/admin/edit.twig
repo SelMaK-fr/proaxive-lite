@@ -1,0 +1,24 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Modifier un client{% endblock %}
+
+{% block body %}
+    <!-- START .cards -->
+    <div class="section--admin">
+        <div class="container">
+            {{ include('_notifications.twig') }}
+            <div class="admin-content">
+                <div class="card-custom cc-shadow">
+                    <div class="card-body">
+                        <div class="card-header"><h2>Client : {{ client.fullname }}</h2></div>
+                        <form method="post">
+                            {% include 'clients/admin/_form.twig' with {'passtab': 1} %}
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

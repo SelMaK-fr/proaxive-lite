@@ -1,0 +1,72 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Gérer les équipements{% endblock %}
+
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                <div class="columns">
+                    <div class="column">
+                        <div class="card-custom">
+                            <div class="card-header"><h2>Ajouter une catégorie</h2></div>
+                            <div class="card-body">
+                                <div class="admin-form">
+                                    {{ viewAlert('info', "Icon par icofont.com. Ex : pour <i>icofont-laptop</i> insérez simplement <i>laptop</i>") | raw }}
+                                    <form method="post" action="#">
+                                        {{ include('equipments/admin/categories/_form.twig') }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        {{ include('_notifications.twig') }}
+                        <div class="card-custom">
+                            <div class="card-header"><h2>Catégories enregistrées</h2></div>
+                            <div class="card-body">
+                                {% if categories is empty %}
+                                    {{ viewAlert('info',"Il n'y a aucune catégorie d'enregistrée pour le moment") | raw }}
+                                {% else %}
+                                    <table class="table-custom">
+                                        <thead>
+                                        <tr>
+                                            <th>C.ID</th>
+                                            <th>Dénomination</th>
+                                            <th>Code couleur</th>
+                                            <th>IcoFont</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for item in categories %}
+                                            <tr>
+                                                <td class="text-center">{{ item.id }}</td>
+                                                <td>{{ item.title }}</td>
+                                                <td><span class="label" style="background-color:#{{ item.color }};color:#ffffff;">{{ item.color }}</span></td>
+                                                <td><i class="icofont-{{ item.icon }}"></i> {{ item.icon }}</td>
+                                                <td>
+                                                    <a href="/admin/equipments/edit-category/{{ item.id }}" class="btn btn-sm btn-primary trigger"><i class="icofont-edit-alt"></i></a>
+                                                    <a href="#delete{{ item.id }}" class="btn btn-sm btn-danger trigger"><i class="icofont-trash"></i></a>
+                                                    <!-- /modal -->
+                                                    <form method="post" action="/admin/equipments/category/delete" style="display:inline-block;">
+                                                        <input type="hidden" name="id" value="{{ item.id }}">
+                                                        {{ include('dashboard/_modal-delete.twig', {'id' : 'delete' ~ item.id , 'title' : item.title}) }}
+                                                    </form>
+                                                    <!-- /.modal -->
+                                                    <!-- /.Delete Modal -->
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+/* Welcome to Compass. Use this file to define print styles.
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" /> */
+@page
+{
+    size: A4;   /* auto is the initial value */
+
+    /* this affects the margin in the printer settings */
+    margin: 4.5mm 4.5mm 4.5mm 4.5mm;
+}
+html, body {
+    width: 210mm;
+    height: 282mm;
+    font-size: 11pt;
+    background: #FFF;
+    overflow:visible;
+}
+.pdf .etiquette{
+    top:1.4em;
+}

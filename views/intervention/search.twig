@@ -1,0 +1,89 @@
+{% extends '_layout/layout.twig' %}
+
+{% block title %} Intervention du {{ intervention.created_at | date('d-m-Y') }}  {% endblock %}
+
+{% block body %}
+    <div class="content-app">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m9">
+                    <div class="card-custom p-relative">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col s12 m2">
+                                    <strong class="d-block">N°</strong>
+                                    {{ intervention.number }}
+                                </div>
+                                <div class="col s12 m2">
+                                    <strong class="d-block">Date de dépôt</strong>
+                                    {{ intervention.received | date('d-m-Y') }}
+                                </div>
+                                <div class="col s12 m3">
+                                    <strong class="d-block primarytxt">Début de l'intervention</strong>
+                                    {{ intervention.created_at | date('d-m-Y') }}
+                                </div>
+                                <div class="col s12 m3">
+                                    <strong class="d-block">Etat</strong>
+                                    {{ intervention.status | raw }}
+                                </div>
+                                <div class="col s12 m2 txtright">
+                                    <strong class="d-block">Tarif</strong>
+                                    49€
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if intervention.closed == 1 %}
+                        <div class="alert alert-info">Intervention <strong>cloturée</strong> le {{ intervention.update_at | date('d-m-Y à H:m') }}</div>
+                        <div class="card-custom">
+                            <h1 class="title-card primary whitetxt">Compte rendu</h1>
+                            <div class="card-content">
+                                {{ intervention.report | markdown }}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning">Intervention ouverte depuis le {{ intervention.created_at | date('d-m-Y à H:m') }}. Dernière mise à jour le {{ intervention.update_at | date('d-m-Y à H:m') }}</div>
+                    {% endif %}
+
+                    <div class="card-custom">
+                        <h1 class="title-card">Détails de l'intervention</h1>
+                        <div class="card-content about_intervention">
+                            {{ intervention.details | markdown }}
+                        </div>
+                    </div>
+                    <div class="card-custom">
+                        <h1 class="title-card">Description de la panne</h1>
+                        <div class="card-content">
+                            {{ intervention.description | markdown }}
+                        </div>
+                    </div>
+                    <div class="card-custom">
+                        <h1 class="title-card">Observation</h1>
+                        <div class="card-content">
+                            {{ intervention.observation | markdown }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m3">
+                    <div class="bloc-column">
+                        <span class="d-block">
+                            <a class="btn-small primary noshadow" href="#"><i class="material-icons">print</i> Imprimer l'intervention</a>
+                        </span>
+                    </div>
+                    {{ include('intervention/_widget_equipment.twig') }}
+                </div>
+            </div>
+        </div>
+        <div id="newequipment" class="modal">
+            <div class="modal-content">
+                <h4></h4>
+                <p>
+                    Cette fonctionnalité sera bientôt disponible :)
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-close waves-effect waves-green btn-flat">Fermer</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

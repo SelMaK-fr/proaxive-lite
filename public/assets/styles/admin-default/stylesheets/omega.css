@@ -1,0 +1,129 @@
+#omega{
+    padding:0 2em;
+    display:none;
+}
+#omega-button{
+    display:none;
+}
+#omega-content nav ul {
+    display:inline-block;
+    margin-right:2em;
+}
+#omega-content nav ul li a{
+    padding:0 0.5em;
+}
+#omega-content nav ul li, #omega-content #logo, #omega-content nav {
+    display: inline-block;
+}
+.omega-links{
+    display:inline-block;
+}
+#omega-content{
+    float: right;
+}
+#omega-overlay {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, .5);
+}
+#omega-sidebar{
+    display:none;
+    position: fixed;
+    width:80%;
+    z-index: 20;
+    height:100%;
+    top:0;
+    left:0;
+    background-color: #ffffff;
+    transform: translateX(-100%);
+    transition: transform .2s ease-in-out;
+}
+#omega-sidebar-header{
+    background-color: #008c7b;
+    color:white;
+    background-size: cover;
+    line-height:3em;
+    padding:0 0.8em;
+    font-size:1.3em;
+}
+#omega-sidebar-body{
+    padding:2em 0;
+}
+#omega-sidebar-body nav ul{
+    margin:0;
+}
+#omega-sidebar-body nav ul li{
+    list-style: none;
+    display: block;
+    margin-bottom:1em;
+    margin-top:0;
+}
+
+#omega-sidebar-body nav ul li.omega-nav-item ul.omega-submenu{
+    display:none;
+    background-color:#f9f9f9;
+}
+#omega-sidebar-body nav ul li.omega-nav-item ul.omega-submenu li{
+    margin:0;
+}
+#omega-sidebar-body nav ul li.omega-nav-item ul.omega-submenu li a{
+    text-transform: none;
+    color:#222;
+    font-weight: normal;
+    background-color:#f9f9f9;
+    padding: 10px 20px 10px 45px;
+}
+#omega-sidebar-body nav ul li.omega-nav-item.is-active a{
+    background-color:#f0f0f0;
+    color:#038551;
+}
+#omega-sidebar-body nav ul li.omega-nav-item.is-active .omega-submenu{
+    display:block;
+    margin-bottom:1em;
+}
+#omega-sidebar-body nav ul li a{
+    display: block;
+    font-weight:700;
+    padding: 5px 20px;
+    color:#606c76;
+}
+#omega-sidebar-body nav ul li a span{
+    display:inline-block;
+    margin:0 0.5em;
+}
+#omega-sidebar-body nav ul li a:hover{
+    color:#9b4dca;
+}
+#omega-sidebar-body .omega-links a{
+    display:block;
+    margin-bottom:1em;
+}
+
+@media only screen and (max-width: 850px){
+
+    #omega-content{
+        display:none;
+    }
+    #omega-button{
+        cursor: pointer;
+        display:inline-block;
+        background-color: transparent;
+        border:0;
+        
+    }
+    .omega-links{
+        display: block;
+        margin-top:2em;
+    }
+    #omega-sidebar, .omega-activated #omega-overlay, #omega{
+        display:block;
+    }
+    .omega-activated #omega-sidebar{
+        transform: translateX(0);
+    }
+}

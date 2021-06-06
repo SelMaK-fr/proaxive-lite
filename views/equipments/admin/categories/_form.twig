@@ -1,0 +1,5 @@
+{{ form.input('title', 'Dénomination', 'Ordinateur, Portable etc.') | raw }}
+{{ form.input('slug', 'Slug', 'ordinateur-portable', '<i class="icofont-info-circle"></i> Laisser vide pour générer automatiquement') | raw }}
+{{ form.input('icon', 'Icon', 'CF IcoFont') | raw }}
+{{ form.inputColor('color', 'Couleur', '#efefef') | raw }}
+{{ form.submitDefault('Enregistrer', 'primary') | raw  }}

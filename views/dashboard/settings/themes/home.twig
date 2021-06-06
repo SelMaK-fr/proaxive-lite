@@ -1,0 +1,41 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Gestion des paramètres du site internet{% endblock %}
+
+{% block body %}
+    <!-- START .cards -->
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+                <form method="post">
+                    <div class="card-custom">
+                        <div class="card-body">
+                            <div class="card-header m-0">
+                                <h2>Thèmes de <span class="txtprimary">{{ getenv('APP_NAME') }}</span></h2>
+                                <span>Ici, sont listés les thèmes qu'utilise l'application.</span>
+                            </div>
+                            <div class="admin-form mg-tb-3">
+                                <div class="columns">
+                                {% for folder in folders %}
+                                    <div class="column col-3 col-sm-12">
+                                        <div class="thumbnail">
+                                            <div class="thumbnail__title">
+                                                <span class="t__name">{{ folder }}</span>
+                                            </div>
+                                            <div class="thumbnail__content">
+                                                <a style="font-size: 4em" href="/admin/setting/css/{{ folder }}" title="Editer les fichiers CSS de ce thème"><i class="icofont-interface"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

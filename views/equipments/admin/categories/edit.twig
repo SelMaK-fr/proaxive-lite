@@ -1,0 +1,24 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Modifier une catégorie d'équipement{% endblock %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                <div class="card-custom">
+                    <div class="card-body">
+                        {{ include('_notifications.twig') }}
+                        <div class="admin-form">
+                            {{ viewAlert('info', "Icon par icofont.com. Ex : pour <i>icofont-laptop</i> insérez simplement <i>laptop</i>") | raw }}
+                            <form method="post" action="#">
+                                {{ include('equipments/admin/categories/_form.twig') }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

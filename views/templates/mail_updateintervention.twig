@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation-emails/2.2.1/foundation-emails.min.css" rel="stylesheet">
+    <title>{{ company.cname }} - Votre suivi d'intervention en ligne</title>
+</head>
+<body>
+<span class="preheader"></span>
+    <table class="body">
+        <tr>
+            <td class="center" align="center" valign="top">
+                <center data-parsed="">
+                <style type="text/css" align="center" class="float-center">
+                body,
+                html,
+                .body {
+                background: #f3f3f3 !important;
+                }
+                </style>
+                <table class="spacer float-center"><tbody><tr><td height="16px" style="font-size:16px;line-height:16px;">&#xA0;</td></tr></tbody></table>
+                <table align="center" class="container float-center"><tbody><tr><td>
+                <table class="spacer"><tbody><tr><td height="16px" style="font-size:16px;line-height:16px;">&#xA0;</td></tr></tbody></table>
+                <table class="row"><tbody><tr>
+                <th class="small-12 large-12 columns first last"><table><tr><th>
+                <h1>Votre suivi d'intervention.</h1>
+                <p>Vous avez choisi {{ company.cname }} et nous vous en remercions. Ci-dessous, vous trouverez les détails de l'intervention en cours sur votre équipement informatique.</p>
+                <table class="spacer"><tbody><tr><td height="16px" style="font-size:16px;line-height:16px;">&#xA0;</td></tr></tbody></table>
+                <table class="callout"><tr><th class="callout-inner secondary">
+                <table class="row"><tbody><tr>
+                <th class="small-12 large-6 columns first"><table><tr><th>
+                <p>
+                {% if intervention.pmad == 0 %}
+                    <strong>Date de dépôt</strong><br>
+                    {{ intervention.received | localizeddate('none', 'none', 'fr', null, 'd, MMM Y') }}
+                {% elseif intervention.pmad == 1 %}
+                    <strong>Type</strong><br>
+                    Prise de main à distance
+                {% endif %}
+                </p>
+                <p>
+                <strong>Etat</strong><br>
+                {{ status.title }}
+                </p>
+                <p>
+                <strong>N°Inter</strong><br>
+                {{ intervention.number }}
+                </p>
+                </th></tr></table></th>
+                <th class="small-12 large-6 columns last"><table><tr><th>
+                <p>
+                <strong>Équipement</strong><br>
+                {{ equipment.name }} ({{ categoryEquipment.title }})<br>
+                <strong>Votre technicien</strong><br>
+                {{ company.director }}<br>
+                </p>
+                <p>
+                    <strong>Intervention débutée le</strong><br>
+                    {{ intervention.start | localizeddate('none', 'none', 'fr', null, 'd, MMM Y') }}<br>
+                    <strong>Mise à jour le</strong><br>
+                    <span style="color:green">{{ intervention.updated_at | localizeddate('none', 'none', 'fr', null, 'd, MMM Y') }}</span>
+                </p>
+                </th></tr></table></th>
+                </tr></tbody></table>
+                </th><th class="expander"></th></tr></table>
+                <h4>Détails de l'intervention</h4>
+                <table>
+                <tbody>
+                <tr>
+                <td>
+                <table>
+                <tbody>
+                <tr>
+                <td>
+                {% if intervention.closed == 1 %}
+                L'intervention sur votre équipement a été cloturée par le technicien. Voici son compte rendu<br>
+                <table class="callout">
+                <tbody><tr>
+                <th class="callout-inner primary">
+                <p>{{ intervention.report }}</p>
+                </th>
+                <th class="expander"></th>
+                </tr>
+                </tbody>
+                </table>
+                <br>Vous pouvez dès à présent passer en boutique récupérer votre équipement ou nous contacter au {{ company.phone }}.<br>
+                <p>Merci pour votre fidélité.</p>
+                {% endif %}
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                <table class="button large">
+                <tbody><tr>
+                <td>
+                <table>
+                <tbody><tr>
+                <td>
+                <a href="{{ viewJsonSetting.app_url }}/i/{{ intervention.number_link }}">Suivi intervention en ligne</a>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                <hr>
+                <h4>Et après ?</h4>
+                <p>Le suivi des interventions en ligne est manuellement géré par le technicien. Le statut des interventions est mis à jour le plus rapidement possible. Vous recevrez un email à chaque étape.</p>
+                </th></tr></table></th>
+                </tr></tbody></table>
+                <table class="row footer text-center"><tbody><tr>
+                <th class="small-12 large-3 columns first"><table><tr><th>
+                <img src="https://placehold.it/170x30" alt="">
+                </th></tr></table></th>
+                <th class="small-12 large-3 columns"><table><tr><th>
+                <p>
+                Contactez nous au {{ company.phone }}<br>
+                Ou par mail {{ company.mail }}
+                </p>
+                </th></tr></table></th>
+                <th class="small-12 large-3 columns last"><table><tr><th>
+                <p>
+                {{ company.cname }}<br>
+                {{ company.about }}
+                </p>
+                </th></tr></table></th>
+                </tr></tbody></table>
+                </td></tr></tbody></table>
+                </center>
+            </td>
+        </tr>
+    </table>
+<div style="display:none; white-space:nowrap; font:15px courier; line-height:0;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>
+</body>

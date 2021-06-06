@@ -1,0 +1,43 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Nouvel administrateur{% endblock %}
+
+{% block body %}
+    <div class="section--admin admin-header">
+        <div class="container-fluid">
+            <div class="grid-2">
+                <div class="col">
+                    <h4>Nouvel administrateur</h4>
+                </div>
+                <div class="col txtright">
+                    <ul>
+                        <li>Accueil</li>
+                        <li>/</li>
+                        <li>Administateurs</li>
+                        <li>/</li>
+                        <li>Nouvel administrateur</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- START .cards -->
+    <div class="section--admin">
+        <div class="container-fluid">
+            <div class="admin-content">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title">Données du compte</h4>
+                        <div class="admin-form">
+                            <form method="post" action="#">
+                            {% include 'admin/ausers/_form.twig' with {'inputpassword': 1} %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

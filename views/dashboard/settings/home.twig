@@ -1,0 +1,116 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Gestion des paramètres du site internet{% endblock %}
+
+{% block body %}
+    <!-- START .cards -->
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+                <form method="post">
+                <div class="card-custom">
+                    <div class="card-body">
+                        <div class="card-header m-0">
+                            <div class="columns">
+                                <div class="col-8 col-sm-12"><h2>Paramètres globaux</h2><span>Gestion des paramètres de l'application.</span></div>
+                                <div class="col-4 col-sm-12 text-right">
+                                    {{ form.submitSingle('primary', 'saveParameters', 'Enregistrer', 'check-circled') | raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mg-tb-3">
+                    <div class="tabs-pe tabs--link">
+                        <ul id="tabs--link">
+                            <li><a href="/admin/setting" class="selected">Paramètres globaux</a></li>
+                            <li><a href="/admin/setting/courriel">Services Courriel</a></li>
+                        </ul>
+                        <div class="tabContent tabsContent--link">
+                            <div class="columns">
+                                <div class="column col-6 col-sm-12">
+                                    <div class="card-custom ">
+                                        <div class="card-body">
+                                            <div class="card-header"><h2>Gestion des erreurs</h2></div>
+                                            <div class="admin-form">
+                                                {{ form.inputswitch('php_error', 'Erreurs PHP') | raw }}
+                                                {{ form.inputswitch('full_error', 'Erreurs Whoops!') | raw }}
+                                                <p>
+                                                    Les erreurs Whoops! affichent les erreurs détaillées de PHP et MySQL. Elles contiennent également les variables d'environnements.<br>
+                                                    <i class="icofont-warning-alt"></i> <u>Ne pas activer Whoops! en production.</u>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-custom mg-tb-2">
+                                        <div class="card-body">
+                                            <div class="card-header"><h2>Divers</h2></div>
+                                            <div class="admin-form">
+                                                {{ form.input('society_days', "Jours d'ouverture", 'Ex : Du lundi au samedi', "Ex : Du lundi au samedi") | raw }}
+                                                {{ form.input('society_hours', "Horaire d'ouverture", 'Ex : 09H-12H / 14H-19H', "Ex : 09H-12H / 14H-19H") | raw }}
+                                                {{ form.input('app_url', "URL de l'application", 'http://monproaxive.fr', "L'adresse internet de Proaxive (ex : <strong>http://monproaxive.fr</strong>/i/f281gefe)") | raw }}
+                                                {{ form.input('app_login_url', "URL de connexion au panel", 'login-dash', "Ex : http://monproaxive.fr/<strong>login-dash</strong>") | raw }}
+                                                {{ form.inputswitch('view_version', 'Afficher version', 'Affiche la version Proaxive de la vue cliente') | raw }}
+                                                {{ form.inputswitch('style_selector', 'SdS en haut ?', 'Oui pour afficher le selecteur de style en haut') | raw }}
+                                                {{ form.inputswitch('notify_fixed', 'Notif flottante ?', 'Oui pour afficher les notifications en haut à droite') | raw }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column col-6 col-sm-12">
+                                    <div class="card-custom ">
+                                        <div class="card-body">
+                                            <div class="card-header"><h2>Sécurité de l'application</h2></div>
+                                            <div class="admin-form">
+                                                {% if checkFolderInstall %}
+                                                    {{ viewAlert('danger', 'Proaxive <strong>n\'est pas sécurisée</strong>. Veuillez renommer le dossier d\'installation de l\'application.') | raw }}
+                                                    {{ form.submitSingle('danger', 'renameFolder', 'Renommer le dossier', 'edit') | raw }}
+                                                    <small class="d-block"><i class="icofont-info-circle"></i> Vous pouvez également supprimer complétement le dossier <strong>install</strong> de votre FTP</small>
+
+                                                {% else %}
+                                                    {{ viewAlert('info', "L'application Proaxive <strong>est sécurisée</strong>.") | raw }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-custom mg-tb-2">
+                                        <div class="card-body">
+                                            <div class="card-header"><h2>Dossiers de l'application</h2></div>
+                                            <div class="admin-form">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="name">Chemin du dossier racine</label>
+                                                    <input class="form-input underlined" value="{{ varRoot }}" disabled>
+                                                    <small></small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label" for="name">Thème admin</label>
+                                                    <input class="form-input underlined" value="{{ getenv('APP_ADMIN_THEME') }}" disabled>
+                                                    <small></small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label" for="name">Thème client</label>
+                                                    <input class="form-input underlined" value="/public/assets/styles/proaxive" disabled>
+                                                    <small></small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label" for="name">Dossiers des documents</label>
+                                                    <input class="form-input underlined" value="{{ varRoot }}documents" disabled>
+                                                    <small></small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

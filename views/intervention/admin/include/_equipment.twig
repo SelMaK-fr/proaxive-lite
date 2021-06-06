@@ -1,0 +1,14 @@
+<div class="recent-default-single {% if equipment.status == 0 %}equipment-out{% endif %}">
+    <a href="/admin/edit-equipment/{{ equipment.id }}">
+        <div class="recent-default-flex">
+            <div class="recent-d-img"><i class="icofont-{{ categoryEquipment.icon }}"></i></div>
+            <div class="recent-d-ctn">
+                <h2>{{ equipment.name }}</h2>
+                <p>
+                    <i>{{ categoryEquipment.title }}</i> - {{ brand.b_title }}<br>
+                    <i class="icofont-clock-time"></i> {{ equipment.updated_at | date('d-m-Y') }}
+                </p>
+            </div>
+        </div>
+    </a>
+</div>

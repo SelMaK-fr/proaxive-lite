@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Kara Modal Box</title>
+        <!-- DOC CSS -->
+        <link rel="stylesheet" href="css/style.css">
+        <!-- SRC Kara Modal CSS -->
+        <link rel="stylesheet" href="kara-modal/css/kara.css">
+        <!-- Addon Animate.css -->
+        <link rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css" />
+        <!-- DOC highlight CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+</head>
+<body>
+        <div class="cr cr-top cr-right cr-sticky cr-midnight"><a href="https://github.com/SelMaK-fr/Kara-Modal">Fork Me</a></div>
+        <header class="txtcenter">
+                <h1><span>Kara</span> Modal Box v1.1</h1>
+                <p><strong>Kara</strong> est une boite modal développé en javascript sans framework</p>
+                <a href="https://github.com/SelMaK-fr/Kara-Modal" target="_blank" class="b-link link-primary">Télécharger <strong>Kara Modal Box v1.1</strong></a>
+        </header>
+        <div class="container">
+                <div class="description txtcenter">
+                        Kara permet de mettre en place un système de modale simple (sans jQuery), accessible et compatible avec la navigation au clavier.
+                </div>
+                <div class="bloc">
+                        <div class="title-bloc">Utilisation</div>
+                        <p>Chargez le style CSS de Kara (avant la fermeture de la balise <code>&lt;head&gt;</code>)</p>
+                        <pre><code class="html">&lt;link rel="stylesheet" href="path/css/kara.css"&gt;</code></pre>
+                        <p>Chargez le fichier javascript de Kara (avant la fermeture de la balise <code>&lt;body&gt;</code>)</p>
+                        <pre><code class="html">&lt;script src="path/js/kara.js"&gt;&lt;/script&gt;</code></pre>
+                </div>
+                <div class="bloc">
+                        <div class="title-bloc">Modale simple</div>
+                        <p>Création d'un lien avec l'ID modal1 et la class <code>js-kara-modal</code></p>
+                        <pre><code class="html">&lt;a href="#modal1" class="js-kara-modal">Ouvrir la boite modale&lt;/a&gt;</code></pre>
+                        <a href="#modal1" class="js-kara-modal link link-primary">Modal avec entête et footer</a>
+                        <a href="#modal3" class="js-kara-modal link link-primary">Modal sans entête et footer</a>
+                </div>
+                <div class="bloc">
+                        <div class="title-bloc">Modale avec Ajax</div>
+                        <div class="alert alert-danger"><strong>Important :</strong> il n'est pas possible d'afficher une page externe</div>
+                        <p>Création d'un lien avec l'ID modal2 (vers le fichier modalAjax.html) et la class <code>js-kara-modal</code></p>
+                        <pre><code class="html">&lt;a href="modalAjax.html#modal2" class="js-kara-modal">Ouvrir avec Ajax&lt;/a&gt;</code></pre>
+                        <a href="modalAjax.html#modal2" class="js-kara-modal link link-primary">Ouvrir en Ajax</a>
+                </div>
+                <div class="bloc">
+                        <div class="title-bloc">Kara et Animate.css</div>
+                        <p>Vous pouvez également utiliser la librairie CSS Animate afin d'aller encore plus loin dans l'animation de la boite modale.<br>
+                        <strong>Après</strong> avoir chargé animate.css, ajoutez la class <code>animated</code> suivi de l'animation souhaitée.</p>
+                        <pre><code class="html">&lt;div class="modal-wrapper animated swing js-kara-modal-stop"&gt;</code></pre>
+                        <a href="#modal4" class="js-kara-modal link link-primary">Modale avec Animate.css</a>
+                        <a href="https://github.com/daneden/animate.css" target="_blank" class="link link-default">Télécharger Animate.css</a>
+                </div>
+        </div>
+
+
+    <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal" style="display:none;">
+        <div class="modal-wrapper js-kara-modal-stop">
+            <div class="modal-header">
+                    <h1 id="titlemodal">Kara Modal</h1>
+            </div>
+            
+            <div class="modal-content">
+                    Quod opera consulta cogitabatur astute, ut hoc insidiarum genere Galli periret avunculus, ne eum ut praepotens acueret in fiduciam exitiosa coeptantem. verum navata est opera diligens hocque dilato Eusebius praepositus cubiculi missus est Cabillona aurum secum perferens, quo per turbulentos seditionum concitores occultius distributo et tumor consenuit militum et salus est in tuto locata praefecti. deinde cibo abunde perlato castra die praedicto sunt mota.
+            </div>
+            <div class="modal-footer">
+                    <button class="btn btn-danger js-kara-modal-close">Fermer la boite modal</button>
+            </div>
+            
+        </div>
+    </aside>
+    <aside id="modal3" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal" style="display:none;">
+        <div class="modal-wrapper js-kara-modal-stop">
+                <div class="modal-content">
+                        <button class="icon-close js-kara-modal-close">Fermer la boite modal</button>
+                        Quod opera consulta cogitabatur astute, ut hoc insidiarum genere Galli periret avunculus, ne eum ut praepotens acueret in fiduciam exitiosa coeptantem. verum navata est opera diligens hocque dilato Eusebius praepositus cubiculi missus est Cabillona aurum secum perferens, quo per turbulentos seditionum concitores occultius distributo et tumor consenuit militum et salus est in tuto locata praefecti. deinde cibo abunde perlato castra die praedicto sunt mota.
+                </div>
+        </div>
+        </aside>
+        <aside id="modal4" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal" style="display:none;">
+                        <div class="modal-wrapper animated swing js-kara-modal-stop">
+                                <div class="modal-content">
+                                        <button class="icon-close js-kara-modal-close">Fermer la boite modal</button>
+                                        Quod opera consulta cogitabatur astute, ut hoc insidiarum genere Galli periret avunculus, ne eum ut praepotens acueret in fiduciam exitiosa coeptantem. verum navata est opera diligens hocque dilato Eusebius praepositus cubiculi missus est Cabillona aurum secum perferens, quo per turbulentos seditionum concitores occultius distributo et tumor consenuit militum et salus est in tuto locata praefecti. deinde cibo abunde perlato castra die praedicto sunt mota.
+                                </div>
+                        </div>
+        </aside>
+        <footer>
+                <div class="container">
+                        2019 <strong>Kara Modal Box</strong> version 1.1 - <a href="https://www.yann-cario.fr" title="Site de l'auteur" target="_blank">yann-cario.fr</a>
+                </div>
+        </footer>
+    <!-- SRC Kara Modal JS -->                    
+    <script src="kara-modal/js/kara.js"></script>
+    <!-- DOC highlight JS -->
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.6/build/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

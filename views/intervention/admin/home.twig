@@ -1,0 +1,72 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Interventions{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="admin-content">
+            {{ include('_notifications.twig') }}
+            <div class="card-custom">
+                <div class="card-header"><h2>Liste des interventions</h2></div>
+                <div class="card-body">
+                    {% if interventions is empty %}
+                        {{ viewAlert('info',"Il n'y a aucune intervention d'enregistrée pour le moment") | raw }}
+                    {% else %}
+                        <table id="data-table" class="table-custom">
+                            <thead>
+                            <tr>
+                                <th>Etat</th>
+                                <th>Date</th>
+                                <th>Réf.</th>
+                                <th>Ordinateur</th>
+                                <th>Dénomination</th>
+                                <th>Statut</th>
+                                <th>Retrait</th>
+                                <th>Technicien</th>
+                                <th>Client</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for intervention in interventions %}
+                                <tr onclick="document.location = '/admin/edit-intervention/{{ intervention.idi }}';" style="cursor: pointer">
+                                    <td>
+                                        {{ intervention.etat | raw }}
+                                        {% if intervention.pmad == 1 %}<i class="icofont-hand"></i>{% endif %}
+                                    </td>
+                                    <td>{{ intervention.icreated | localizeddate('none', 'none', 'fr', null, 'd, MMM Y') }}</td>
+                                    <td>{{ intervention.number }}</td>
+                                    <td>{{ intervention.tcomputer }}</td>
+                                    <td><strong>{{ intervention.tinter }}</strong></td>
+                                    <td><span class="label" style="background-color:#{{ intervention.bgcolor }}">{{ intervention.tstatus }}</span></td>
+                                    <td>
+                                        {% if intervention.back_home is defined and intervention.back_home is not null %}
+                                        <span class="label label-success">{{ intervention.back_home | localizeddate('none', 'none', 'fr', null, 'd, MMM Y') }}</span>
+                                        {% else %}
+                                            <span class="label label-default">N/A</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ intervention.apseudo }}</td>
+                                    <td><strong>{{ intervention.c_fullname }}</strong></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <div class="columns">
+                        <div class="column">
+                            {{ dataPaginator | raw }}
+                        </div>
+                        <div class="column text-right">
+                            <div style="vertical-align: middle">
+                                <span class="label label-danger label-circle"></span> Non cloturée <span class="label label-success label-circle"></span> Cloturée
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Modifier une marque{% endblock %}
+
+{% block breadCrumb %}
+    <li><a href="#"></a></li>
+    <li><a href="/admin">Admin</a></li>
+    <li><a href="/admin/equipments">équipements</a></li>
+    <li><a href="/admin/brands">Marques</a></li>
+    <li>{{ brand.b_title }}</li>
+{% endblock %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                <div class="card-custom">
+                    <div class="card-body">
+                        {{ include('_notifications.twig') }}
+                        <div class="admin-form">
+                            <form method="post" action="#">
+                                {{ include('equipments/admin/brands/_form.twig') }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

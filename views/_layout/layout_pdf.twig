@@ -1,0 +1,127 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        body{
+            font-family: sans-serif;
+            text-rendering: optimizeLegibility;
+            font-size: 14px;
+            color: #3b4351;
+        }
+        .mtmb1{margin:1em 0;}
+        .mb1{margin-bottom:1em;}
+        .bgcolor1{
+            background-color:#008c7b;
+        }
+        .d-block{
+            display:block;
+            margin-bottom:0.4em;
+        }
+        .text-center{text-align:center}
+        .text-uppercase{text-transform: uppercase;}
+        ul{
+            list-style:none;
+            margin:0 1em 0 0;
+            padding:0;
+        }
+        ul li{
+            margin:0 0 0.5em 0;
+            padding:0.2em 0.5em;
+        }
+        ul li:nth-child(2n+1){
+            background-color:#f3f3f3;
+        }
+        .bloc, .bloc-header{
+            display: block;
+            border-radius: 8px 8px 8px 8px;
+        }
+        .bloc-header{
+            text-align:center;
+            color:white;
+        }
+        .bloc-header h2{
+            display:inline-block;
+            margin:0;
+            padding:0.5em 0;
+        }
+        .bloc-header span{
+            font-size:20px;
+        }
+        .bloc{
+            border: 1px solid #008c7b;
+            background-color: white;
+            margin-bottom: 1em;
+            padding: 1em;
+        }
+        .bloc-content h3.children-title{
+            background-color: #e8e8e8;
+            line-height: 1.7em;
+            padding: 0 1em;
+            margin-bottom: 0.5em;
+            font-size: 1.1em;
+        }
+        .bloc-content .bloc--inline{
+            border-bottom: 1px solid #008c7b;
+            margin:0.5em 0;
+        }
+        .bloc-columns{
+            display:inline-block;
+            width:100%;
+        }
+        .bloc-column{
+            float:left;
+        }
+        .bloc-column h3, .bloc h3{
+            margin: 0 0 0.8em 0;
+        }
+        .bloc-columns-4 .bloc-column{
+            width:25%;
+        }
+        .bloc-columns-3 .bloc-column{
+            width:25%;
+        }
+        .bloc-columns-2 .bloc-column{
+            width:50%;
+        }
+        .bloc-input{
+            margin-bottom:1em;
+        }
+        .bloc-input .form-input{
+            display: inline-block;
+        }
+        .form-container{
+            width:100%
+        }
+        .form-container .form-input{
+            width: 48%;
+            float:left;
+            margin-right: 0.5em;
+        }
+        .form-container .form-input .form-group{
+            width:100%;
+            display: inline-block;
+            overflow: hidden;
+            margin-bottom:0.4em;
+        }
+        .form-container .form-input .form-group label{
+            float:left;
+            vertical-align: middle;
+            width:80%;
+        }
+        .form-container .form-input .form-group span{
+            float:right;
+            width:20%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<!-- start:Main-body -->
+{% block body %}{% endblock %}
+<!-- end:Main-body -->
+</body>
+</html>

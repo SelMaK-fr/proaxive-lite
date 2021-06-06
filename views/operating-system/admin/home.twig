@@ -1,0 +1,73 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %} Gestion des systèmes d'exploitation {% endblock %}
+
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <div class="admin-content">
+                        {{ include('_notifications.twig') }}
+                        <div class="card-custom">
+                            <div class="card-header"><h2>Nouveau système d'exploitation</h2></div>
+                            <div class="card-body">
+                                <div class="admin-form">
+                                    <form method="post" action="#">
+                                    {{ include('operating-system/admin/_form.twig') }}
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- -->
+                <div class="column">
+                    <div class="admin-content">
+                            <div class="card-custom">
+                                <div class="card-header"><h2>Systèmes d'exploitation</h2></div>
+                                <div class="card-body">
+                                    {% if operatingsystem is empty %}
+                                        {{ viewAlert('info',"Il n'y a aucun système d'exploitation d'enregistré pour le moment") | raw }}
+                                    {% else %}
+                                        <table id="data-table" class="table-custom">
+                                            <thead>
+                                            <tr>
+                                                <th style="width:5%;" scope="col">#</th>
+                                                <th style="width:30%;" scope="col" class="w350p">Nom</th>
+                                                <th style="width:20%;" scope="col">Release</th>
+                                                <th style="width:20%;" scope="col">Architecture</th>
+                                                <th style="width:15%;" scope="col">Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for item in operatingsystem %}
+                                                <tr>
+                                                    <th scope="row">{{ item.id }}</th>
+                                                    <td>{{ item.os_name }}</td>
+                                                    <td><span class="label label-info">{{ item.os_release }}</span></td>
+                                                    <td>{{ item.os_architecture }} Bits</td>
+                                                    <td><a class="btn-table btn-info" href="/admin/edit-operating-system/{{ item.id }}"><i class="icofont-edit"></i></a>
+                                                        <a href="#{{ item.id }}" class="btn-table btn-danger"><i class="icofont-trash"></i></a>
+                                                        <!-- /modal -->
+                                                        <form method="post" action="/admin/operating-system/delete" style="display:inline-block;">
+                                                            <input type="hidden" name="id" value="{{ item.id }}">
+                                                            {{ include('dashboard/_modal-delete.twig', {'id' : item.id, 'title': item.os_name}) }}
+                                                        </form>
+                                                        <!-- /.modal -->
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    {% endif %}
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

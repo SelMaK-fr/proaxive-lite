@@ -1,0 +1,325 @@
+{% if intervention.start is null %}
+    <div class="alert-alert-info">Le bon sera disponible une fois l'intervention débutée.</div>
+{% else %}
+    <div class="container--admin">
+        <div class="container-fluid txtcenter">
+            <a href="#" onclick="PrintElem('printpdf');" class="btn btn-sm btn-primary">Imprimer cette fiche</a><br><br>
+        </div>
+    </div>
+    <div id="printpdf">
+        <div class="pdf">
+            <div id="container">
+                <div class="title-container">
+                    <span>Bon d'intervention atelier</span>
+                </div>
+                <div class="block block-company-logo border-bottom">
+                    <div class="columns">
+                        <div class="column border-right">
+                            <div class="companyname-adress">
+                                <div class="company-info pr05 pl05">
+                                    <span class="txtuppercase"><strong>synexo</strong> finistère</span> - Cario Yann<br>
+                                    <span class="d-block txtuppercase">29380, Bannalec</span>
+                                    <span class="d-block">Finistère Sud</span>
+                                </div>
+                                <div class="columns">
+                                    <div class="column border-right border-bottom">
+                                        <span class="d-block border-bottom default">&nbsp;</span>
+                                        <span class="d-block secondary pr05 pl05">Dépôt sur rendez-vous</span>
+                                    </div>
+                                    <div class="column border-right border-bottom">
+                                        <span class="d-block txtcenter border-bottom"><strong>Du mardi au vendredi</strong></span>
+                                        <span class="d-block txtcenter">10H-13 / 15H - 18H</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column logo-company"><figure class="txtcenter"><img style="width:70%" src="/pictures/site/LogoFAC2.png" alt=""></figure></div>
+                    </div>
+                </div>
+                <!---->
+                <div class="block block-contact neutral">
+                    <div class="columns">
+                        <div class="column border-right">
+                            <div class="columns">
+                                <div class="column border-right pr05 pl05">TEL: <strong>02.98.35.46.16</strong><br>Mobile : <strong>06.51.34.18.77</strong></div>
+                                <div class="column pr05 pl05">Mail : yann@synexo.fr<br>Site : www.synexo.fr</div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="columns">
+                                <div class="column border-right pr05 pl05">Siret : 79264352000010<br>APRM : 9511Z</div>
+                                <div class="column pr05 pl05">N°TVA : N/A<br>RM : 792.643.520 RM 29</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+                <div class="block-title txtcenter border-bottom">
+                    <h3>Bon d'intervention/réparation/assemblage PC</h3>
+                </div>
+                <!---->
+                <div class="block block-infos">
+                    <div class="columns">
+                        <div class="column border-right ">
+                            <h3 class="txtcenter txtuppercase primary">Informations intervention</h3>
+                            <ul>
+                                <li>Inter N° : {{ intervention.number }}</li>
+                                <li>Date de retrait : {{ intervention.icreated | date('d-M-Y') }} <span style="display: inline-block;margin-left:2em;">Date de dépôt : {{ intervention.back_home | date('d-M-Y') }}</span></li>
+                                <li>Code client : CLS{{ intervention.client_id }}</li>
+                                <li>Technicien : <span class="txtuppercase">Privé</span> </li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h3 class="txtcenter txtuppercase primary">Informations client</h3>
+                            <ul>
+                                <li>Nom : <span class="txtuppercase">Privé</span></li>
+                                <li>Adresse : <span class="txtuppercase">Privé</span></li>
+                                <li>Ville : <span class="txtuppercase">Privé</span></li>
+                                <li>Email : <span class="txtuppercase">Privé</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+                <div class="block block-equipment">
+                    <h3 class="txtcenter txtuppercase primary">Description du materiel</h3>
+                    <div class="columns">
+                        <div class="column">
+                            <ul>
+                                <li>Fabricant/Assembleur : <span class="txtuppercase">{{ intervention.b_title }}</span></li>
+                                <li>N°de série : <span class="txtuppercase">{{ intervention.serialnumber }}</span></li>
+                                <li>Type : <span class="txtuppercase">{{ intervention.category_title }}</span></li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <ul>
+                                <li>Année d'assemblage : <span class="txtuppercase">{{ intervention.year }}</span></li>
+                                <li>N°de produit : <span class="txtuppercase">{{ intervention.numberproduct }}</span></li>
+                                <li>&nbsp;</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+                <div class="block block-intervention">
+                    <h3 class="txtcenter txtuppercase primary">détails du diagnostic</h3>
+                    <div class="block--inline pr05 pl05">
+                        <div class="columns">
+                            <div class="column">
+                                Précisez le type d'intervention réalisée :
+                            </div>
+                            <div class="column">
+                                <div class="form-group d-inline">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox">
+                                        <i class="form-icon"></i> Réparation
+                                    </label>
+                                </div>
+                                <div class="form-group d-inline">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox">
+                                        <i class="form-icon"></i> Assemblage
+                                    </label>
+                                </div>
+                                <div class="form-group d-inline">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox">
+                                        <i class="form-icon"></i> Expertise
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="column border-left">
+                                <div class="form-group d-inline">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox">
+                                        <i class="form-icon"></i> Notebook
+                                    </label>
+                                </div>
+                                <div class="form-group d-inline">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox">
+                                        <i class="form-icon"></i> PC Fixe
+                                    </label>
+                                </div>
+                                <div class="form-group d-inline">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox">
+                                        <i class="form-icon"></i> HIFI
+                                    </label>
+                                </div>
+                                <div class="form-group d-inline">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox">
+                                        <i class="form-icon"></i> AIO
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="bi--children">
+                        <div class="columns">
+                            <div class="column col-5">
+                                <h3 class="children-title">&nbsp;</h3>
+                                <div class="block-content border-right p0 txtuppercase" style="min-height: 427px;">
+                                    {% markdown %}
+                                        {{ intervention.details }}
+                                    {% endmarkdown %}
+                                </div>
+                            </div>
+                            <div class="column col-7">
+                                <h3 class="children-title txtuppercase txtcenter">Description de la panne</h3>
+                                <div class="block-content txtuppercase" style="min-height: 90px;">
+                                    {% markdown %}
+                                        {{ intervention.description }}
+                                    {% endmarkdown %}
+                                </div>
+                                <h3 class="children-title txtuppercase txtcenter">Compte rendu</h3>
+                                <div class="block--inline border-bottom pr05 pl05">
+                                    <div class="form-group d-inline">
+                                        <label class="form-checkbox">
+                                            <input type="checkbox">
+                                            <i class="form-icon"></i> Logiciel(s)
+                                        </label>
+                                    </div>
+                                    <div class="form-group d-inline">
+                                        <label class="form-checkbox">
+                                            <input type="checkbox">
+                                            <i class="form-icon"></i> Composant(s)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="block-content txtuppercase" style="min-height: 67px;">
+                                    {% markdown %}
+                                        {{ intervention.report }}
+                                    {% endmarkdown %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <!--evaluation and more details-->
+                            <div class="column col-5">
+                                <h3 class="children-title txtuppercase txtcenter">evaluation initiale</h3>
+                                <div class="block-content border-right p0" style="min-height:150px;">
+                                    <div class="columns">
+                                        <div class="column">
+                                            <ul>
+                                                <li>Démarrage du PC</li>
+                                                <li>Boot Bios</li>
+                                                <li>Démarrage OS</li>
+                                                <li>Message(s) d'erreur(s)</li>
+                                                <li>Affichage vidéo</li>
+                                            </ul>
+                                        </div>
+                                        <div class="column list-checkbox">
+                                            <ul>
+                                                {% for i in 0..4 %}
+                                                    <li>
+                                                        <div class="form-group d-inline">
+                                                            <label class="form-checkbox">
+                                                                <input type="checkbox">
+                                                                <i class="form-icon"></i> OUI
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group d-inline">
+                                                            <label class="form-checkbox">
+                                                                <input type="checkbox">
+                                                                <i class="form-icon"></i> NON
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--descrtion, compte rendu, observation-->
+                            <div class="column col-7">
+                                <h3 class="children-title txtuppercase txtcenter">observation</h3>
+                                <div class="block-content txtuppercase">
+                                    {% markdown %}
+                                        {{ intervention.observation }}
+                                    {% endmarkdown %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+                <div class="block block-end">
+                    <div class="columns">
+                        <div class="column col-7">
+                            <div style="position: relative">
+                                <h3 class="txtcenter txtuppercase primary">complément d'informations</h3>
+                                <div class="block-content primary-light">
+                                    <span class="txtuppercase d-block pb2">Sinistre electrique (expertise)</span>
+                                    <div class="columns">
+                                        <div class="column col-4">
+                                            <div class="form-group d-inline">
+                                                <label class="form-checkbox">
+                                                    <input type="checkbox">
+                                                    <i class="form-icon"></i> Surtension électrique
+                                                </label>
+                                            </div>
+                                            <div class="form-group d-inline">
+                                                <label class="form-checkbox">
+                                                    <input type="checkbox">
+                                                    <i class="form-icon"></i> Incendie
+                                                </label>
+                                            </div>
+                                            <div class="form-group d-inline">
+                                                <label class="form-checkbox">
+                                                    <input type="checkbox">
+                                                    <i class="form-icon"></i> Autre (précisez)
+                                                </label>
+                                                <p><br><br></p>
+                                            </div>
+                                        </div>
+                                        <div class="column col-3">
+                                            <div class="form-group d-inline">
+                                                <label class="form-checkbox">
+                                                    <input type="checkbox">
+                                                    <i class="form-icon"></i> Orage / Foudre
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="column col-3">
+                                            <div class="form-group d-inline">
+                                                <label class="form-checkbox">
+                                                    <input type="checkbox">
+                                                    <i class="form-icon"></i> Dégat des eaux
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block-inline border-top">
+                                    <div class="block-content">
+                                        Assurance à contacter :
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div>
+                                <div class="etiquette secondary"><span class="d-block txtuppercase txtcenter">assurance</span></div>
+                            </div>
+                        </div>
+                        <div class="column col-5">
+                            <h3 class="txtcenter txtuppercase primary">signature technicien</h3>
+                            <div class="block-content" style="height:94px">
+
+                            </div>
+                            <h4 class="txtcenter primary">Singature client</h4>
+                            <div class="block-content grey" style="height:85px">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="border-top">
+                    <div class="title-footer txtuppercase txtcenter">bon d'intervention synexo</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+{% endif %}
+

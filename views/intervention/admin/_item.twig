@@ -1,0 +1,15 @@
+<div class="column col-6 col-sm-12 col-xl-12 recent-default-single" >
+    <a href="/admin/edit-intervention/{{ item.idi }}">
+        <div class="recent-default-flex">
+            <div class="recent-d-img"><i class="icofont-{{ item.icon }}"></i></div>
+            <div class="recent-d-ctn">
+                <span class="label label-circle-small" style="background-color:#{{ item.bgcolor }}"></span> <strong>{{ item.ititle }}</strong>
+                <p>
+                    N°{{ item.number }}<br>
+                    <i class="icofont-calendar"></i> {{ item.idate | date('d-m-Y') }}<br>
+                    <i class="icofont-keyboard"></i> {{ item.name }}
+                </p>
+            </div>
+        </div>
+    </a>
+</div>

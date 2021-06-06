@@ -1,0 +1,16 @@
+{% extends '_layout/dashboard/layout_login.twig' %}
+
+{% block body %}
+        {{ include('_notifications.twig') }}
+        <div class="card-body">
+            <div class="text-center mg-tb-3">
+                <img width="30%" src="/assets/styles/proaxive/proaxive_logo_synexolabs_400.png" alt="">
+            </div>
+            <p class="mtm mbm">Afin de réinitialiser votre compte, merci d'entrer votre nouveau mot de passe</p>
+            {{ form.password('password', '<i class="icofont-ui-password"></i> Mot de passe', '') | raw }}
+            {{ form.password('password_confirm', '<i class="icofont-ui-password"></i> Confirmer le mot de passe', '') | raw }}
+        </div>
+        <div class="card-footer text-center">
+            <button type="submit" name="" class="btn btn-primary"><i class="icofont-check"></i> Réinitialiser</button>
+        </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends '_layout/layout.twig' %}
+
+{% block title %} Intervention n°{{ intervention.number }} du {{ intervention.created_at | date('d-m-Y') }}  {% endblock %}
+
+{% block body %}
+    <div class="container mb2">
+        <div class="container-fluid text-center mt2 mb2">
+                <a href="#" class="btn btn-primary" onclick="printDiv('printpdf');"><i class="icofont-print"></i> Imprimer ce bon</a>
+        </div>
+        {{ include('templates/print_intervention.twig', {viewClient: 1}) }}
+    </div>
+
+{% endblock %}

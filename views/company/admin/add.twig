@@ -1,0 +1,25 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Gestion des entreprises{% endblock %}
+
+{% block body %}
+
+    <!-- START .cards -->
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+                <div class="card-custom">
+                    <div class="card-body">
+                        <h4 class="header-title">Ajouter une entreprise</h4>
+                        <form class="form-default" method="post" enctype="multipart/form-data">
+                            {{ include('company/admin/_form.twig', {'firstAdd': 1}) }}
+                            {{ form.submitSingle('primary', 'saveData', 'Sauvegarder', false) | raw }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

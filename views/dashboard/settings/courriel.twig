@@ -1,0 +1,92 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Gestion des paramètres du site internet - Services courriel{% endblock %}
+
+{% block body %}
+    <!-- START .cards -->
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+                <form method="post">
+                    <div class="card-custom">
+                        <div class="card-body">
+                            <div class="card-header m-0">
+                                <div class="columns">
+                                    <div class="col-8 col-sm-12"><h2>Paramètres globaux / Services Courriel</h2><span>Gestion des services pour les envois par courriel</span></div>
+                                    <div class="col-4 col-sm-12 text-right">
+                                        {{ form.submitSingle('primary', 'saveParameters', 'Enregistrer', 'check-circled') | raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mg-tb-3">
+                        <div class="tabs-pe tabs--link">
+                            <ul id="tabs--link">
+                                <li><a href="/admin/setting">Paramètres globaux</a></li>
+                                <li><a href="/admin/setting/courriel" class="selected">Services Courriel</a></li>
+                            </ul>
+                            <div class="tabContent tabsContent--link">
+                                <div class="columns">
+                                    <div class="column col-6 col-sm-12">
+                                        <div class="card-custom ">
+                                            <div class="card-body">
+                                                <div class="card-header"><h2>Choix du service</h2></div>
+                                                <div class="admin-form">
+                                                    {{ form.select('mail_service', 'Service', {'swiftmailer': 'Swiftmailer (SMTP)', 'mailjet': 'Mailjet'}) | raw }}
+                                                    <p>
+                                                        Pour Mailjet, il est nécessaire de créer un compte et de configurer les envois auprès de leur service.<br>
+                                                        <i class="icofont-warning-alt"></i> <u>Configuration de Mailjet via la colonne de droite</u>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-custom mg-tb-2">
+                                            <div class="card-body">
+                                                <div class="card-header"><h2>Configuration de base</h2></div>
+                                                <div class="admin-form">
+                                                    {{ form.input('mail_host', "Hôte SMTP", 'Ex : smtp.mail.com', "Ex : smtp.mail.com") | raw }}
+                                                    {{ form.select('mail_encryption', 'Chiffrement', {'tls': 'TLS', 'ssl': 'SSL', 'S/MIME' : 'S/MIME'}) | raw }}
+                                                    {{ form.input('mail_port', "Port SMTP", 'Ex : 465', "Ex : 465") | raw }}
+                                                    {{ form.input('mail_title_from', "Titre du courriel", 'Ex : Mon Entreprise - Votre suivi en ligne') | raw }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column col-6 col-sm-12">
+                                        <div class="card-custom mg-b-2">
+                                            <div class="card-body">
+                                                <div class="card-header"><h2>Configuration SMTP</h2></div>
+                                                <div class="admin-form">
+                                                    {{ form.inputAutoCompletOff('mail_address', "Adresse courriel", 'Ex : monadresse@domain.tld') | raw }}
+                                                    {{ form.inputAutoCompletOff('mail_username', "Utilisateur", "Nom d'utilisateur") | raw }}
+                                                    {{ form.password('mail_password', "Mot de passse") | raw }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-custom ">
+                                            <div class="card-body">
+                                                <div class="card-header"><h2>Configuration Mailjet</h2></div>
+                                                <div class="admin-form">
+                                                    {{ form.input('mailjet_publickey', "Clé public", false) | raw }}
+                                                    {{ form.input('mailjet_privatekey', "Clé privée", false) | raw }}
+                                                    {{ form.input('mailjet_address', "Adresse courriel", 'Ex : monadresse@domain.tld') | raw }}
+                                                    {{ form.input('mailjet_username', "Utilisateur", "Nom d'utilisateur") | raw }}
+                                                    {{ form.password('mailjet_password', "Mot de passse") | raw }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

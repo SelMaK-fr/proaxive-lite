@@ -1,0 +1,29 @@
+<h3>Actions pour cette intervention</h3>
+{{ form.submitSingle('primary', 'update', 'Enregistrer', 'save') | raw }}
+{% if intervention.closed is null %}
+{{ form.submitSingle('info','update_inter', 'Mettre à jour la date', 'clock-time') | raw }}
+{% endif %}
+{% if intervention.start is null %}
+{{ form.submitSingle('warning', 'start_inter', 'Débuter l\'intervention ') | raw }}
+{% endif %}
+<a href="/admin/intervention/html/{{ intervention.id }}" title="Fiche d'intervention HTML" class="btn btn-info" target="_blank"><i class="icofont-file-html5"></i> Fiche HTML</a>
+<!--
+<a href="/admin/intervention/pdf/{{ intervention.id }}" title="Fiche d'intervention PDF" class="btn btn-info" target="_blank"><i class="icofont-file-pdf"></i> PDF</a>
+-->
+{% if intervention.back_home is null %}
+{{ form.submitSingle('warning', 'backhome', 'Rendre le matériel', 'inbox') | raw }}
+{% else %}
+<span class="btn btn-success d-block"><i class="icofont-check"></i> Rendu le {{ intervention.back_home | date('d-m-y') }}</span><br>
+{% endif %}
+{{ form.submitSingle('primary', 'sendmail', 'Envoyer le mail', 'send-mail') | raw }}
+<hr>
+{% if intervention.rapport_bao is empty %}
+<a href="#upload-file" class="btn btn-info d-block"><i class="icofont-file-alt"></i> Ajouter rapport BAO</a>
+{% else %}
+<a href="/admin/intervention/{{ intervention.id }}/rapport/bao" class="btn btn-primary d-block"><i class="icofont-ui-edit"></i> Modifier rapport BAO</a>
+{% endif %}
+{% if intervention.closed == 1 %}
+    <a href="#closed-1" class="btn btn-success"><i class="icofont-ui-edit"></i> Modifier le compte rendu</a>
+{% else %}
+    <a href="#closed-1" class="btn btn-danger"><i class="icofont-close-circled"></i> Cloturer</a>
+{% endif %}

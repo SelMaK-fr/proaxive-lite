@@ -1,0 +1,53 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %} Mise à jour de Proaxive Lite {% endblock %}
+
+{% block breadCrumb %}
+    {{ breadcrumb('','', false) | raw }}
+{% endblock %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            <div class="admin-content">
+            {{ include('_notifications.twig') }}
+            <div class="columns">
+                <div class="column col-6 col-sm-12">
+                        <div class="card-custom">
+                            <div class="card-header"><h2><i class="icofont-database"></i> Mise à jour Proaxive Lite</h2></div>
+                            <div class="card-body">
+                                {{ viewAlert('info',"Ne lancez qu'une seul fois cette mise à jour !") | raw }}
+                                <p>
+                                    La nouvelle version bêta (<strong>1.5.0-beta.07</strong>) a besoin de mettre à jour votre base de données.
+                                    <br>
+                                    Cette mise à jour va ajouter le champ "key_totp" (Authentification à double facteur) à la table "ausers".<br>
+                                </p>
+                                <div class="admin-form">
+                                    <form method="post" action="">
+                                        <input type="hidden" name="number_version" value="beta03">
+                                        {{ form.submitDefault('Mettre à jour la base de données', 'warning') | raw }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="column col-6 col-sm-12">
+                    <div class="card-custom">
+                        <div class="card-header"><h2><i class="icofont-bug"></i> Changelogs</h2> ver.1.5.0-beta.07</div>
+                        <div class="card-body">
+                            <div>
+                                - [Panel] Ajout de la dernière version (en date) de Proaxive dans l'accueil<br>
+                                - [Panel] Les alert flash se cache aprés x temps<br>
+                                - [Sécurité] Ajout de l'authentification à double facteurs<br>
+                                - Ajout d'une option afin d'importer le rapport généré par BAO (Boite à Outils par Bastien |²)<br>
+                                - La déconnexion redirige maintenant vers le login<br>
+                                - Correction CSS (style dark)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
