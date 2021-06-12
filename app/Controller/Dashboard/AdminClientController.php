@@ -36,6 +36,7 @@ class AdminClientController extends AppController{
         $this->loadModel('Equipment');
         $this->loadModel('Intervention');
         $this->loadModel('Company');
+        $this->loadModel('Outlay');
         $this->loadModel('Department');
 	}
 
@@ -91,6 +92,7 @@ class AdminClientController extends AppController{
 
         $equipments = $this->Equipment->byclient($id);
         $interventions = $this->Intervention->byclient($id);
+        $outlay = $this->Outlay->byclient($id);
         $company = $this->Company->find(1, 'id');
         $form = new SpectreForm($_POST);
         // Twig
@@ -101,7 +103,8 @@ class AdminClientController extends AppController{
            'current_menu' => $this->current_menu,
             'form' => $form,
             'company' => $company,
-            'breadcrumbs' => $this->breadcrumbs
+            'breadcrumbs' => $this->breadcrumbs,
+            'outlay' => $outlay
         ]);
     }
 

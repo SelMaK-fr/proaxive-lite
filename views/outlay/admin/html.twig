@@ -1,0 +1,12 @@
+{% extends '_layout/layout.twig' %}
+
+{% block title %}Débours{% endblock %}
+
+{% block body %}
+    <div class="container mb2">
+        <div class="container-fluid text-center mt2 mb2">
+            <a href="#" class="btn btn-primary" onclick="printDiv('printpdf');"><i class="icofont-print"></i> Imprimer le mandat</a>
+        </div>
+        {{ include('templates/print_outlay.twig', {viewClient: 1}) }}
+    </div>
+{% endblock %}

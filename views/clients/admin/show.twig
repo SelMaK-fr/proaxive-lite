@@ -137,6 +137,30 @@
                                         {% endif %}
                                     </div>
                                 </div>
+                                <!-- list outlay -->
+                                <div class="card-custom cc-shadow mg-tb-1">
+                                    <div class="card-body">
+                                        <div class="columns">
+                                            <div class="column col-6 col-sm-12">
+                                                <div class="card-header"><h2>Débours</h2></div>
+                                            </div>
+                                            <div class="column col-6 col-sm-12 text-right">
+                                                    <a href="/admin/client/{{ client.id }}/add-outlay" class="btn-sm btn-primary" title="Créer une intervention"><i class="icofont-plus"></i></a>
+                                            </div>
+                                        </div>
+                                        {% if outlay is empty %}
+                                            {{ viewAlert('info', "Aucun débours enregistré pour ce client") | raw }}
+                                        {% else %}
+                                            <div class="recent-default">
+                                                <div class="columns">
+                                                    {% for item in outlay %}
+                                                        {{ include('outlay/admin/_item.twig') }}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

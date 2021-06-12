@@ -59,22 +59,7 @@
                                     </div>
                                 </div>
                                 <div class="column col-6 col-sm-12">
-                                    <div class="card-custom ">
-                                        <div class="card-body">
-                                            <div class="card-header"><h2>Sécurité de l'application</h2></div>
-                                            <div class="admin-form">
-                                                {% if checkFolderInstall %}
-                                                    {{ viewAlert('danger', 'Proaxive <strong>n\'est pas sécurisée</strong>. Veuillez renommer le dossier d\'installation de l\'application.') | raw }}
-                                                    {{ form.submitSingle('danger', 'renameFolder', 'Renommer le dossier', 'edit') | raw }}
-                                                    <small class="d-block"><i class="icofont-info-circle"></i> Vous pouvez également supprimer complétement le dossier <strong>install</strong> de votre FTP</small>
-
-                                                {% else %}
-                                                    {{ viewAlert('info', "L'application Proaxive <strong>est sécurisée</strong>.") | raw }}
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-custom mg-tb-2">
+                                    <div class="card-custom">
                                         <div class="card-body">
                                             <div class="card-header"><h2>Dossiers de l'application</h2></div>
                                             <div class="admin-form">

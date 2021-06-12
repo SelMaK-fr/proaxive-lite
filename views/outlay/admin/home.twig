@@ -1,0 +1,68 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Débours{% endblock %}
+
+{% block body %}
+    <div class="container--admin">
+        <div class="container">
+            <div class="admin-content">
+                {{ include('_notifications.twig') }}
+                <div class="card-custom">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <div class="columns">
+                                <div class="column col-9 col-sm-6"><h2>Gestion des débours</h2></div>
+                                <div class="column col-3 col-sm-6 text-right">
+                                    {% if outlay is not empty %}
+                                        <form method="post" action="/admin/outlay/export">
+                                            <input type="hidden" name="export_data">
+                                            <button type="submit" class="btn-sm btn-primary"> <i class="icofont-download-alt"></i> Exporter les débours</button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+                        {% if outlay is empty %}
+                            {{ viewAlert('info',"Il n'y a aucun débours d'enregistré pour le moment") | raw }}
+                        {% else %}
+                            <table id="data-table" class="table-custom">
+                                <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Client</th>
+                                    <th>Montant</th>
+                                    <th>Signature</th>
+                                    <th>Vendeur</th>
+                                    <th>Date</th>
+                                    <th>Statut</th>
+                                    <th>Remboursement</th>
+                                    <th>Etat</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for data in outlay %}
+                                    <tr onclick="document.location = '/admin/edit-outlay/{{ data.o_id }}';" style="cursor: pointer">
+                                        <td>{{ data.number }}</td>
+                                        <td>{{ data.c_fullname }}</td>
+                                        <td><strong>{{ data.amount | number_format(2, '.', ',')  }}€</strong></td>
+                                        <td>{{ data.sign | raw }}</td>
+                                        <td>{{ data.seller }}</td>
+                                        <td>{{ data.o_created_at | date('d/m/Y') }}</td>
+                                        <td><span class="label" style="background-color:{{ data.bgcolor }};">{{ data.tstatus }}</span></td>
+                                        <td>{{ data.LabelRefund | raw }}</td>
+                                        <td>
+                                            <a href="/admin/client/{{ data.c_id }}" class="btn btn-sm btn-primary" title="Voir la fiche cliente">Fiche client</a>
+                                            <a href="/admin/outlay/html/{{ data.o_id }}" class="btn btn-sm btn-info" title="Voir le bon">Mandat</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -46,7 +46,7 @@ class SendMail extends Controller
     {
         $message = (new \Swift_Message($subject))
             ->setFrom(['john@doe.com' => 'John Doe'])
-            ->setTo(['yann@synexo.fr', 'yann@synexo.fr' => 'Proaxive - Votre suivi en ligne'])
+            ->setTo(['selmak@myserver.eu', 'selmak@myserver.eu' => 'Proaxive - Votre suivi en ligne'])
             ->setBody($this->twig->render($view),'text/html');
 
         $this->mailer->send($message);
@@ -66,7 +66,7 @@ class SendMail extends Controller
     {
         $message = (new \Swift_Message($subject))
             ->setFrom(['john@doe.com' => 'John Doe'])
-            ->setTo(['noreply@synexo.fr' => 'Proaxive Support'])
+            ->setTo(['selmak@myserver.eu' => 'Proaxive Support'])
             ->setBody($this->twig->render($view, $data),'text/html');
         $this->mailer->send($message);
     }
@@ -94,7 +94,7 @@ class SendMail extends Controller
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function sendDataSwiftMailer(string $subject, string $from, string $to = null, string $name, array $data, string $view)
+    public function sendDataSwiftMailer(string $subject, string $from, string $to, string $name, array $data, string $view)
     {
         $subject = $this->viewJson->mail_title_from;
         $message = (new \Swift_Message($subject))
@@ -125,7 +125,7 @@ class SendMail extends Controller
             'Messages' => [
                 [
                     'From' => [
-                        'Email' => $this->viewJson->mailjet_username,
+                        'Email' => $this->viewJson->mail_address,
                         'Name' => $this->viewJson->mail_title_from
                     ],
                     'To' => [

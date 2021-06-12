@@ -44,7 +44,7 @@
                     <div class="pe--logo">
                         <img src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/logo-green.png" alt="">
                     </div>
-                    <strong>Proaxive </strong>Lite Panel
+                    <strong>Proaxive </strong><span class="d-none-mobile">Lite Panel</span>
                 </div>
             </div>
             <div class="column col-6">
@@ -59,7 +59,7 @@
                     </div>
                     {% endif %}
                     <ul class="navbar-custom">
-                        <li><a href="/admin/edit-auser/1" title="Mon compte utilisateur"><i class="icofont-user-alt-7"></i> <span>Bonjour {{ sessionAuth.pseudo }}</span></a></li>
+                        <li><a href="/admin/edit-auser/1" title="Mon compte utilisateur"><i class="icofont-user-alt-7"></i> <span class="d-none-mobile">Bonjour {{ sessionAuth.pseudo }}</span></a></li>
                         <li><a href="/logout" title="Se deconnecter"><i class="icofont-logout"></i></a></li>
                     </ul>
                 </div>

@@ -75,6 +75,14 @@
         window.print();
         document.body.innerHTML = originalContents;
     }
+    function isChecked(event){
+        if(event.getAttribute('checked') === null){
+            event.setAttribute('checked','');
+        }
+        else{
+            event.removeAttribute('checked');
+        }
+    }
 </script>
 </body>
 </html>

@@ -53,6 +53,16 @@ $router->post('/admin/client/:id_client/add-intervention', "Dashboard#AdminInter
 $router->post('/admin/client/:id_client/equipment/:id_equipment/add-intervention', "Dashboard#AdminIntervention#addWithClientAndEquipment")->with('id_client', '[0-9]+')->with('id_equipment', '[0-9]+');
 $router->get('/admin/client/:id_client/equipment/:id_equipment/add-intervention', "Dashboard#AdminIntervention#addWithClientAndEquipment")->with('id_client', '[0-9]+')->with('id_equipment', '[0-9]+');
 $router->post('/admin/intervention/delete', "Dashboard#AdminIntervention#delete");
+// Outlay
+$router->get('/admin/outlay', 'Dashboard#AdminOutlay#home');
+$router->post('/admin/outlay/export', "Dashboard#AdminOutlay#exportOutlay");
+$router->get('admin/add-outlay', 'Dashboard#AdminOutlay#add');
+$router->post('admin/add-outlay', 'Dashboard#AdminOutlay#add');
+$router->get('/admin/client/:id_client/add-outlay', "Dashboard#AdminOutlay#addWithClient")->with('id_client', '[0-9]+');
+$router->post('/admin/client/:id_client/add-outlay', "Dashboard#AdminOutlay#addWithClient")->with('id_client', '[0-9]+');
+$router->get('/admin/edit-outlay/:id', "Dashboard#AdminOutlay#edit")->with('id', '[0-9]+');
+$router->post('/admin/edit-outlay/:id', "Dashboard#AdminOutlay#edit")->with('id', '[0-9]+');
+$router->get('admin/outlay/html/:id', 'Dashboard#AdminOutlay#showHtml')->with('id', '[0-9]+');
 // Equipments
 $router->get('/admin/equipments', "Dashboard#AdminEquipment#home");
 $router->post('/admin/equipments/export', "Dashboard#AdminEquipment#exportEquipment");

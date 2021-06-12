@@ -1,0 +1,78 @@
+{% if client is empty %}
+    {{ viewAlert('danger', "Erreur : <strong>aucun client en base de données</strong>.<br>") | raw }}
+    <a class="btn btn-info" href="/admin/add-client" title="Ajouter mon premier client">Ajouter un client</a>
+{% else %}
+    {% if outlay.toclosed == 1 %}
+        {{ viewAlert('success', "Cloturé : ce débours a été réglé par le client.") | raw }}
+    {% endif %}
+    <div class="columns">
+        <div class="column col-sm-12">
+            <div class="card-custom">
+                <div class="card-body">
+                    <div class="card-header"><h2>Informations sur le débours</h2></div>
+                    <div class="admin-form">
+                        {{ form.input('amount', "Montant du débours", false, '', '', true) | raw }}
+                        {{ form.input('ref_propal', "Référence devis", false) | raw }}
+                        {{ form.input('seller', "Vendeur(s)", false, 'Si plusieurs, séparez par une virgule') | raw }}
+                        {{ form.select('payment', 'Moyen de remboursement', {'Carte bancaire' : 'Carte bancaire', 'Espèce' : 'Espèce', 'Chèque' : 'Chèque', 'Virement' : 'Virement'}) | raw }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column col-sm-12">
+            <div class="card-custom">
+                <div class="card-body">
+                    <div class="card-header">
+                        <h2>Client et status</h2>
+                    </div>
+                    {% if withclient == 1 %}
+                        <div class="recent-default-single" style="margin-bottom:2em;">
+                            <a href="/admin/edit-client/{{ client.id }}">
+                                <div class="recent-default-flex">
+                                    <div class="recent-d-img"><i class="icofont-user"></i></div>
+                                    <div class="recent-d-ctn">
+                                        <h2>{{ client.fullname }}</h2>
+                                        <p>
+                                            {% if client.zipcode is not empty and client.city is not empty %}
+                                                <i>{{ client.zipcode }}</i> - {{ client.city }}<br>
+                                            {% elseif client.zipcode is not empty %}
+                                                <i>{{ client.zipcode }}</i>
+                                            {% elseif client.city is not empty %}
+                                                {{ client.city }}<br>
+                                            {% endif %}
+                                            {% if client.phone is not empty and client.mobile is not empty %}
+                                                {{ client.phone }} / {{ client.mobile }}
+                                            {% elseif client.phone is empty %}
+                                                {{ client.mobile }}
+                                            {% elseif client.mobile is empty %}
+                                                {{ client.phone }}
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
+                    <div class="admin-form">
+                        <!-- Client -->
+                        {% if withclient == 0 %}
+                            {{ form.select('client_id', 'Client', client, 'Si votre client dort, pensez à le réveiller.') | raw }}<br>
+                        {% endif %}
+                        {{ form.select('status_id', 'Status', status) | raw }}
+                        {{ form.inputswitch('signature', 'Signé par les deux parties ?') | raw }}
+                    </div>
+                </div>
+                <div class="text-right">
+                    {% if edit == 1 %}
+                        {% if outlay.toclosed != 1 %}
+                            {{ form.submitDefault('Sauvegarder', 'primary', 'update') | raw }}
+                            {{ form.submitDefault('Cloturer', 'info', 'cloture') | raw }}
+                        {% endif %}
+                    {% else%}
+                        {{ form.submitDefault('Sauvegarder', 'primary') | raw }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -1,5 +1,5 @@
 # PROAXIVE LITE (1.5.x)
-### version 1.5.1
+### version 1.5.2
 
 [![Minimum PHP Version](https://img.shields.io/badge/PHP->=7.4-%23786fa6)](https://php.net/)
 [![Minimum MySQL Version](https://img.shields.io/badge/MySQL-5.x-%23f0932b)](https://www.mysql.com/fr/)
@@ -33,7 +33,7 @@ mv .env.exemple .env
 04. Depuis la racine de Proaxive, lancez l'installation des package via Composer.
 
 ```shell
-composer install
+composer install --ignore-platform-reqs
 ```
 
 *Avant de lancer la migration, créez la base de données qui sera utilisée par Proaxive*   
@@ -59,7 +59,7 @@ Le compte administrateur par défaut est
 Utilisateur : **admin**   
 Mot de passe : **admin**  
 
-**Important :** Ne pas oublier de modifiez le mot de passe et pseudo du compte via le panel
+**Important :** Ne pas oublier de modifier le mot de passe et pseudo du compte via le panel
 
 ## Fichier de configuration Proaxive
 Le fichier de configuration de l'application **.env** se trouve à la racine de cette dernière
@@ -69,7 +69,8 @@ APP_NAME=ProaxiveLite
 APP_ENV=local
 APP_URL=http://localhost:8000
 APP_AUTHOR=SynexoLabs
-APP_ADMIN_THEME=/assets/styles/admin-default
+APP_ADMIN_THEME=/public/assets/styles/admin-default
+APP_ROOT_PUBLIC=/public
 APP_DEBUG=true
 APP_DEBUG_PHP=true
 APP_ROUTER_LOCAL=false
@@ -87,6 +88,27 @@ Rendez-vous dans les paramètres (panel admin)
 Remplacez **login-dash** par quelque chose de plus personnel.
 
 Si l'application fonctionne correctement, **désactivez l'affichage des erreurs**.
+
+## Configuration de l'envoi des courriels
+**Important** Pensez à bien inscrire une adresse courriel dans les informations de votre entreprise  
+> Menu "Accueil" puis onglet "Mon entreprise"
+
+Champ "Courriel"  
+
+La configuration des courriels se fait maintenant dans le panel d'administration  
+> Menu "Paramètres" puis onglet "Service Courriel"  
+### MailJet
+Pour Mailjet, il également nécessaire de remplir la partie "Configuration SMTP".   
+
+Adresse courriel : votre adresse courriel ajoutée dans Mailjet   
+Utilisateur : votre clé public Mailjet   
+Mot de passe : votre clé privée Mailjet  
+
+La configuration des courriels sera "allégée" à l'avenir.  
+
+### Tester la configuration
+Rentrez votre adresse courriel de test dans le champ "Courriel de test".  
+Afin de s'assurer que votre configuration fonctionne correctement, cliquez sur "Tester l'envoi".
 
 ## Variables d'environnement
 

@@ -1,0 +1,17 @@
+{% extends '_layout/dashboard/layout.twig' %}
+
+{% block title %}Nouveau débours{% endblock %}
+
+{% block body %}
+    <div class="section--admin">
+        <div class="container">
+            {{ include('_notifications.twig') }}
+            <div class="admin-content">
+                <form class="form-border" method="post">
+                    {{ include('outlay/admin/_form.twig', {'withclient': 1}) }}
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END .cards -->
+{% endblock %}

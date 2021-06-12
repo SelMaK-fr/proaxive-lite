@@ -251,3 +251,51 @@
   font-weight: 400;
   font-size: 2.5em;
 }
+/** Fixed update 1.5.2 **/
+.pdf-outlay .span-table span{
+    padding: 0.2em 0.4em;
+}
+.pdf-outlay .primary{
+  color:white;
+}
+.pdf-outlay .head-title{
+  padding: 0.2em 0.4em;
+  font-weight: 600;
+}
+.pdf-outlay .company-info{
+  border:0 !important;
+}
+.pdf-outlay .case-check ul li{
+  display: inline-block;
+  background-color: white;
+  margin-right: 0.5em;
+  padding: 0;
+  margin-top: 0;
+}
+.pdf-outlay .table-info-equipment{
+  height: 390px;
+}
+.pdf-outlay .table-info-equipment, .pdf-outlay .bloc-sign, .pdf-outlay .create-at{
+  margin-left: .4rem;
+  margin-right: .4rem;
+}
+.pdf-outlay .bloc-sign {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+.pdf-outlay .bloc-sign> div {
+  width: 40%;
+  border: 1px solid black;
+  padding: 0.5em;
+  height: 180px;
+  box-shadow: 5px 5px 0px 0px gray;
+}
+.pdf-outlay .bandeau-page{
+  background-color: #e6e6e6;
+  margin-top: 2em;
+  padding: 0.2em;
+  font-weight: 400;
+  color: #cacaca;
+  font-size: 2.3em;
+}

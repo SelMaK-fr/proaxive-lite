@@ -15,6 +15,7 @@
                                 <div class="columns">
                                     <div class="col-8 col-sm-12"><h2>Paramètres globaux / Services Courriel</h2><span>Gestion des services pour les envois par courriel</span></div>
                                     <div class="col-4 col-sm-12 text-right">
+                                        {{ form.submitSingle('info', 'testMail', "Tester l'envoi", 'send-mail') | raw }}
                                         {{ form.submitSingle('primary', 'saveParameters', 'Enregistrer', 'check-circled') | raw }}
                                     </div>
                                 </div>
@@ -39,6 +40,7 @@
                                                         Pour Mailjet, il est nécessaire de créer un compte et de configurer les envois auprès de leur service.<br>
                                                         <i class="icofont-warning-alt"></i> <u>Configuration de Mailjet via la colonne de droite</u>
                                                     </p>
+                                                    {{ form.input('mail_testaddress', "Courriel de test", 'test@domain.tld', "<i class=\"icofont-warning-alt\"></i> Permet de recevoir les courriels de test") | raw }}
                                                 </div>
                                             </div>
                                         </div>
@@ -47,7 +49,7 @@
                                                 <div class="card-header"><h2>Configuration de base</h2></div>
                                                 <div class="admin-form">
                                                     {{ form.input('mail_host', "Hôte SMTP", 'Ex : smtp.mail.com', "Ex : smtp.mail.com") | raw }}
-                                                    {{ form.select('mail_encryption', 'Chiffrement', {'tls': 'TLS', 'ssl': 'SSL', 'S/MIME' : 'S/MIME'}) | raw }}
+                                                    {{ form.select('mail_encryption', 'Chiffrement', {'tls': 'TLS', 'ssl': 'SSL', 'S/MIME' : 'S/MIME', '': 'Aucun'}) | raw }}
                                                     {{ form.input('mail_port', "Port SMTP", 'Ex : 465', "Ex : 465") | raw }}
                                                     {{ form.input('mail_title_from', "Titre du courriel", 'Ex : Mon Entreprise - Votre suivi en ligne') | raw }}
                                                 </div>
@@ -61,7 +63,7 @@
                                                 <div class="admin-form">
                                                     {{ form.inputAutoCompletOff('mail_address', "Adresse courriel", 'Ex : monadresse@domain.tld') | raw }}
                                                     {{ form.inputAutoCompletOff('mail_username', "Utilisateur", "Nom d'utilisateur") | raw }}
-                                                    {{ form.password('mail_password', "Mot de passse") | raw }}
+                                                    {{ form.password('mail_password', "Mot de passe") | raw }}
                                                 </div>
                                             </div>
                                         </div>
@@ -73,7 +75,6 @@
                                                     {{ form.input('mailjet_privatekey', "Clé privée", false) | raw }}
                                                     {{ form.input('mailjet_address', "Adresse courriel", 'Ex : monadresse@domain.tld') | raw }}
                                                     {{ form.input('mailjet_username', "Utilisateur", "Nom d'utilisateur") | raw }}
-                                                    {{ form.password('mailjet_password', "Mot de passse") | raw }}
                                                 </div>
                                             </div>
                                         </div>

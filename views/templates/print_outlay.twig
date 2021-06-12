@@ -1,0 +1,170 @@
+<div id="printpdf" class="printpdfInter">
+    <div class="pdf pdf-outlay">
+        <div id="container">
+            <div class="title-container">
+                <span>Débours N°{{ outlay.number }}</span>
+            </div>
+            <div class="header">
+                <div class="columns border-bottom">
+                    <div class="column p0 m0 border-right">
+                        <div class="companyname-adress border-top border-right" style="margin-top:1em;">
+                            <div class="company-info pr05 pl05">
+                                <span class="txtuppercase"><strong>{{ company.cname }}</strong></span> - {{ company.director }}<br>
+                                <span class="d-block txtuppercase">{{ company.adress }} {{ company.zipcode }}, {{ company.city }}</span>
+                            </div>
+                            <div class="columns col-gapless">
+                                <div class="column">
+                                    <span class="d-block border-right border-top border-bottom default">&nbsp;</span>
+                                    <span class="d-block border-right secondary pr05 pl05">Dépôt sur RDV</span>
+                                </div>
+                                <div class="column">
+                                    <span class="d-block txtcenter border-bottom border-top"><strong>{{ app_setting.society_days }}</strong></span>
+                                    <span class="d-block txtcenter">{{ app_setting.society_hours }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column p0 logo-company">
+                        {% if company.logo is empty %}
+                            <div class="logo">
+                                <div><img src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/proaxive_logo_synexolabs_400.png)" alt=""></div>
+                            </div>
+                        {% else %}
+                            <div class="logo">
+                                <div><img src="{{ getenv('APP_ROOT_PUBLIC') }}/uploads/company/{{ company.logo }}" alt=""></div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!---->
+            <div class="info-enterprise border-bottom p0" style="margin-bottom:1em;">
+                <div class="columns">
+                    <div class="column m0 col-3 border-right pl1 pr05">
+                        {% if(company.phone is not empty) %}
+                            Tel: <strong>{{ company.phone }}</strong><br>
+                        {% endif %}
+                        {% if(company.mobile is not empty) %}
+                            Mobile : <strong>{{ company.mobile }}</strong>
+                        {% endif %}
+                    </div>
+                    <div class="column col-3 border-right pr05 pl05">
+                        {{ company.mail }}<br>{{ company.website }}
+                    </div>
+                    <div class="column border-right pr05 pl05">Siret : {{ company.siret }}<br>APRM : {{ company.ape }}</div>
+                    <div class="column pr05 pl05">{% if company.tva is defined %}N°TVA : {{ company.tva }}<br>{% endif %}RM : {{ company.rm }}</div>
+
+                </div>
+            </div>
+            <!---->
+            <div class="ref-doc">
+                <div class="columns">
+                    <div class="column col-6" style="padding:0 .4rem;">
+                        <!--document + responsable + entreprise -->
+                        <div class="columns">
+                            <div class="column span-table txtcenter">
+                                <span class="d-block primary border-bottom border-left border-top border-right mb-2">REF Devis</span>
+                                <span class="d-block primary border-bottom border-left border-top border-right mb-2">Responsable</span>
+                                <span class="d-block primary border-bottom border-left border-top border-right mb-2">Vendeur</span>
+                            </div>
+                            <div class="column span-table txtcenter">
+                                <span class="d-block txtuppercase border-bottom border-top border-right mb-2">{% if outlay.ref_propal is not empty %}D-{{ outlay.ref_propal }}{% else %}N/C{% endif %}</span>
+                                <span class="d-block txtuppercase border-bottom border-top border-right mb-2">{{ company.director }}</span>
+                                <span class="d-block txtuppercase border-bottom border-top border-right mb-2">{{ outlay.seller }}</span>
+                            </div>
+                        </div>
+                        <!--Date debut + fin + case à cocher-->
+                        <div>
+                            <span class="d-block mt1"><strong>Montant du débours</strong> : {{ outlay.amount | number_format(2, '.', ',') }} Euros (€)</span>
+                        </div>
+                        <!---->
+                        <div class="paiement case-check">
+                            <span class="d-block mt1"><strong>Moyen de remboursement :</strong></span>
+                            <ul>
+                                <li><label class="form-checkbox"><input type="checkbox"><i class="form-icon"></i> Carte bancaire</label></li>
+                                <li><label class="form-checkbox"><input type="checkbox"><i class="form-icon"></i> Espèce</label></li>
+                                <li><label class="form-checkbox"><input type="checkbox"><i class="form-icon"></i> Chèque</label></li>
+                                <li><label class="form-checkbox"><input type="checkbox"><i class="form-icon"></i> Virement</label></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--locataire-->
+                    <div class="column col-6" style="padding:0 .4rem;">
+                        <div class="locataire">
+                            <span class="head-title secondary txtuppercase d-block border-top border-left border-right">A l'attention de</span>
+                            <div class="columns">
+                                <div class="column span-table">
+                                    <span class="d-block secondary border-bottom border-top border-right border-left">Nom et prénom</span>
+                                    <span class="d-block secondary border-left border-right">Adresse postale</span>
+                                    <span class="d-block secondary border-bottom border-left border-right">&nbsp;</span>
+                                    <span class="d-block secondary border-b-opac border-left border-right">Tél.fixe / tél.mobile</span>
+                                    <span class="d-block secondary border-bottom border-left border-right">&nbsp;</span>
+                                    <span class="d-block secondary border-bottom border-left border-right">Adresse e-mail</span>
+                                </div>
+                                <div class="column span-table">
+                                    <span class="d-block txtuppercase border-bottom border-top border-right">{{ client.fullname }}</span>
+                                    <span class="d-block txtuppercase border-bottom border-right" style="height:auto;">{{ client.adress }}<br>{{ client.zipcode }} {{ client.city }}</span>
+                                    <span class="d-block txtuppercase border-bottom border-right">{% if client.phone is empty %}N/C{% else %}{{ client.phone }}{% endif %}</span>
+                                    <span class="d-block txtuppercase border-bottom border-right">{% if client.mobile is empty %}N/C{% else %}{{ client.mobile }}{% endif %}</span>
+                                    <span class="d-block txtuppercase border-bottom border-right">{% if client.mail is empty %}N/C{% else %}{{ client.mail }}{% endif %}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--details service equipement location-->
+            <div class="table-info-equipment mt1 border-right border-left border-top border-bottom">
+                <div class="equipment">
+                    <span class="head-title txtuppercase txtcenter d-block primary">Détails et réglement</span>
+                    <!--text details-->
+                    <div class="mt1 p-2">
+                        <div class="more">
+                            Je soussigné <strong class="txtuppercase">{{ client.fullname }}</strong> être en accord avec ce document pour un montant de débours de <strong>{{ outlay.amount | number_format(2, '.', ',') }} Euros</strong>.
+                            <p>
+                                Je m'engage à rembourser, aux centimes prêt, l'entreprise <strong class="text-uppercase">{{ company.cname}} - {{ company.director }}</strong> en fin de mission.
+                            </p>
+                            <p class="mt1">
+                                Je recevrai les factures (à mon nom) de chaque achat effectué par l'entreprise <span class="text-uppercase">{{ company.cname}} - {{ company.director }}</span>. Les produits/articles restent la propriété de <span class="text-uppercase">{{ company.cname}} - {{ company.director }}</span>
+                                jusqu'à mon remboursement total.
+                            </p>
+                            <p class="mt1">
+                                <strong>Conditions</strong>
+                            <ul>
+                                <li>- Le remboursement se fait en une seule fois et en intégralité</li>
+                                <li>- Les deux parties doivent obligatoirement apposer leur signature (+ cachet pour l'entreprise)</li>
+                            </ul>
+                            </p>
+                            <!---->
+                            <div style="height:10px;"></div>
+                            <p class="mt3">
+                                Votre signature vous engage à rembourser intégralement l'entreprise. Vérifiez vos capacités de remboursement avant toute signature.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---->
+            <div class="create-at mt2">
+                <strong>Fait à {{ company.city }}</strong> le {{ outlay.created_at | localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}
+            </div>
+            <!--Signature-->
+            <div class="bloc-sign mt2">
+                <div>
+                    <div class="bloc">
+                        <strong>Signature/cachet de l'entreprise</strong>
+                    </div>
+                </div>
+                <div>
+                    <div class="bloc">
+                        <strong>Signature du client</strong>
+                    </div>
+                </div>
+            </div>
+            <!---->
+            <div class="bandeau-page txtcenter txtuppercase border-top">
+                mandat de débours
+            </div>
+        </div>
+    </div>
+</div>

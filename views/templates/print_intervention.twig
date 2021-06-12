@@ -132,19 +132,19 @@
                                 <li>Type :
                                     <div class="form-group d-inline" style="margin-right:1em;">
                                         <label>
-                                            <input type="checkbox">
+                                            <input type="checkbox" onclick="isChecked(this)">
                                             <i class="form-icon"></i> Notebook/Netbook
                                         </label>
                                     </div>
                                     <div class="form-group d-inline" style="margin-right:1em;">
                                         <label>
-                                            <input type="checkbox">
+                                            <input type="checkbox" onclick="isChecked(this)">
                                             <i class="form-icon"></i> Ordinateur fixe
                                         </label>
                                     </div>
                                     <div class="form-group d-inline">
                                         <label>
-                                            <input type="checkbox">
+                                            <input type="checkbox" onclick="isChecked(this)">
                                             <i class="form-icon"></i> Ordinateur AIO
                                         </label>
                                     </div>
@@ -177,34 +177,34 @@
                         </div>
                         <div class="column col-5 txtright">
                             <div class="form-group d-inline">
-                                <label class="form-checkbox">
-                                    <input type="checkbox">
+                                <label class="">
+                                    <input type="checkbox" onclick="isChecked(this)">
                                     <i class="form-icon"></i> Réparation
                                 </label>
                             </div>
                             <div class="form-group d-inline">
-                                <label class="form-checkbox">
-                                    <input type="checkbox">
+                                <label class="">
+                                    <input type="checkbox" onclick="isChecked(this)">
                                     <i class="form-icon"></i> Assemblage
                                 </label>
                             </div>
                             <div class="form-group d-inline">
-                                <label class="form-checkbox">
-                                    <input type="checkbox">
+                                <label class="">
+                                    <input type="checkbox" onclick="isChecked(this)">
                                     <i class="form-icon"></i> Expertise
                                 </label>
                             </div>
                         </div>
                         <div class="column col-4 border-left">
                             <div class="form-group d-inline">
-                                <label class="form-checkbox">
-                                    <input type="checkbox">
+                                <label class="">
+                                    <input type="checkbox" onclick="isChecked(this)">
                                     <i class="form-icon"></i> Avec sauvegarde
                                 </label>
                             </div>
                             <div class="form-group d-inline">
-                                <label class="form-checkbox">
-                                    <input type="checkbox">
+                                <label class="">
+                                    <input type="checkbox" onclick="isChecked(this)">
                                     <i class="form-icon"></i> Sans sauvegarde
                                 </label>
                             </div>
@@ -232,14 +232,14 @@
                             <h3 class="children-title txtuppercase txtcenter">Compte rendu</h3>
                             <div class="block--inline border-bottom pr05 pl05">
                                 <div class="form-group d-inline">
-                                    <label class="form-checkbox">
-                                        <input type="checkbox">
+                                    <label class="">
+                                        <input type="checkbox" onclick="isChecked(this)">
                                         <i class="form-icon"></i> Logiciel(s)
                                     </label>
                                 </div>
                                 <div class="form-group d-inline">
-                                    <label class="form-checkbox">
-                                        <input type="checkbox">
+                                    <label class="">
+                                        <input type="checkbox" onclick="isChecked(this)">
                                         <i class="form-icon"></i> Composant(s)
                                     </label>
                                 </div>
@@ -261,7 +261,7 @@
                                         <span class="d-block" style="grid-row: 1 / 3;"><strong>Watts</strong></span>
                                         <div class="form-group d-inline txtcenter" style="grid-row: 1;">
                                             <label>
-                                                <input type="checkbox"> Non mesurée
+                                                <input type="checkbox" onclick="isChecked(this)"> Non mesurée
                                             </label>
                                         </div>
                                     </div>
@@ -289,14 +289,14 @@
                                             {% for i in 0..4 %}
                                                 <li>
                                                     <div class="form-group d-inline">
-                                                        <label class="form-checkbox">
-                                                            <input type="checkbox">
+                                                        <label class="">
+                                                            <input type="checkbox" onclick="isChecked(this)">
                                                             <i class="form-icon"></i> OUI
                                                         </label>
                                                     </div>
                                                     <div class="form-group d-inline">
-                                                        <label class="form-checkbox">
-                                                            <input type="checkbox">
+                                                        <label class="">
+                                                            <input type="checkbox" onclick="isChecked(this)">
                                                             <i class="form-icon"></i> NON
                                                         </label>
                                                     </div>
@@ -344,11 +344,9 @@
                                                     {% for i in 0..5 %}
                                                         <li>
                                                             <div class="form-group d-inline">
-                                                                <label class="form-checkbox" style="position: relative;">
-                                                                    <input type="checkbox">
-                                                                    <span class="lc--checkbox" style="position: absolute;top:-15px;">
-                                                                            <i class="form-icon"></i>
-                                                                        </span>
+                                                                <label class="" style="position: relative;">
+                                                                    <input type="checkbox" onclick="isChecked(this)">
+                                                                    <i class="form-icon"></i>
                                                                 </label>
                                                             </div>
                                                         </li>
@@ -374,9 +372,9 @@
                                                     {% for i in 0..5 %}
                                                         <li>
                                                             <div class="form-group d-inline">
-                                                                <label class="form-checkbox" style="position: relative;">
-                                                                    <input type="checkbox" checked="checked">
-                                                                    <span class="lc--checkbox" style="position: absolute;top:-15px;right:15px;">
+                                                                <label class="" style="position: relative;">
+                                                                    <input type="checkbox" onclick="isChecked(this)">
+                                                                    <span class="lc--checkbox" style="position: relative;top:0;right:15px;">
                                                                             <i class="form-icon"></i>
                                                                         </span>
                                                                 </label>

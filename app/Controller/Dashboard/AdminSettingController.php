@@ -5,6 +5,7 @@ namespace App\Controller\Dashboard;
 use Creitive\Breadcrumbs\Breadcrumbs;
 use src\Entity\Entity;
 use src\Form\SpectreForm;
+use src\MyClass\SendMail;
 use src\MyClass\Session;
 
 class AdminSettingController extends AppController{
@@ -28,6 +29,8 @@ class AdminSettingController extends AppController{
         $this->current_menu = 'config';
         $this->session = Session::getSessionInstance();
         $this->breadcrumbs = new Breadcrumbs();
+        // Models
+        $this->loadModel('Company');
     }
 
     /**
@@ -98,13 +101,13 @@ class AdminSettingController extends AppController{
     }
 
     /**
-     * Permet de lister les utilisateurs/clients
      *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
     public function courriel(){
+        $company = $this->Company->isDefault();
         if(!empty($_POST)){
             // Sauvegarde des nouveaux parametres
             if(isset($_POST['saveParameters'])){
@@ -112,6 +115,7 @@ class AdminSettingController extends AppController{
                     'mail_title_from' => $_POST['mail_title_from'],
                     'mail_service' => $_POST['mail_service'],
                     'mail_address' => $_POST['mail_address'],
+                    'mail_testaddress' => $_POST['mail_testaddress'],
                     'mail_host' => $_POST['mail_host'],
                     'mail_port' => $_POST['mail_port'],
                     'mail_username' => $_POST['mail_username'],
@@ -120,13 +124,30 @@ class AdminSettingController extends AppController{
                     'mailjet_publickey' => $_POST['mailjet_publickey'],
                     'mailjet_privatekey' => $_POST['mailjet_privatekey'],
                     'mailjet_username' => $_POST['mailjet_username'],
-                    'mailjet_password' => $_POST['mailjet_password'],
                 );
                 if($writeJson){
                     file_put_contents(ROOT. '/config/mail.json', json_encode($writeJson));
                     $this->session->setFlash('success', "Les nouveaux paramètres ont été appliqués !");
                 } else {
                     $this->session->setFlash('danger', "Un problème est survenu !");
+                }
+            }
+            // Test mail
+            if(isset($_POST['testMail'])){
+                $sendMail = new SendMail();
+                // Lecture du fichier de configuration json (Mail)
+                $viewJsonFile = file_get_contents(ROOT. '/config/mail.json');
+                $viewJson = json_decode($viewJsonFile, false);
+                if ($viewJson->mail_service == 'mailjet'){
+                    $sendMail->sendDataMailJet('TEST - Votre suivi intervention', $viewJson->mail_testaddress, 'John Doe', [
+                        'data' => 'data'
+                    ], 'templates/mail_updateintervention.twig');
+                    $this->session->setFlash('success', "Le courriel de test a été envoyé !");
+                } elseif ($viewJson->mail_service == 'swiftmailer'){
+                    $sendMail->sendDataSwiftMailer('TEST - Votre suivi intervention', $viewJson->mail_testaddress, $company->mail, 'John Doe', [
+                        'data' => 'data'
+                    ], 'templates/mail_updateintervention.twig');
+                    $this->session->setFlash('success', "Le courriel de test a été envoyé !");
                 }
             }
         }
@@ -148,8 +169,10 @@ class AdminSettingController extends AppController{
 
     }
 
+
+
     /**
-     * Permet d'affiche les themes CSS d'un template
+     * Permet d'afficher les themes CSS d'un template
      * @param $theme
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -174,7 +197,7 @@ class AdminSettingController extends AppController{
     }
 
     /**
-     * Permet d'affiche les themes CSS d'un template
+     * Permet de modifier les themes CSS d'un template
      * @param $theme
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -207,7 +230,7 @@ class AdminSettingController extends AppController{
     }
 
     /**
-     * Permet d'affiche les themes CSS d'un template
+     * Permet de modifier un theme CSS
      * @param $theme
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
