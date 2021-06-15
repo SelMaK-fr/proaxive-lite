@@ -722,7 +722,7 @@ class AdminInterventionController extends AppController{
                 'operatingSystem' => $operatingSystem,
                 'categoryEquipment' => $categoryEquipment,
                 'viewJsonSetting' => $viewJsonSetting
-            ], '/templates/mail_updateintervention.twig');
+            ], 'templates/mail_updateintervention.twig');
         } elseif ($viewJson->mail_service == 'swiftmailer'){
             // Envoi le mail avec Swiftmailer
             $sendMail->sendDataSwiftMailer('Votre suivi intervention', $client->mail, $company->mail, $company->cname, [
@@ -736,7 +736,7 @@ class AdminInterventionController extends AppController{
                 'operatingSystem' => $operatingSystem,
                 'categoryEquipment' => $categoryEquipment,
                 'viewJsonSetting' => $viewJsonSetting
-            ], '/templates/mail_updateintervention.twig');
+            ], 'templates/mail_updateintervention.twig');
         }
     }
 
