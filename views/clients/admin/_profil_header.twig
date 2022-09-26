@@ -1,0 +1,52 @@
+<div class="card-custom p-0">
+    <div class="card-body p-all-15">
+        <div class="d-flex justify-content-space-between">
+            <div class="first-letter">
+                <div class="d-flex align-items-center" style="height: 100%">
+                    <div class="flex-root align-items-center"><span>{{ client.firstname | slice(0,1) }}{{ client.lastname | slice(0,1) }}</span></div>
+                </div>
+            </div>
+            <div class="flex-root mg-l-2">
+                <div class="card-header m-0">
+                    <h2>{% if client.sleeping == 1 %}<span class="txtdanger"><i class="icofont-teddy-bear"></i></span> {% endif %} {{ client.fullname }}</h2>
+                </div>
+                <span class="d-block mg-b-1">
+                                <i class="icofont-google-map"></i>
+                                {{ getdata(client.adress, false, 'span') | raw }}
+                    {% if client.zipcode is not empty and client.city is not empty %}
+                        <i>{{ client.zipcode }}</i>, {{ client.city }}
+                                        {% elseif client.zipcode is not empty %}
+                        <i>{{ client.zipcode }}</i>
+                    {% elseif client.city is not empty %}
+                        {{ client.city }}
+                    {% endif %}
+                            </span>
+                {% if client.mobile is not empty or client.phone is not empty %}
+                    <span class="d-block"><i class="icofont-phone"></i> <strong>Téléphone :</strong>
+                                {% if client.phone is not empty and client.mobile is not empty %}
+                                    <a href="tel:{{ company.phone_indicatif }}{{ client.phone | replace({'.': ''}) | slice(1,15) }}">{{ client.phone }}</a>
+                                /
+                                <a href="tel:{{ company.phone_indicatif }}{{ client.mobile | replace({'.': ''}) | slice(1,15) }}">{{ client.mobile }}</a>
+                                {% elseif client.phone is empty %}
+                                    <a href="tel:{{ company.phone_indicatif }}{{ client.mobile | replace({'.': ''}) | slice(1,15) }}">{{ client.mobile }}</a>
+                                {% elseif client.mobile is empty %}
+                                    <a href="tel:{{ company.phone_indicatif }}{{ client.phone | replace({'.': ''}) | slice(1,15) }}">{{ client.phone }}</a>
+                                {% endif %}
+                            </span>
+                {% endif %}
+                {% if client.mail is not empty %}
+                    <span class="d-block"><i class="icofont-email"></i> <strong>Courriel :</strong> {{ client.mail }}</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="tabs-nav">
+        <ul id="nav">
+            <li><a href="/admin/client/{{ client.id }}"><i class="icofont-eye"></i> Vue générale</a></li>
+            <li><a href="/admin/edit-client/{{ client.id }}"><i class="icofont-ui-edit"></i> Modifier ses informations</a></li>
+            {% if link_tab == "edit_client" %}
+            <li><a class="text-danger" href="#delete{{ client.id }}"><i class="icofont-trash"></i> Supprimer cette fiche</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

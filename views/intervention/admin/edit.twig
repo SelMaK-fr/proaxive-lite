@@ -9,8 +9,20 @@
         <form method="post">
         <div class="container">
             <div class="admin-form">
+                {{ include('intervention/admin/_actions.twig') }}
                 {% if intervention.closed == 1 %}
-                <div class="alert alert-success" role="alert"><span><i class="icofont-check"></i></span>Cette intervention a été cloturée le <strong>{{ intervention.close_date | localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y à H:m') }}</strong></div>
+                    <div class="alert alert-success" role="alert">
+                        <div class="d-flex align-items-center">
+                            <span><i class="icofont-check"></i></span>
+                            <div>
+                                Cette intervention a été cloturée le <strong>{{ intervention.close_date | localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y à H:m') }}</strong>
+                                {% if intervention.back_home is defined and intervention.back_home is not null %}
+                                    <br>
+                                    <strong>Date de retrait</strong> : {{ intervention.back_home | localizeddate('none', 'none', 'fr', null, 'd, MMM Y') }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
                 {% endif %}
                 {% if intervention.cancel_inter is not null %}
                     <div class="alert alert-danger" role="alert"><span><i class="icofont-stop"></i></span>Cette intervention a été annulée le <strong>{{ intervention.cancel_inter | localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y à H:m') }}</strong></div>
@@ -50,6 +62,9 @@
                             <div class="column col-4 col-sm-12">
                                 <div class="column-bloc">
                                     <h4 class="header-title"><i class="icofont-gears"></i> Intervention</h4>
+                                    {% if intervention.start is null %}
+                                        <span class="label label-danger"><i class="icofont-warning-alt"></i> Intervention non débutée</span><br>
+                                    {% endif %}
                                     Numéro : <strong>{{ intervention.number }}</strong><br>
                                     {% if intervention.pmad == 0 %}
                                     Date de dépôt : <strong>{{ intervention.received | localizeddate('none', 'none', 'fr', null, 'EEEE d MMM Y') }}</strong><br>
@@ -78,21 +93,10 @@
                 </div>
                 <!-- BAO -->
                 {{ include('intervention/admin/include/_rapport_bao.twig') }}
-                <!-- Submit Form -->
-                <div class="columns button-inline">
-                    <div class="column col-12 col-sm-12">
-                        <div class="card-custom">
-                            <div class="card-header"><h2>Actions pour cette intervention</h2></div>
-                            <div class="card-body">
-                                {{ include('intervention/admin/_button.twig') }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="card-custom">
                     <div class="card-body">
                         <div class="card-header">
-                            <h2>{{ intervention.title }}</h2>
+                            {{ form.input('title', "", "Le nom que porte votre intervention") | raw }}
                         </div>
                         <div class="columns">
                             <div class="column col-6 col-lg-12 col-sm-12">
@@ -133,10 +137,6 @@
                     </div>
                 </div>
             </div>
-            <!-- button float form -->
-            <aside id="aside" class="form-aside">
-                {{ include('intervention/admin/_button.twig') }}
-            </aside>
         </form>
     </div>
     <!-- END .cards -->

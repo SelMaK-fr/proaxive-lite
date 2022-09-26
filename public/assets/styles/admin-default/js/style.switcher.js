@@ -1,64 +1,36 @@
-function setActiveStyleSheet(title) {
-    var i, a, main;
-    for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-        if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
-            a.disabled = true;
-            if(a.getAttribute("title") == title) a.disabled = false;
+// Theme Switcher
+function setTheme(styleName){
+    localStorage.setItem('data-layout-mode', styleName);
+    document.documentElement.setAttribute("data-layout-mode", styleName)
+}
+// function to toggle between light and dark theme
+function toggleTheme() {
+    let iconTheme = document.getElementById("icon-switcher");
+    let getDefault = document.documentElement.getAttribute("data-layout-mode");
+    if (localStorage.getItem('data-layout-mode') === 'dark' || getDefault === 'dark-forced'){
+        iconTheme.classList.replace('icofont-sun-alt','icofont-night');
+        setTheme('light');
+    } else {
+        iconTheme.classList.replace('icofont-night','icofont-sun-alt');
+        setTheme('dark');
+    }
+}
+// Immediately invoked function to set the theme on initial load
+(function () {
+    let iconTheme = document.getElementById("theme-switcher");
+    let getDefault = document.documentElement.getAttribute("data-layout-mode");
+    if(getDefault === 'dark-forced'){
+        document.documentElement.setAttribute("data-layout-mode", "dark-forced");
+        iconTheme.innerHTML = "<i id=\"icon-switcher\" class=\"icofont-sun-alt\"></i>";
+    } else {
+        if (localStorage.getItem('data-layout-mode') === 'dark') {
+            iconTheme.innerHTML = "<i id=\"icon-switcher\" class=\"icofont-sun-alt\"></i>";
+            setTheme('dark');
+        } else {
+            iconTheme.innerHTML = "<i id=\"icon-switcher\" class=\"icofont-night\"></i>";
+            setTheme('light');
         }
     }
-}
+})();
 
-function getActiveStyleSheet() {
-    var i, a;
-    for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-        if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title") && !a.disabled) return a.getAttribute("title");
-    }
-    return null;
-}
 
-function getPreferredStyleSheet() {
-    var i, a;
-    for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-        if(a.getAttribute("rel").indexOf("style") != -1
-            && a.getAttribute("rel").indexOf("alt") == -1
-            && a.getAttribute("title")
-        ) return a.getAttribute("title");
-    }
-    return null;
-}
-
-function createCookie(name,value,days) {
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime()+(days*24*60*60*1000));
-        var expires = "; expires="+date.toGMTString();
-    }
-    else expires = "";
-    document.cookie = name+"="+value+expires+"; path=/";
-}
-
-function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
-
-window.onload = function(e) {
-    var cookie = readCookie("style");
-    var title = cookie ? cookie : getPreferredStyleSheet();
-    setActiveStyleSheet(title);
-}
-
-window.onunload = function(e) {
-    var title = getActiveStyleSheet();
-    createCookie("style", title, 365);
-}
-
-var cookie = readCookie("style");
-var title = cookie ? cookie : getPreferredStyleSheet();
-setActiveStyleSheet(title);

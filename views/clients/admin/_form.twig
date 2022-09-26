@@ -34,4 +34,13 @@
             {{ form.inputswitch('sleeping', 'En sommeil ?') | raw }}
         </div>
     </div>
-{{ form.submitDefault('Enregistrer', 'primary') | raw }}
+    <div class="columns mg-t-2">
+        <div class="column col-auto">
+            {{ form.submitDefault('Enregistrer', 'primary') | raw }}
+        </div>
+        {% if edit == 1 %}
+        <div class="column">
+            Dernière modification<br><strong>{{ client.updated_at | localizeddate('none', 'none', 'fr', null, 'EEEE d MMM Y') }}</strong>
+        </div>
+        {% endif %}
+    </div>

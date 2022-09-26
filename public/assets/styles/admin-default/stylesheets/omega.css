@@ -44,7 +44,7 @@
     transition: transform .2s ease-in-out;
 }
 #omega-sidebar-header{
-    background-color: #008c7b;
+    background-color: #453d9b;
     color:white;
     background-size: cover;
     line-height:3em;
@@ -80,7 +80,7 @@
 }
 #omega-sidebar-body nav ul li.omega-nav-item.is-active a{
     background-color:#f0f0f0;
-    color:#038551;
+    color:#453d9b;
 }
 #omega-sidebar-body nav ul li.omega-nav-item.is-active .omega-submenu{
     display:block;

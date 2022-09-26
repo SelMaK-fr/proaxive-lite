@@ -36,10 +36,10 @@
                                             <div class="admin-form">
                                                 {{ form.inputswitch('php_error', 'Erreurs PHP') | raw }}
                                                 {{ form.inputswitch('full_error', 'Erreurs Whoops!') | raw }}
-                                                <p>
+                                                <div class="alert alert-primary mg-t-2">
                                                     Les erreurs Whoops! affichent les erreurs détaillées de PHP et MySQL. Elles contiennent également les variables d'environnements.<br>
-                                                    <i class="icofont-warning-alt"></i> <u>Ne pas activer Whoops! en production.</u>
-                                                </p>
+                                                    <i class="icofont-warning-alt"></i> <strong>Ne pas activer Whoops! en production.</strong>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -51,15 +51,35 @@
                                                 {{ form.input('society_hours', "Horaire d'ouverture", 'Ex : 09H-12H / 14H-19H', "Ex : 09H-12H / 14H-19H") | raw }}
                                                 {{ form.input('app_url', "URL de l'application", 'http://monproaxive.fr', "L'adresse internet de Proaxive (ex : <strong>http://monproaxive.fr</strong>/i/f281gefe)") | raw }}
                                                 {{ form.input('app_login_url', "URL de connexion au panel", 'login-dash', "Ex : http://monproaxive.fr/<strong>login-dash</strong>") | raw }}
-                                                {{ form.inputswitch('view_version', 'Afficher version', 'Affiche la version Proaxive de la vue cliente') | raw }}
-                                                {{ form.inputswitch('style_selector', 'SdS en haut ?', 'Oui pour afficher le selecteur de style en haut') | raw }}
-                                                {{ form.inputswitch('notify_fixed', 'Notif flottante ?', 'Oui pour afficher les notifications en haut à droite') | raw }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="column col-6 col-sm-12">
                                     <div class="card-custom">
+                                        <div class="card-body">
+                                            <div class="card-header"><h2>Interface</h2></div>
+                                            <div class="admin-form">
+                                                {{ form.inputswitch('view_version', 'Afficher version', 'Affiche la version Proaxive de la vue cliente') | raw }}
+                                                {{ form.inputswitch('theme_darker', 'Thème dark par défaut ?', 'Oui pour enregistrer le thème sombre par défaut') | raw }}
+                                                {{ form.inputswitch('notify_fixed', 'Notif flottante ?', 'Oui pour afficher les notifications en haut à droite') | raw }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-custom mg-tb-2">
+                                        <div class="card-body">
+                                            <div class="card-header"><h2>Sécurité de l'application</h2></div>
+                                            <div class="admin-form">
+                                                {% if checkFolderInstall %}
+                                                    {{ viewAlert('danger', 'Proaxive <strong>n\'est pas sécurisée</strong>. Veuillez renommer/supprimer le dossier d\'installation de l\'application.') | raw }}
+                                                    {{ form.submitSingle('danger', 'renameFolder', 'Renommer le dossier', 'check') | raw }}
+                                                {% else %}
+                                                    {{ viewAlert('info', "L'application Proaxive <strong>est sécurisée</strong> (Installateur désactivé).") | raw }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-custom mg-tb-2">
                                         <div class="card-body">
                                             <div class="card-header"><h2>Dossiers de l'application</h2></div>
                                             <div class="admin-form">

@@ -1,0 +1,37 @@
+<div class="columns">
+    <div class="column col-10 col-sm-12 hide-sm">
+        <h3>{{ intervention.title }}</h3>
+    </div>
+    <div class="column col-2 col-sm-12">
+        <div class="submit-nav-mobile">
+            <div class="action-navigation text-right mg-b-3 p-relative">
+                <a class="btn btn-info" href="/admin/intervention/html/{{ intervention.id }}"><i class="icofont-printer"></i></a>
+                {{ form.submitSingle('primary', 'update', '', 'save') | raw }}
+                <button onclick="toggleAside('action_submit', 'deploy');" type="button" class="btn btn-primary"><i class="icofont-gear-alt"></i></button>
+                <div class="sf-content toggle-content" id="action_submit">
+                    {% if intervention.start is null %}
+                        <button class="btn btn-light-primary animate__animated animate__flash" name="start_inter"><i class="icofont-rocket-alt-2"></i> Débuter l'intervention</button>
+                    {% else %}
+                        {% if intervention.closed is null %}
+                            {{ form.submitSingle('light-info','update_inter', 'Mettre à jour la date', 'clock-time') | raw }}
+                        {% endif %}
+                        {% if intervention.back_home is null %}
+                            {{ form.submitSingle('warning', 'backhome', 'Rendre le matériel', 'fast-delivery') | raw }}
+                        {% endif %}
+                        {{ form.submitSingle('light-primary', 'sendmail', 'Envoyer le mail', 'send-mail') | raw }}
+                        {% if intervention.rapport_bao is empty %}
+                            <a href="#upload-file" class="btn btn-info d-block"><i class="icofont-file-alt"></i> Rapport BAO</a>
+                        {% else %}
+                            <a href="/admin/intervention/{{ intervention.id }}/rapport/bao" class="btn btn-light-primary"><i class="icofont-ui-edit"></i> Modifier rapport BAO</a>
+                        {% endif %}
+                        {% if intervention.closed == 1 %}
+                            <a href="#closed-1" class="btn btn-success"><i class="icofont-ui-edit"></i> Modifier le compte rendu</a>
+                        {% else %}
+                            <a href="#closed-1" class="btn btn-light-danger"><i class="icofont-close-circled"></i> Cloturer</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

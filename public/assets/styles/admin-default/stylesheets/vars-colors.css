@@ -1,0 +1,33 @@
+/** Configurations des couleurs pour le mode clair (mode par défaut) **/
+:root{
+    --body-bg-color: #f4f4f4;
+    --first-bg-color: #ffffff;
+    --primary-color: #453d9b;
+    --primary-color-rgb: 157, 148, 249;
+    --breadcrumb-bgcolor: #393382;
+    --body-txt-color: #333;
+    --main-txt-color: #222;
+    --form-bg-color: #f8f8f8;
+    --border-color: #e2e2e4;
+    --main-bg-color: #f8f8f8;
+    --table-thead-color: #edf5f8;
+    --default-txt-color: #ffffff;
+    --shadow-color: rgba(175, 175, 175, 0.1);
+}
+
+/** Configurations des couleurs pour le mode sombre **/
+[data-layout-mode=dark], [data-layout-mode=dark-forced]{
+    --body-bg-color: #34495e;
+    --first-bg-color: #2c3e50;
+    --primary-color: #453d9b;
+    --primary-color-rgb: 157, 148, 249;
+    --breadcrumb-bgcolor: #393382;
+    --body-txt-color: #ffffff;
+    --main-txt-color: #ffffff;
+    --form-bg-color: #21303e;
+    --border-color: #435569;
+    --border-black-color: #000000;
+    --main-bg-color: #21303e;
+    --dark-txt-color: #21303e;
+    --shadow-color: rgba(0, 0, 0, 0);
+}

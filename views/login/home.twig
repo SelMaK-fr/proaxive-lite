@@ -4,10 +4,10 @@
         {{ include('_notifications.twig') }}
         <div class="card-body">
             <div class="text-center mg-tb-3">
-                <img width="30%" src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/proaxive_logo_synexolabs_400.png" alt="">
+                <img class="img-responsive" src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/admin-default/img/undraw_login_re_4vu2.svg" alt="">
             </div>
-            {{ form.input('pseudo', '<i class="icofont-ui-user"></i> Pseudo', 'Bruce') | raw }}
-            {{ form.password('password', '<i class="icofont-ui-password"></i> Mot de passe', '') | raw }}
+            {{ form.inputWithIcon('pseudo', false, 'user-suited', 'Pseudo') | raw }}
+            {{ form.inputWithIcon('password', false, 'ui-password', 'Mot de passe', {type: 'password'}) | raw }}
         </div>
         <div class="card-footer text-center">
             {{ forum.submitSingleWithIcon('btn-primary', 'Se connecter', 'login') }}

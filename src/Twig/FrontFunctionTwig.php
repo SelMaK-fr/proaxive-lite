@@ -15,6 +15,7 @@ class FrontFunctionTwig extends AbstractExtension
             new TwigFunction('statuscircle', [$this, 'getStatusCircle']),
             new TwigFunction('statusactive', [$this, 'getActiveOrInactive']),
             new TwigFunction('viewAlert', [$this, 'getViewFlash']),
+            new TwigFunction('viewAlertFlex', [$this, 'getViewFlashFlex']),
             new TwigFunction('getDataWithHtml', [$this, 'getDataWithHtml']),
             new TwigFunction('getdata', [$this, 'getData']),
             new TwigFunction('breadcrumb', [$this, 'breadcrumb'])
@@ -65,6 +66,8 @@ class FrontFunctionTwig extends AbstractExtension
             $html = '<div class="alert alert-warning" role="alert"><div class="a-icon"><i class="icofont-exclamation-tringle"></i></div><span>'.$message.'</span></div>';
         } elseif($type == "info") {
             $html = '<div class="alert alert-info" role="alert"><div class="a-icon"><i class="icofont-info-square"></i></div><span>'.$message.'</span></div>';
+        } elseif($type == "primary") {
+            $html = '<div class="alert alert-primary" role="alert"><div class="a-icon"><i class="icofont-info-square"></i></div><span>'.$message.'</span></div>';
         }
         return $html;
     }
@@ -84,6 +87,8 @@ class FrontFunctionTwig extends AbstractExtension
             $html = '<div class="alert alert-warning" role="alert"><span><i class="icofont-exclamation-tringle"></i></span>'.$message.'</div>';
         } elseif($type == "info") {
             $html = '<div class="alert alert-info" role="alert"><span><i class="icofont-info-square"></i></span>'.$message.'</div>';
+        } elseif($type == "primary") {
+            $html = '<div class="alert alert-primary" role="alert"><span><i class="icofont-info-square"></i></span>'.$message.'</div>';
         }
         return $html;
     }

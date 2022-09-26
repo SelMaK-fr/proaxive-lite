@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="fr">
+<html class="no-js" lang="fr" data-layout-mode="{% if app_setting.theme_darker == true %}dark-forced{% else %}light{% endif %}">
 <head>
     <meta name="robots" content="noindex, nofollow">
     <meta charset="UTF-8">
@@ -25,9 +25,6 @@
     <link rel="stylesheet" href="{{ getenv('APP_ADMIN_THEME') }}/node_modules/vanilla-datatables/dist/vanilla-dataTables.min.css">
     <!-- START::Layout -->
     <link rel="stylesheet" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/layout.css?={{ now | date('hi') }}" type="text/css"/>
-    <!-- START::layout colors -->
-    <link rel="stylesheet" type="text/css" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/light-style.css?={{ now | date('hi') }}" title="default"/>
-    <link rel="alternate stylesheet" type="text/css" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/dark-style.css?={{ now | date('hi') }}" title="dark" />
     <!-- START::Omega -->
     <link rel="stylesheet" href="{{ getenv('APP_ADMIN_THEME') }}/stylesheets/omega.css?={{ now | date('hi') }}" type="text/css"/>
     <!-- START::Print -->
@@ -42,23 +39,15 @@
             <div class="column col-6">
                 <div class="header-top-logo text-uppercase">
                     <div class="pe--logo">
-                        <img src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/logo-green.png" alt="">
+                        <img src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/styles/proaxive/proaxive_logo_synexolabs_400.png" alt="">
                     </div>
-                    <strong>Proaxive </strong><span class="d-none-mobile">Lite Panel</span>
+                    <strong>Proaxive</strong><span class="d-none-mobile ml-1">Lite Panel</span>
                 </div>
             </div>
             <div class="column col-6">
                 <div class="header-top-menu s--switcher">
-                    {% if app_setting.style_selector == true %}
-                    <div class="style-switcher">
-                        Styles :
-                        <ul>
-                            <li><a class="style--default" href="/" onclick="setActiveStyleSheet('default'); return false;"><span></span></a></li>
-                            <li><a class="style--dark" href="/" onclick="setActiveStyleSheet('dark'); return false;"><span></span></a></li>
-                        </ul>
-                    </div>
-                    {% endif %}
                     <ul class="navbar-custom">
+                        <li><button type="button" id="theme-switcher" onclick="toggleTheme()" aria-pressed="true"></button></li>
                         <li><a href="/admin/edit-auser/1" title="Mon compte utilisateur"><i class="icofont-user-alt-7"></i> <span class="d-none-mobile">Bonjour {{ sessionAuth.pseudo }}</span></a></li>
                         <li><a href="/logout" title="Se deconnecter"><i class="icofont-logout"></i></a></li>
                     </ul>
@@ -81,22 +70,13 @@
 {% block body %}{% endblock %}
 <!-- end:Main-body -->
 <!-- start:Footer -->
-<footer>
+<footer class="hide-md">
     <div class="container">
         <div class="columns">
             <div class="column col-6">
-                2021. <strong>Proaxive</strong> {{ app_info.release }} - <strong>{{ app_info.number }}</strong> ({{ app_info.verdate }})
+                2021, 2022. <strong>Proaxive</strong> {{ app_info.release }} - <strong>{{ app_info.number }}</strong> ({{ app_info.verdate }})
             </div>
             <div class="column col-6 text-right">
-                {% if app_setting.style_selector == false %}
-                    <div class="style-switcher">
-                        Styles :
-                        <ul>
-                            <li><a class="style--default" href="/" onclick="setActiveStyleSheet('default'); return false;"><span></span></a></li>
-                            <li><a class="style--dark" href="/" onclick="setActiveStyleSheet('dark'); return false;"><span></span></a></li>
-                        </ul>
-                    </div>
-                {% endif %}
                 Développé par <a href="{{ app_info.urlauthor }}" target="_blank"><strong>{{ app_info.author }}</strong></a>
             </div>
         </div>
@@ -128,14 +108,14 @@
 <!-- START::JSColor -->
 <script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/jscolor.js"></script>
 <!-- START::SimpleMDE -->
-<script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/simplemde/simplemde.min.js"></script>
-<script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/tabs.js"></script>
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 <script>
     [].forEach.call(document.getElementsByClassName('area-mdeditor'),element => {
-        const simplemde = new SimpleMDE({
+        let simplemde = new SimpleMDE({
             element: element,
         });
     });
 </script>
+<script src="{{ getenv('APP_ROOT_PUBLIC') }}/assets/javascript/tabs.js"></script>
 </body>
 </html>

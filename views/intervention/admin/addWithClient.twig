@@ -7,7 +7,7 @@
         <div class="container">
             <div class="admin-content">
                 {{ include('_notifications.twig') }}
-                <form method="post" class="form-border">
+                <form method="post">
                     {{ include('intervention/admin/_form.twig', {'withClient': 1}) }}
                 </form>
             </div>
