@@ -1,5 +1,5 @@
 # PROAXIVE LITE (1.5.x)
-### version 1.5.2
+### version 1.5.3 (pour développeur)
 
 [![Minimum PHP Version](https://img.shields.io/badge/PHP->=7.4-%23786fa6)](https://php.net/)
 [![Minimum MySQL Version](https://img.shields.io/badge/MySQL-5.x-%23f0932b)](https://www.mysql.com/fr/)
