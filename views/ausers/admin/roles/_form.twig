@@ -1,4 +1,4 @@
-{{ form.inputWithIcon('title', false, 'info-circle', 'Titre du rôle') | raw }}
-{{ form.inputWithIcon('slug', false, 'info-circle', 'Slug du rôle') | raw }}
+{{ form.input('title', 'Titre du rôle', 'Titre du rôle') | raw }}
+{{ form.input('slug', 'Slug du rôle', 'Slug du rôle') | raw }}
 {{ form.number('level', 'Level du rôle', '10 étant le Super Administrateur') | raw }}
 {{ form.submitDefault('Sauvegarder', 'primary') | raw }}

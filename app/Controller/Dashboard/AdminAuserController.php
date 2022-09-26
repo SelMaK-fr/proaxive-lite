@@ -171,7 +171,6 @@ class AdminAuserController extends AppController
                         'pseudo' => $_POST['pseudo'],
                         'fullname' => $_POST['fullname'],
                         'mail' => $_POST['mail'],
-                        'roles_id' => $_POST['roles_id'],
                         'resetpassword' => false,
                         'lastvisite' => $date,
                         'token' => null,

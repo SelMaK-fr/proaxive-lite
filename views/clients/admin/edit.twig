@@ -7,18 +7,24 @@
     <div class="section--admin">
         <div class="container">
             {{ include('_notifications.twig') }}
-            <div class="admin-content">
+            {{ include('clients/admin/_profil_header.twig') }}
+            <div class="admin-content mg-t-3">
                 <div class="card-custom cc-shadow">
                     <div class="card-body">
                         <div class="card-header"><h2>Client : {{ client.fullname }}</h2></div>
                         <form method="post">
-                            {% include 'clients/admin/_form.twig' with {'passtab': 1} %}
+                            {{ include('clients/admin/_form.twig', {'edit': 1}) }}
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
     <!-- END .cards -->
+    <!-- /modal -->
+    <form method="post" action="/admin/client/delete">
+        <input type="hidden" name="id" value="{{ client.id }}">
+        {{ include('dashboard/_modal-delete.twig', {'id' : 'delete' ~ client.id , 'title' : client.fullname, 'note': "Supprimer un client, supprime toutes ses données (interventions et équipements)."}) }}
+    </form>
+    <!-- /.modal -->
 {% endblock %}

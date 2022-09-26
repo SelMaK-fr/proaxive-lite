@@ -3,91 +3,103 @@
     <a class="btn btn-primary" href="/admin/add-client" title="Ajouter mon premier client">Ajouter un client</a>
     <a class="btn btn-primary" href="/admin/add-equipment" title="Ajouter mon premier équipement">Ajouter un équipement</a>
 {% else %}
-    <div class="columns">
-        <div class="column">
-            <div class="card-custom">
-                <div class="card-body">
-                    <div class="card-header"><h2>Contenu de l'intervention</h2></div>
-                    <div class="admin-form">
-                        {{ form.input('title', "Titre de l'intervention", "Le nom que porte votre intervention") | raw }}
-                        {{ form.textareaMde('details', 'Décrivez les actions en temps réel', '- Ma première étape', 'Un tiret (-) avant chaque étape suivi d\'un retour à la ligne.') | raw }}
-                    </div>
-
+    <div class="tabs-pe">
+        <ul id="tabs">
+            <li><a href="#general">Informations générales</a></li>
+            <li><a href="#details">Détails de l'intervention</a></li>
+        </ul>
+    </div>
+    <div class="tabContent" id="general">
+        <div class="admin-content">
+            <div class="columns">
+                <div class="column col-6 col-sm-12">
+                    {{ form.input('title', "Titre de l'intervention", "Le nom que porte votre intervention") | raw }}
+                    {{ form.textareaMde('details', 'Décrivez les actions en temps réel', '- Ma première étape', 'Un tiret (-) avant chaque étape suivi d\'un retour à la ligne.') | raw }}
+                </div>
+                <div class="column col-6 col-sm-12">
+                    <!-- Client -->
+                    {% if client is empty %}
+                        <p><span class="label label-danger">Il n'y a aucun client d'enregistré dans la base de données.</span></p>
+                    {% else %}
+                        {% if withClient == 1 %}
+                            {{ form.select('equipment_id', 'Equipement', computer) | raw }}
+                        {% elseif withClient == 2 %}
+                            <div class="block-info block-info-info">
+                                <span class="label label-info"><i class="icofont-info-square"></i> Info</span>
+                                <span class="d-block mt-2">
+                            Vous pouvez également créer une intervention depuis une <strong>fiche client</strong> ou un <strong>équipement</strong>.
+                            </span>
+                            </div>
+                            {{ form.selectLinked('Selectionnez un client', 'client_id', 'Client', 'select_equipments', '/admin/equipments/byclient/$id', client) | raw }}
+                            <!-- Computer -->
+                            <div class="form-group">
+                                <label class="form-label">Equipement <span style="color:red">*</span></label>
+                                <select class="form-input" id="select_equipments" name="equipment_id" style="display:none;">
+                                    <option value="0">Selectionnez un équipement</option>
+                                </select>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    {% if withClient == 1 %}
+                        <div class="card-custom mg-b-2">
+                            <div class="card-body">
+                                <div class="card-header"><h2>Client sélectionné</h2></div>
+                                <div class="recent-default-single">
+                                    <a href="/admin/client/{{ client.id }}">
+                                        <div class="recent-default-flex">
+                                            <div class="recent-d-img"><i class="icofont-user"></i></div>
+                                            <div class="recent-d-ctn">
+                                                <h2>{{ client.fullname }}</h2>
+                                                <p><i>{{ client.zipcode }}</i> - {{ client.city }} <br>{{ getdata(client.phone, 'N/A') }}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if withClientAndEquipment is defined %}
+                        <div class="card-0 mg-b-2">
+                            <div class="card-header"><h2><i class="icofont-id"></i> Client et équipement sélectionnés</h2></div>
+                            <div class="card-body">
+                                <div class="columns">
+                                    <div class="column col-sm-12">
+                                        {{ include('intervention/admin/include/_client.twig') }}
+                                    </div>
+                                    <div class="column col-sm-12">
+                                        {{ include('intervention/admin/include/_equipment.twig') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
-        <div class="column">
-            {% if withClient == 1 %}
-                <div class="card-custom mg-b-2">
-                    <div class="card-body">
-                        <div class="card-header"><h2>Client sélectionné</h2></div>
-                        <div class="recent-default-single">
-                            <a href="/admin/client/{{ client.id }}">
-                                <div class="recent-default-flex">
-                                    <div class="recent-d-img"><i class="icofont-user"></i></div>
-                                    <div class="recent-d-ctn">
-                                        <h2>{{ client.fullname }}</h2>
-                                        <p><i>{{ client.zipcode }}</i> - {{ client.city }} <br>{{ getdata(client.phone, 'N/A') }}</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+    </div>
+    <!-- More details -->
+    <div class="tabContent" id="details">
+        <div class="admin-form">
+            <div class="columns">
+                <div class="column col-6 col-sm-12">
+                    <!-- Number -->
+                    {{ form.input('number', 'Numéro', 'Numéro Intervention; Ex : 20200100112', '<i class="icofont-info-circle"></i> Laissez vide pour le générer automatiquement') | raw }}
+                    <!-- Received -->
+                    {{ form.tailDatetime('received', 'Date de dépot', 'Laissez vide si PMAD') | raw }}
+                    <!-- PMAD -->
+                    {{ form.inputswitch('pmad', 'A distance (PMAD) ?') | raw }}
+                    <!-- Status -->
+                    {{ form.select('status_id', 'Status', status) | raw }}
+                    {{ form.select('steps', 'Steps', {1: 'Matériel récupéré', 2: 'En atelier', 3: 'Tests finaux', 4: 'Terminé'}) | raw }}
                 </div>
-            {% endif %}
-            {% if withClientAndEquipment is defined %}
-                <div class="card-0 mg-b-2">
-                    <div class="card-header"><h2><i class="icofont-id"></i> Client et équipement sélectionnés</h2></div>
-                    <div class="card-body">
-                        <div class="columns">
-                            <div class="column col-sm-12">
-                                {{ include('intervention/admin/include/_client.twig') }}
-                            </div>
-                            <div class="column col-sm-12">
-                                {{ include('intervention/admin/include/_equipment.twig') }}
-                            </div>
-                        </div>
-                    </div>
+                <div class="column col-6 col-sm-12">
+                    {{ form.textareaMde('description', "Description de la panne", "Décrire le problème rencontré") | raw }}
+                    {{ form.textareaMde('observation', "Observation", "Note supplémentaire suite à l'intervention") | raw }}
+                    {{ form.textareaDefault('note_tech', "Note technicien", "Note du technicien", 'Cette note n\'est visible que par le technicien') | raw }}
                 </div>
-            {% endif %}
-            <div class="card-custom">
-                <div class="card-body">
-                    <div class="card-header"><h2>Détails de l'intervention</h2></div>
-                    <div class="admin-form">
-                        <!-- Number -->
-                        {{ form.input('number', 'Numéro', 'Numéro Intervention; Ex : 20200100112', '<i class="icofont-info-circle"></i> Laissez vide pour le générer automatiquement') | raw }}
-                        <!-- Received -->
-                        {{ form.tailDatetime('received', 'Date de dépot', 'Laissez vide si PMAD') | raw }}
-                        <!-- PMAD -->
-                        {{ form.inputswitch('pmad', 'A distance (PMAD) ?') | raw }}
-                        <!-- Client -->
-                        {% if client is empty %}
-                            <p><span class="label label-danger">Il n'y a aucun client d'enregistré dans la base de données.</span></p>
-                        {% else %}
-                            {% if withClient == 1 %}
-                                {{ form.select('equipment_id', 'Equipement', computer) | raw }}
-                                {% elseif withClient == 2 %}
-                                    {{ form.selectLinked('Selectionnez un client', 'client_id', 'Client', 'select_equipments', '/admin/equipments/byclient/$id', client) | raw }}
-                                    <!-- Computer -->
-                                    <div class="form-group">
-                                        <label class="form-label">Equipement <span style="color:red">*</span></label>
-                                        <select class="form-input" id="select_equipments" name="equipment_id" style="display:none;">
-                                            <option value="0">Selectionnez un équipement</option>
-                                        </select>
-                                    </div>
-                            {% endif %}
-                        {% endif %}
-                        {{ form.textareaDefault('description', "Description de la panne", "Décrire le problème rencontré") | raw }}
-                        {{ form.textareaDefault('observation', "Observation", "Note supplémentaire suite à l'intervention") | raw }}
-                        {{ form.textareaDefault('note_tech', "Note technicien", "Note du technicien", '<i class="icofont-info-circle"></i> Cette note n\'est visible que par le technicien') | raw }}
-                        <!-- Status -->
-                        {{ form.select('status_id', 'Status', status) | raw }}
-                        {{ form.select('steps', 'Steps', {1: 'Matériel récupéré', 2: 'En atelier', 3: 'Tests finaux', 4: 'Terminé'}) | raw }}
-                        <div class="text-right">
-                            {{ form.submitDefault('Sauvegarder', 'primary') | raw }}
-                        </div>
-                    </div>
-                </div>
+            </div>
+            <div class="text-left">
+                {{ form.submitDefault('Sauvegarder', 'primary') | raw }}
             </div>
         </div>
     </div>

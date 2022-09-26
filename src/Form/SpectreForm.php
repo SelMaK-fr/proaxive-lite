@@ -109,8 +109,8 @@ class SpectreForm extends Form
      * @return string
      */
     public function inputswitch($name, $label, $info = false){
-        $label = '<div class="switch-inline columns"><label class="col-3 col-sm-12" style="line-height: 1.8;" for="'. $name .'">' . $label . '</label>';
-        $switch = '<div class="switch col-9 col-sm-12 m-0">';
+        $label = '<div class="switch-inline columns"><label class="col-4 col-sm-12" style="line-height: 1.8;" for="'. $name .'">' . $label . '</label>';
+        $switch = '<div class="switch col-8 col-sm-12 m-0">';
         $switch .= '<input type="radio" class="switch-input" name="'.$name.'" value="1" id="'. $name .'-yes"';
         if($this->getValue($name) == 1){ //Vérifie si ON
             $switch .= ' checked>'; //Check le input
@@ -274,7 +274,7 @@ class SpectreForm extends Form
         }else{
             $label = '<label class="form-label" for="' . $name . '">' . $label . '</label>';
         }
-        $input = '<div class="form-ic-comp"><i class="icofont-'.$icon.'"></i></div><div class="input-st"><input class="form-control" type="'. $type .'" id="'. $name .'" name="'. $name .'" value="' . $this->getValue($name) . '" placeholder="'.$placeholder.'"></div>';
+        $input = '<div class="form-ic-comp"><i class="icofont-'.$icon.'"></i></div><div class="input-st"><input class="form-input" type="'. $type .'" id="'. $name .'" name="'. $name .'" value="' . $this->getValue($name) . '" placeholder="'.$placeholder.'"></div>';
         $input .= '<small>' . $info . '</small>';
 
 
@@ -371,6 +371,30 @@ class SpectreForm extends Form
             $info = '<small><i class="icofont-info-circle"></i> ' . $info . '</small>';
         }
         $input = '<textarea class="form-input area-mdeditor" name="'. $name .'" placeholder="'.$placeholder.'">' . $this->getValue($name) . '</textarea>';
+        if($binding == true){
+            $label = '<label class="form-label">' . $label . ' <span style="color:red">*</span></label>';
+        } else {
+            $label = '<label class="form-label">' . $label . '</label>';
+        }
+
+        return $this->surroundBlock($label . $info . $input);
+    }
+
+    /**
+     * Permet de générer un textarea
+     * @param string $name
+     * @param string $label
+     * @param string $placeholder
+     * @param bool $info
+     * @param bool $binding
+     * @return mixed
+     */
+    public function textareaCk(string $name, string $label, string $placeholder, $info = false, bool $binding = false)
+    {
+        if($info == true){
+            $info = '<small><i class="icofont-info-circle"></i> ' . $info . '</small>';
+        }
+        $input = '<textarea class="form-input area-ckeditor" name="'. $name .'" placeholder="'.$placeholder.'">' . $this->getValue($name) . '</textarea>';
         if($binding == true){
             $label = '<label class="form-label">' . $label . ' <span style="color:red">*</span></label>';
         } else {

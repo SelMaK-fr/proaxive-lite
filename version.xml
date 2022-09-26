@@ -1,11 +1,11 @@
 <?xml version = "1.0" encoding = "UTF-8" ?>
 <!-- SynexoLabs (SelMaK) -->
 <app_version>
-    <number>1.5.2</number>
-    <namecode>Castiel</namecode>
+    <number>1.5.3</number>
+    <namecode>Lionra</namecode>
     <release>Lite</release>
-    <verdate>06/21</verdate>
-    <status>stable</status>
+    <verdate>09/22</verdate>
+    <status>stable (Git)</status>
     <author>SelMaK</author>
     <urlauthor>https://proaxive.fr</urlauthor>
 </app_version>

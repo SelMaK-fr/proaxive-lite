@@ -66,7 +66,7 @@
                                         <td>{{ client.mail }}</td>
                                         <td>{{ client.updated_at | date('d/m/Y') }}</td>
                                         <td>
-                                            <a href="/admin/edit-client/{{ client.c_id }}" class="btn btn-sm btn-info" title="Modifier le compte client"><i class="icofont-edit"></i></a>
+                                            <a href="/admin/edit-client/{{ client.c_id }}" class="label label-info" title="Modifier le compte client"><i class="icofont-edit"></i> Modifier</a>
                                         </td>
                                     </tr>
                                 {% endfor %}

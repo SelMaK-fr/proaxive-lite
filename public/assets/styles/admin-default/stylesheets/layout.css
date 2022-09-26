@@ -1,3 +1,5 @@
+@import "vars-colors.css";
+
 @font-face {
   font-family: "RobotoLight";
   src: url("../fonts/roboto/Roboto-Light.ttf");
@@ -25,8 +27,22 @@
 }
 /* line 6, ../sass/layout.scss */
 body {
+  background-color:var(--body-bg-color);
+  color:var(--body-txt-color);
   font-size: 14px;
   font-family: "RobotoRegular", sans-serif;
+}
+
+::selection {
+  background-color: var(--primary-color);
+  color: var(--default-txt-color);
+}
+
+a, a:link, a:visited, .txtprimary{
+  color:var(--primary-color);
+}
+.label.label-primary{
+  background-color:var(--primary-color);
 }
 
 /* line 1, ../sass/_container.scss */
@@ -110,6 +126,21 @@ body {
   margin-bottom: 3em;
 }
 
+/* line 10, ../sass/_base.scss */
+.mg-t-1 {
+  margin-top: 1em;
+}
+
+/* line 11, ../sass/_base.scss */
+.mg-t-2 {
+  margin-top: 2em;
+}
+
+/* line 12, ../sass/_base.scss */
+.mg-t-3 {
+  margin-top: 3em;
+}
+
 /* padding */
 /* line 14, ../sass/_base.scss */
 .pd-tb-1 {
@@ -135,6 +166,9 @@ body {
 .pd-tb-5 {
   padding: 5em 0;
 }
+.p-all-15{
+  padding:1.5em;
+}
 
 /* font style */
 /* line 21, ../sass/_base.scss */
@@ -146,13 +180,19 @@ strong {
 /* font colors */
 /* line 26, ../sass/_base.scss */
 .txtprimary {
-  color: #008c7b;
+  color: var(--primary-color);
+}
+.txtwarning {
+  color: #bc6c3b;
+}
+.txtdanger {
+  color: #ba4141;
 }
 
 /* links */
 /* line 28, ../sass/_base.scss */
 a, a:link, a:visited {
-  color: #008c7b;
+  color: #453d9b;
 }
 
 /* line 32, ../sass/_base.scss */
@@ -171,44 +211,6 @@ a, a:link, a:visited {
 /* line 45, ../sass/_base.scss */
 #parent {
   cursor: pointer;
-}
-
-/* line 48, ../sass/_base.scss */
-.style-switcher {
-  display: inline-block;
-}
-/* line 50, ../sass/_base.scss */
-.style-switcher ul {
-  margin: 0 1em 0 0;
-  padding: 0;
-  display: inline-block;
-}
-/* line 52, ../sass/_base.scss */
-.style-switcher ul li {
-  display: inline-block;
-  margin-right: 0.2em;
-  margin-top: 0;
-}
-/* line 56, ../sass/_base.scss */
-.style-switcher ul li a {
-  display: inline-block;
-}
-/* line 58, ../sass/_base.scss */
-.style-switcher ul li a span {
-  display: block;
-  height: 10px;
-  width: 10px;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-}
-/* line 65, ../sass/_base.scss */
-.style-switcher ul li a.style--default span {
-  background-color: #ffffff;
-}
-/* line 68, ../sass/_base.scss */
-.style-switcher ul li a.style--dark span {
-  background-color: #2c3e50;
 }
 
 /* Ribbon */
@@ -256,7 +258,7 @@ a, a:link, a:visited {
   width: 100px;
   display: block;
   background: #000;
-  background: #008c7b;
+  background: var(--primary-color);
   box-shadow: 0 3px 10px -5px black;
   position: absolute;
   top: 19px;
@@ -284,17 +286,17 @@ a, a:link, a:visited {
 }
 /* line 137, ../sass/_base.scss */
 .ribbon.ribbon--primary span {
-  background: #008c7b;
+  background: var(--primary-color);
 }
 /* line 139, ../sass/_base.scss */
 .ribbon.ribbon--primary span:before {
-  border-left: 3px solid #016055;
-  border-top: 3px solid #016055;
+  border-left: 3px solid #000;
+  border-top: 3px solid #000;
 }
 /* line 143, ../sass/_base.scss */
 .ribbon.ribbon--primary span:after {
-  border-right: 3px solid #016055;
-  border-top: 3px solid #016055;
+  border-right: 3px solid #000;
+  border-top: 3px solid #000;
 }
 
 /* line 150, ../sass/_base.scss */
@@ -342,6 +344,11 @@ a, a:link, a:visited {
   color: #1c9806;
   background-color: #f2fef0;
   border-color: #23bf08;
+}
+.alert.alert-primary {
+  color: var(--primary-color);
+  background-color: #ffffff;
+  border-color: var(--primary-color);
 }
 /* line 26, ../sass/_alert.scss */
 .alert.alert-warning {
@@ -440,7 +447,10 @@ button.btn-table {
 /* line 59, ../sass/_button.scss */
 .btn.btn-white, .btn-sm.btn-white {
   background-color: white;
-  color: #008c7b;
+  color: #453d9b;
+}
+.btn, .btn-sm.btn-primary, .btn.btn-primary, .btn-sm.btn-primary:hover, .btn.btn-primary:hover{
+  background: var(--primary-color);
 }
 
 /* line 66, ../sass/_button.scss */
@@ -481,6 +491,8 @@ button.btn-table {
 }
 /* line 2, ../sass/_main.scss */
 .main-stats .stats-card {
+  background-color:var(--first-bg-color);
+  color:var(--main-txt-color);
   padding: 1.5em;
   display: flex;
   justify-content: space-between;
@@ -515,6 +527,7 @@ button.btn-table {
 
 /* line 23, ../sass/_main.scss */
 .thumbnail {
+  background-color: var(--main-bg-color);
   padding: 1em;
   position: relative;
   text-align: center;
@@ -531,6 +544,7 @@ button.btn-table {
 /* line 32, ../sass/_main.scss */
 .thumbnail .thumbnail__title span.t__name {
   font-family: RobotoBold, sans-serif;
+  color:var(--main-txt-color);
 }
 /* line 37, ../sass/_main.scss */
 .thumbnail .thumbnail__content {
@@ -565,6 +579,7 @@ button.btn-table {
 }
 /* line 1, ../sass/_aside.scss */
 aside.form-aside {
+  background-color:var(--first-bg-color);
   position: fixed;
   right: 0;
   width: 250px;
@@ -605,6 +620,9 @@ aside.form-aside button, aside.form-aside a {
 /* line 6, ../sass/_label.scss */
 .label.label-info {
   background-color: #5bb2fc;
+}
+a.label.label-info {
+  color:#ffffff;
 }
 /* line 9, ../sass/_label.scss */
 .label.label-success {
@@ -648,8 +666,12 @@ aside.form-aside button, aside.form-aside a {
   list-style: none;
   font-size: 15px;
 }
+.main-menu ul.nav-tabs li.active{
+  background-color:var(--first-bg-color);
+}
 /* line 9, ../sass/_navbar.scss */
 .main-menu ul.nav-tabs li a {
+  color:var(--main-txt-color);
   padding: 15px 25px;
   display: block;
 }
@@ -661,6 +683,7 @@ aside.form-aside button, aside.form-aside a {
 }
 /* line 17, ../sass/_navbar.scss */
 .main-menu ul.nav-tabs li a:hover {
+  background-color:var(--first-bg-color);
   text-decoration: none;
 }
 /* line 21, ../sass/_navbar.scss */
@@ -673,6 +696,7 @@ aside.form-aside button, aside.form-aside a {
 }
 /* line 30, ../sass/_navbar.scss */
 .main-menu .tab-content .tab-pane {
+  background-color:var(--first-bg-color);
   display: none;
 }
 /* line 32, ../sass/_navbar.scss */
@@ -689,6 +713,7 @@ aside.form-aside button, aside.form-aside a {
 }
 /* line 38, ../sass/_navbar.scss */
 .main-menu .tab-content .tab-pane ul.main-menu-dropdown li a {
+  color:var(--main-txt-color);
   padding: 20px 20px;
   display: block;
   font-size: 14px;
@@ -708,6 +733,7 @@ Mobile nav
 
 /* line 58, ../sass/_navbar.scss */
 .navbar-navigation {
+  background-color:var(--first-bg-color);
   display: none;
   padding: 0.8em;
   text-align: right;
@@ -737,6 +763,9 @@ Mobile nav
   }
 }
 /* line 2, ../sass/_header.scss */
+.header-top{
+  background-color:var(--primary-color);
+}
 .header-top .header-top-logo {
   display: flex;
   align-items: center;
@@ -790,10 +819,15 @@ Mobile nav
 
 /* line 1, ../sass/_breadcrumb.scss */
 .breadcrumb {
+  background-color:var(--breadcrumb-bgcolor);
+  color:var(--default-txt-color);
   margin: 0;
   padding: 0;
   line-height: 3;
   transition: all 300ms ease;
+}
+.breadcrumb li{
+  color:rgba(var(--primary-color-rgb), 0.8);
 }
 /* line 6, ../sass/_breadcrumb.scss */
 .breadcrumb ul.breadcrumbs {
@@ -864,7 +898,7 @@ Mobile nav
 }
 /* line 19, ../sass/_card.scss */
 .card-0 .card-header {
-  background-color: #008c7b;
+  background-color: #453d9b;
   color: white;
 }
 /* line 22, ../sass/_card.scss */
@@ -876,10 +910,12 @@ Mobile nav
 
 /* line 27, ../sass/_card.scss */
 .card-custom {
+  background-color:var(--first-bg-color);
   padding: 1.5em;
   -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 5px 1px var(--shadow-color);
+  border-radius:0.3rem;
 }
 /* line 30, ../sass/_card.scss */
 .card-custom .card-header {
@@ -893,6 +929,7 @@ Mobile nav
 }
 /* line 34, ../sass/_card.scss */
 .card-custom .card-footer {
+  color:var(--main-txt-color);
   padding: 1em;
   margin-top: 0.8em;
 }
@@ -929,13 +966,15 @@ Mobile nav
 
 /* line 2, ../sass/_forms.scss */
 form .form-input, form .form-select {
-  border-bottom: 1px solid transparent;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
+  border: 0;
+  border-radius: .3rem;
+  padding: .5rem .8rem;
+  height: auto;
 }
 /* line 8, ../sass/_forms.scss */
 form .form-select:not([multiple]):not([size]) {
+  background-color:var(--form-bg-color);
+  color:var(--main-txt-color);
   border-bottom: 1px solid transparent;
   border-top: 0;
   border-left: 0;
@@ -969,8 +1008,20 @@ form .form-select:not([multiple]):not([size]) {
   padding: 10px;
   font-family: "RobotoRegular", sans-serif;
 }
+.form-border input[type="text"],
+.form-border input[type="email"],
+.form-border textarea,
+.form-border input[type="number"],
+.form-border input[type="password"],
+form .form-input{
+  border-color:var(--border-color);
+  background-color:var(--body-bg-color);
+  color:var(--body-txt-color);
+}
 /* line 43, ../sass/_forms.scss */
 .form-border .form-control {
+  background-color:var(--form-bg-color);
+  color:var(--main-txt-color);
   display: block;
   width: 100%;
   height: 34px;
@@ -996,18 +1047,20 @@ form .form-select:not([multiple]):not([size]) {
 
 /* line 68, ../sass/_forms.scss */
 .form-default input[type="text"], .form-default input[type="email"], .form-default textarea, .form-default input[type="number"], .form-default input[type="password"] {
+  background-color:var(--form-bg-color);
+  border-color:var(--border-color);
   box-shadow: none;
-  padding: 6px;
   resize: none;
-  border-radius: 0;
-  border-bottom: 1px solid transparent;
+  border-radius:0 0.3rem 0.3rem 0;
+  border-bottom: 1px solid var(--border-color);
   border-left: 0;
-  border-right: 0;
-  border-top: 0;
+  border-right: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
 }
 /* line 78, ../sass/_forms.scss */
 .form-default .form-group {
   margin-bottom: 15px;
+  display: flex;
 }
 /* line 80, ../sass/_forms.scss */
 .form-default .form-group label {
@@ -1024,16 +1077,17 @@ form .form-select:not([multiple]):not([size]) {
 /* line 87, ../sass/_forms.scss */
 .form-default .form-group.ic-comp {
   position: relative;
-  display: flex;
-  align-items: center;
   border-collapse: separate;
 }
 /* line 92, ../sass/_forms.scss */
 .form-default .form-group.ic-comp .form-ic-comp {
+  color: var(--main-txt-color);
   padding: 0px 12px;
+  display: flex;
+  align-items: center;
   background-color: transparent;
-  border: 0px solid transparent;
-  border-radius: 0;
+  border: 1px solid var(--border-color);
+  border-radius:0.3rem 0 0 0.3rem;
 }
 /* line 98, ../sass/_forms.scss */
 .form-default .form-group.ic-comp .form-ic-comp i {
@@ -1093,6 +1147,7 @@ form .form-select:not([multiple]):not([size]) {
 
 /* line 149, ../sass/_forms.scss */
 .switch {
+  background: var(--primary-color);
   position: relative;
   margin: 20px 0;
   height: 26px;
@@ -1151,6 +1206,7 @@ form .form-select:not([multiple]):not([size]) {
 
 /* line 193, ../sass/_forms.scss */
 .switch-input:checked + .switch-label {
+  color:var(--primary-color);
   font-weight: bold;
   /*text-shadow: 0 1px rgba(0, 0, 0, 0.25);*/
   -webkit-transition: 0.15s ease-out;
@@ -1295,6 +1351,9 @@ body.pdf {
   margin: 0;
   line-height: inherit;
 }
+.pdf, .pdf h4{
+  color:var(--main-txt-color);
+}
 /* line 25, ../sass/_html.scss */
 .pdf h4 {
   font-size: 0.9em;
@@ -1311,6 +1370,9 @@ body.pdf {
   list-style: none;
   padding: 0 0.5em;
   line-height: 1.8;
+}
+.pdf ul li:nth-child(2n+1){
+  background-color: #dbdbdb;
 }
 /* line 38, ../sass/_html.scss */
 .pdf .form-checkbox {
@@ -1340,18 +1402,42 @@ body.pdf {
 }
 /* line 55, ../sass/_html.scss */
 .pdf #container {
+  background-color:var(--first-bg-color);
+  border:1px solid #000000;
   width: 1000px;
   margin: 0 auto;
 }
 /* line 60, ../sass/_html.scss */
 .pdf .title-container {
+  background-color:var(--body-txt-color);
+  color:var(--default-txt-color);
   text-align: center;
   font-weight: bold;
   font-size: 1.4em;
 }
+.pdf .border-right{
+  border-right:1px solid #000000;
+}
+.pdf .border-left{
+  border-left:1px solid #000000;
+}
+.pdf .border-bottom{
+  border-bottom:1px solid #000000;
+}
+.pdf .border-top{
+  border-top:1px solid #000000;
+}
+.pdf .company-info{
+  border-top:1px solid var(--body-txt-color);
+  border-bottom:1px solid var(--body-txt-color);
+  border-right:1px solid var(--body-txt-color);
+}
 /* line 66, ../sass/_html.scss */
 .pdf .companyname-adress {
   width: 85%;
+}
+.pdf .companyname-adress span.secondary{
+  color:var(--default-txt-color);
 }
 /* line 69, ../sass/_html.scss */
 .pdf .logo-company {
@@ -1394,11 +1480,13 @@ body.pdf {
 }
 /* line 102, ../sass/_html.scss */
 .pdf .block h3 {
+  color:var(--default-txt-color);
   font-size: inherit;
   font-weight: 600;
 }
 /* line 106, ../sass/_html.scss */
 .pdf .block-title {
+  border-top:1px solid var(--body-txt-color);
   line-height: 1.8em;
 }
 /* line 109, ../sass/_html.scss */
@@ -1432,10 +1520,13 @@ body.pdf {
 }
 /* line 126, ../sass/_html.scss */
 .pdf .bi--children h3.children-title {
+  background-color:var(--body-txt-color);
+  color:var(--default-txt-color);
   line-height: 1.5em;
 }
 /* line 130, ../sass/_html.scss */
 .pdf .etiquette {
+  color:var(--default-txt-color);
   position: absolute;
   z-index: 20;
   padding: 1em;
@@ -1452,10 +1543,18 @@ body.pdf {
 }
 /* line 145, ../sass/_html.scss */
 .pdf .checkbox {
+  -moz-box-shadow: 2px 2px 0px 0px var(--body-txt-color);
+  -webkit-box-shadow: 2px 2px 0px 0px var(--body-txt-color);
+  -o-box-shadow: 2px 2px 0px 0px var(--body-txt-color);
+  box-shadow: 2px 2px 0px 0px var(--body-txt-color);
+  border:1px solid var(--body-txt-color);
   border-radius: 0;
   width: 0.8em;
   height: 0.8em;
   vertical-align: top;
+}
+.pdf .checkbox:checked{
+  background-color:#77adc3;
 }
 /* line 151, ../sass/_html.scss */
 .pdf .list-checkbox label, .pdf .block--inline label {
@@ -1463,8 +1562,17 @@ body.pdf {
   margin-left: 0.5em;
   margin-bottom: 0;
 }
+.pdf .neutral{background-color: var(--table-thead-color)}
+.pdf .default{background-color: #f2f2f2;}
+.pdf .primary{background-color:var(--primary-color)}
+.pdf .primary-light{background-color:#e8f0ff}
+.pdf .secondary{background-color: #77adc3; color: #fff;}
+.pdf .secondary-light{background-color: #edf8fc}
+.pdf .grey{background-color:#bfbfbf;}
 /* line 156, ../sass/_html.scss */
 .pdf footer {
+  background-color:var(--main-bg-color);
+  color: #d9d9d9;
   padding: 0.2em;
   font-weight: 400;
   font-size: 2.5em;
@@ -1472,6 +1580,7 @@ body.pdf {
 
 /* line 1, ../sass/_blocs.scss */
 .recent-default-single {
+  color:var(--main-txt-color);
   margin-bottom: 0.5em;
 }
 /* line 3, ../sass/_blocs.scss */
@@ -1480,13 +1589,19 @@ body.pdf {
 }
 /* line 6, ../sass/_blocs.scss */
 .recent-default-single a {
-  padding: 0.5em;
+  color:var(--main-txt-color);
+  background-color:var(--form-bg-color);
+  padding: 1em;
   display: block;
   text-decoration: none;
   -moz-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
+}
+.recent-default-single a:hover{
+  color:var(--default-txt-color);
+  background-color:var(--primary-color);
 }
 /* line 11, ../sass/_blocs.scss */
 .recent-default-single a .recent-default-flex {
@@ -1518,6 +1633,8 @@ body.pdf {
 }
 /* line 33, ../sass/_blocs.scss */
 .pdf_default .title-container {
+  background-color: var(--primary-color);
+  color:var(--default-txt-color);
   padding: 0.3em;
   font-size: 1.4em;
   text-align: center;
@@ -1609,7 +1726,7 @@ body.pdf {
 }
 /* line 101, ../sass/_blocs.scss */
 .pdf_default .bloc.bloc-end .right-bloc h3 {
-  background-color: #008c7b;
+  background-color: #453d9b;
   color: white;
   line-height: 1.7em;
 }
@@ -1627,6 +1744,7 @@ body.pdf {
   border-collapse: collapse;
   border-spacing: 0;
   text-align: left;
+  border:1px solid var(--border-color);
 }
 /* line 6, ../sass/_table.scss */
 .table-custom tbody tr.clickable-row {
@@ -1634,15 +1752,21 @@ body.pdf {
 }
 /* line 9, ../sass/_table.scss */
 .table-custom th {
-  padding: .6rem .4rem;
   text-transform: uppercase;
-  font-size: 0.8em;
+  font-size: 0.9em;
   font-family: RobotoBold, sans-serif;
 }
 /* line 15, ../sass/_table.scss */
-.table-custom td, .table-custom th {
-  border-bottom: .05rem solid transparent;
-  padding: .6rem .4rem;
+.table-custom td, .table-custom th, .dataTable-table>thead>tr>th, .dataTable-table>tbody>tr>td {
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 15px;
+  border-color:var(--border-color);
+}
+.table-custom tr:nth-child(2n){
+  background-color:var(--body-bg-color);
+}
+.dataTable-wrapper.no-footer .dataTable-container{
+  border-bottom:0;
 }
 
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -1650,6 +1774,9 @@ body.pdf {
   /* line 25, ../sass/_table.scss */
   table, thead, tbody, th, td, tr {
     display: block;
+  }
+  table tr, table td{
+    border-color:var(--border-color);
   }
 
   /* Hide table headers (but not display: none;, for accessibility) */
@@ -1697,12 +1824,18 @@ ul#tabs, ul#tabs--link {
 /* line 7, ../sass/_tabs.scss */
 ul#tabs li, ul#tabs--link li {
   display: inline;
+
+}
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+  ul#tabs li, ul#tabs--link li {
+    display: block;
+  }
 }
 
 /* line 11, ../sass/_tabs.scss */
 ul#tabs li a, ul#tabs--link li a {
-  color: #42454a;
-  background-color: #e0e0e0;
+  color: var(--body-txt-color);
+  background-color: var(--form-bg-color);
   border-bottom: none;
   padding: 0.7em 1em;
   text-decoration: none;
@@ -1710,26 +1843,27 @@ ul#tabs li a, ul#tabs--link li a {
 
 /* line 19, ../sass/_tabs.scss */
 ul#tabs li a:hover, ul#tabs--link li a:hover {
-  background-color: white;
+  background-color: var(--primary-color);
+  color:white;
 }
 
 /* line 23, ../sass/_tabs.scss */
 ul#tabs li a.selected, ul#tabs--link li a.selected {
-  color: #3b4351;
-  background-color: white;
+  color: var(--body-txt-color);
+  background-color: var(--first-bg-color);
   font-weight: 600;
   padding: 0.7em 1em;
 }
 
 /* line 30, ../sass/_tabs.scss */
 .tabs--link ul#tabs--link li a.selected {
-  background-color: #f9f9f9;
+  background-color: var(--first-bg-color);
 }
 
 /* line 34, ../sass/_tabs.scss */
 div.tabContent {
+  background-color:var(--first-bg-color);
   padding: 1em;
-  background-color: white;
   -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
@@ -1761,8 +1895,13 @@ div.tabContent.hide {
 
 /* line 1, ../sass/_footer.scss */
 footer {
+  background-color: var(--primary-color);
+  color:var(--default-txt-color);
   padding: 1em 0;
   margin-top: 3em;
+}
+footer a, footer a:link, footer a:visited{
+  color:var(--default-txt-color);
 }
 /** Fixed **/
 .d-none{
@@ -1773,4 +1912,170 @@ footer {
     display:none;
   }
 }
+/* Update 1.5.2 September 2022 */
+/** Submit special **/
+/* line 455, ../sass/components/_form.scss */
+.submit-nav-mobile .btn-mobile {
+  cursor: pointer;
+}
+/* line 457, ../sass/components/_form.scss */
+.submit-nav-mobile .btn-mobile a {
+  color: var(--pe-content-txt-color);
+}
 
+/* line 462, ../sass/components/_form.scss */
+.submit-nav-mobile .btn-mobile {
+  font-size: 1.8em;
+}
+/* line 465, ../sass/components/_form.scss */
+.submit-nav-mobile .sf-content {
+  position: absolute;
+  right: 0;
+  width: 300px;
+  overflow-x: auto;
+  top: 2.5rem;
+  display: none;
+  z-index: 3;
+  background-color: var(--first-bg-color);
+  border: 1px solid var(--border-color);
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+/* line 477, ../sass/components/_form.scss */
+.submit-nav-mobile .sf-content a i {
+  display: block;
+  font-size: 1.2em;
+}
+/* line 482, ../sass/components/_form.scss */
+.submit-nav-mobile .sf-content.deploy {
+  display: block;
+}
+
+/* line 487, ../sass/components/_form.scss */
+.submit-nav-mobile .sf-content > .btn {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+  margin: 0;
+  font-weight: normal;
+  padding: 0.6em;
+  font-size: inherit;
+  box-shadow: none;
+  color: var(--pe-content-txt-color);
+}
+/* line 497, ../sass/components/_form.scss */
+.submit-nav-mobile .sf-content > .btn:hover {
+  background-color: var(--light-color);
+}
+/* line 500, ../sass/components/_form.scss */
+.submit-nav-mobile .sf-content > .btn:last-child {
+  border-bottom: 0;
+}
+
+/* line 504, ../sass/components/_form.scss */
+.submit-nav-mobile .sf-content > [class*=btn-light-], .submit-nav-mobile .sf-content > [class*=btn-] {
+  border-bottom: 1px solid var(--border-color);
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+}
+
+/* line 510, ../sass/components/_form.scss */
+.submit-nav-mobile .sf-content > .btn i {
+  display: inline-block;
+}
+/** Update 1.5.2 september 2022 **/
+.block-info{
+  padding:0.5rem;
+  border:1px solid transparent;
+  border-radius:0.4rem;
+  margin-bottom:1rem;
+}
+.block-info.block-info-info{
+  border-color: #5bb2fc;
+}
+.align-items-center{
+  align-items: center;
+}
+.justify-content-space-between{
+  justify-content: space-between;
+}
+.flex-root{
+  flex:1;
+}
+.first-letter{
+  text-align: center;
+  width:10%;
+  margin-right:1rem;
+}
+.first-letter{
+  background-color:var(--primary-color);
+  color:white;
+  border-radius:0.3rem;
+}
+.first-letter div span{
+  font-size:2rem;
+}
+.tabs-nav{
+  border-top: 1px solid var(--border-color);
+  padding: 0 1rem;
+}
+.tabs-nav ul{
+  margin:0;padding:0;
+}
+.tabs-nav ul li{
+  list-style: none;
+  display: inline-block;
+  margin:.6rem 1rem;
+
+}
+.tabs-nav ul li a{
+  color: var(--body-txt-color);
+  font-family: "RobotoMedium", sans-serif;
+}
+.tabs-nav ul li a.text-danger{
+  color: #ba4141;
+}
+.tabs-nav ul li a:hover{
+  text-decoration: none;
+  color:var(--main-txt-color)
+}
+.modal.active .modal-overlay, .modal:target .modal-overlay{
+  background: rgba(0,0,0,.5);
+}
+.modal.modal-sm .modal-container{
+  max-width:520px;
+  background-color:var(--main-bg-color);
+  color:var(--main-txt-color);
+}
+.modal-container .modal-header{
+  background-color:var(--primary-color);
+  color:var(--default-txt-color);
+}
+.modal-container .modal-header a{
+  color:var(--default-txt-color);
+}
+/* Editor */
+.editor-toolbar a{
+  color: var(--main-txt-color)!important;
+}
+.editor-toolbar a:hover{
+  background-color:var(--main-bg-color);
+}
+.editor-toolbar, .CodeMirror{
+  background-color:var(--form-bg-color);
+  color:var(--main-txt-color);
+  border-color:var(--border-color);
+}
+#theme-switcher{
+  cursor: pointer;
+  background-color:transparent;
+  border:0;
+  color:white;
+}
+#theme-switcher i{
+  font-size:1.3rem;
+}

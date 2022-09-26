@@ -12,7 +12,7 @@
                 <div class="card-custom">
                     <div class="card-body">
                         <h4 class="header-title">Ajouter une entreprise</h4>
-                        <form class="form-default" method="post" enctype="multipart/form-data">
+                        <form method="post" enctype="multipart/form-data">
                             {{ include('company/admin/_form.twig', {'firstAdd': 1}) }}
                             {{ form.submitSingle('primary', 'saveData', 'Sauvegarder', false) | raw }}
                         </form>

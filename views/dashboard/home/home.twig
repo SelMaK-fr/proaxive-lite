@@ -3,9 +3,9 @@
 {% block title %}Administration{% endblock %}
 
 {% block body %}
-    {% if lastversionNum > version %}
+    {% if lastversionNum != version %}
     <div class="container">
-        {{ viewAlert('success', '<strong>Nouvelle version disponible !</strong> Pensez à mettre à jour votre version de Poraxive > <a href="https://proaxive.fr/updates" target="_blank">Télécharger la mise à jour</a>') | raw }}
+        {{ viewAlert('primary', '<strong>Mise à jour disponible !</strong> Pour plus d\'informations sur cette mise à jour > <a class="label label-primary" href="https://proaxive.fr/downloads" target="_blank">Télécharger la mise à jour</a>') | raw }}
     </div>
     {% endif %}
     <!-- start:Main-stats -->
@@ -63,14 +63,23 @@
             <div class="columns">
                 <div class="column col-9 col-lg-12">
                     <div class="card-custom">
-                        <div class="card-header"><h2>Derniers messages</h2></div>
                         <div class="card-body">
-                            <p>
-                                Bienvenue sur la version <strong>stable</strong> de Proaxive Lite.<br>
-                                Un <a href="https://discord.gg/GpUHExKqWH" target="_blank">serveur Discord</a> (code : GpUHExKqWH)  a été mis en place afin de suivre l'avancement et de participer à ce projet. N'hésitez pas à y vous connecter.<br>
-                                Pour pour tout ce qui est support de l'application, ça se passe sur <a
-                                        href="https://forums.synexolabs.com" target="_blank">les forums officiels</a>.
-                            </p>
+                            <div class="columns">
+                                <div class="column col-4 hide-md">
+                                    <img class="img-responsive" src="{{ getenv('APP_ADMIN_THEME') }}/img/undraw_programming_re_kg9v.svg" alt="">
+                                </div>
+                                <div class="column col-8 col-sm-12">
+                                    <div class="card-header"><h2>Bienvenue dans Proaxive Lite</h2></div>
+                                    <p>
+                                        Merci d'avoir choisi Proaxive Lite !<br>
+                                        Un <a href="https://discord.gg/GpUHExKqWH" target="_blank">serveur Discord</a> (code : GpUHExKqWH)  a été mis en place afin de suivre l'avancement et de participer à ce projet. N'hésitez pas à y vous connecter.<br>
+                                        Pour pour tout ce qui est support de l'application, ça se passe sur <a
+                                                href="https://discuss.synexolabs.com" target="_blank">les forums officiels</a>.
+                                        <br><br>
+                                        <strong>Proaxive est en cours de redéveloppement afin de proposer une solution plus complète.</strong> Participez vous aussi au développement en partageant vos suggestions !
+                                    </p>
+                                </div>
+                            </div>
                             {% if checkFolderInstall %}
                                 {{ viewAlert('danger', '<strong>Alert sécurité !</strong> Veuillez renommer le dossier <strong>install</strong>. <a href="/admin/setting">Sécuriser l\'application</a>') | raw }}
                             {% endif %}
@@ -90,15 +99,15 @@
                     <div class="card-custom">
                         <div class="card-header"><h2>Proaxive <span class="txtprimary">{{ app_info.release }}</span> </h2></div>
                         <div class="card-body">
-                            <span class="d-block">Version : <strong {% if version < lastversionNum %}style="color:red;"{% endif %}>{{ app_info.number }}</strong> ({{ app_info.verdate }})</span>
+                            <span class="d-block">Version : <strong {% if version != lastversionNum %}style="color:red;"{% endif %}>{{ app_info.number }}</strong> ({{ app_info.verdate }})</span>
                             <span class="d-block">Dernière version :
-                                <strong class="{% if lastversionNum > version %}txtprimary{% endif %}">{{ lastversion.num }}</strong> ({{ lastversion.date }})
+                                <strong class="{% if lastversionNum != version %}txtprimary{% endif %}">{{ lastversion.num }}</strong> ({{ lastversion.date }})
                             </span>
-                            <span class="d-block">Nom de code : <strong>{{ lastversion.namecode }}</strong></span>
+                            <span class="d-block">Nom de code : <strong>{{ app_info.namecode }}</strong></span>
                             <span class="d-block">Statut : <strong>{{ app_info.status }}</strong></span>
                             <span class="d-block">Développeur : <a href="{{ app_info.urlauthor }}" target="_blank"><i class="icofont-link-alt"></i></a> <strong>{{ app_info.author }}</strong></span>
                             <span class="d-block">PHP : <strong>{{ phpversion }}</strong></span>
-                            {% if lastversionNum > version %}
+                            {% if lastversionNum != version %}
                             <p class="text-center mg-tb-1">
                             <a href="https://proaxive.fr" target="_blank" class="btn-sm btn-primary"><i class="icofont-external-link"></i> Mettre à jour</a>
                             </p>

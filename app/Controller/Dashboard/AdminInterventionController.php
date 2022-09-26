@@ -242,6 +242,12 @@ class AdminInterventionController extends AppController{
             }
         } // Fin du IF $_POST
 
+        //Breadcrumb
+        $this->breadcrumbs->addCrumb('Accueil', '/admin')
+            ->addCrumb('Interventions', '/admin/interventions')
+            ->addCrumb('Création', false);
+        $this->breadcrumbs->render();
+
         $client = $this->Client->extractByAlpha('id', 'fullname');
         $computer = $this->Equipment->extract('id', 'name');
         $status = $this->Status->extract('id', 'title');
@@ -253,7 +259,8 @@ class AdminInterventionController extends AppController{
             'status' => $status,
             'countEquipment' => $countEquipment,
             'form' => $form,
-            'current_menu' => $this->current_menu
+            'current_menu' => $this->current_menu,
+            'breadcrumbs' => $this->breadcrumbs
         ]);
 
 
@@ -490,6 +497,7 @@ class AdminInterventionController extends AppController{
                 $result = $this->Intervention->update(
                     'id', (int) $id,
                     [
+                        'title' => $_POST['title'],
                         'status_id' => $_POST['status_id'],
                         'details' => $_POST['details'],
                         'steps' => $_POST['steps'],

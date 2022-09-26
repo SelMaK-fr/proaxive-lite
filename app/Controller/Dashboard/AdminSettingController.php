@@ -51,7 +51,7 @@ class AdminSettingController extends AppController{
                     'php_error' => $_POST['php_error'],
                     'full_error' => $_POST['full_error'],
                     'view_version' => $_POST['view_version'],
-                    'style_selector' => $_POST['style_selector'],
+                    'theme_darker' => $_POST['theme_darker'],
                     'society_days' => $_POST['society_days'],
                     'society_hours' => $_POST['society_hours'],
                     'notify_fixed' => $_POST['notify_fixed'],
@@ -69,7 +69,7 @@ class AdminSettingController extends AppController{
             if(isset($_POST['renameFolder'])){
                $renameFolder = rename(ROOT . "/install", ROOT. "/install" . rand(8, 99999));
                if($renameFolder){
-                   $this->session->setFlash('success', "Le dossier <strong>install</strong> a bien été renommé !");
+                   $this->session->setFlash('success', "Le dossier <strong>install</strong> a bien été renommé ! (vous pouvez le supprimer si vous le souhaitez)");
                }
             }
 

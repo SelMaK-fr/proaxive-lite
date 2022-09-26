@@ -50,9 +50,9 @@ class AdminHomeController extends AppController
         $countStatus = $this->Status->CountRow();
         $equipmentInWork = $this->Equipment->selectWithCategoryInWork(4);
         $phpversion = phpversion();
-        $version = substr($this->app_version()->number, -2);
+        $version = str_replace('.', '', $this->app_version()->number);
         $lastversion = $this->app_lastversion();
-        $lastversionNum = substr($lastversion->num, -2);
+        $lastversionNum = str_replace('.', '', $lastversion->num);
         $auser = $this->User->find('id', 1);
 
         $this->breadcrumbs->addCrumb('Panel Proaxive', '/admin')

@@ -232,6 +232,7 @@ class AdminClientController extends AppController{
         'departments' => $departments,
         'form' => $form,
         'current_menu' => $this->current_menu,
+        'link_tab' => 'edit_client',
         'breadcrumbs' => $this->breadcrumbs
     ]);
 
